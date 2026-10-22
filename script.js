@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     introTimers = [];
   }
 
-  function finishIntro(immediate = false, scrollToProjects = false) {
+  function finishIntro(immediate = false, scrollToProjects = false, targetId = null) {
     if (!introEl) return;
     clearIntroTimers();
     introActive = false;
@@ -86,6 +86,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const executeDestination = () => {
+      if (targetId) {
+        const targetEl = document.getElementById(targetId);
+        const projSection = document.getElementById('projects');
+        const projectIndexMap = {
+          'project-tracex': 0,
+          'project-attendance': 1,
+          'project-copilot': 2,
+          'project-loganalyzer': 3,
+          'project-phishguard': 4,
+          'project-eplatform': 5
+        };
+        const slideIndex = projectIndexMap[targetId];
+        if (typeof window.goToGallerySlide === 'function' && slideIndex !== undefined) {
+          window.goToGallerySlide(slideIndex);
+        }
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+        } else if (projSection) {
+          projSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        return;
+      }
+
       if (scrollToProjects) {
         const projSection = document.getElementById('projects');
         if (projSection) {
@@ -293,6 +316,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (studioBackdrop) studioBackdrop.classList.add('screen-lit');
         return;
       }
+      if (freezeStage === 'welcome') {
+        if (introWelcomeScreen) {
+          introWelcomeScreen.classList.add('active');
+        }
+        return;
+      }
     }
 
     // =========================================================================
@@ -367,6 +396,92 @@ document.addEventListener('DOMContentLoaded', () => {
   document.documentElement.setAttribute('data-theme', 'editorial');
   document.body.setAttribute('data-theme', 'editorial');
 
+  // =========================================================================
+  // WELCOME REEL PROJECTS CONFIGURATION & INTERACTION (Phase 15.4)
+  // Maintainable single configuration array for the 6 welcome reel projects.
+  // Facilitates rapid replacement of images and clearly marks temporary placeholders.
+  // =========================================================================
+  const WELCOME_REEL_PROJECTS = [
+    {
+      id: 'project-tracex',
+      caseStudy: 'tracex',
+      order: 1,
+      title: 'TRACE-X',
+      tag: 'Cybercrime Intelligence',
+      desc: 'Predictive cash-withdrawal interception dashboard & spatial forecasting.',
+      image: 'assets/images/tracex_hero.png',
+      alt: 'TRACE-X Command Center Interface',
+      isPlaceholder: false
+    },
+    {
+      id: 'project-attendance',
+      caseStudy: 'attendance',
+      order: 2,
+      title: 'Smart Faculty Attendance System',
+      tag: 'Systems & CV',
+      desc: 'Haversine GPS geofencing, classroom photo verification, and timetable OCR.',
+      image: 'assets/images/sfas_placeholder.svg',
+      alt: 'Smart Faculty Attendance System Architecture (Screenshot Pending)',
+      isPlaceholder: true // Clearly identified in code as temporary
+    },
+    {
+      id: 'project-copilot',
+      caseStudy: 'copilot',
+      order: 3,
+      title: 'Campus Copilot',
+      tag: 'Intelligent Agents',
+      desc: 'Student utility hub with event discovery, study scheduler, and RAG knowledge base.',
+      image: 'assets/images/campus_copilot_events.png',
+      alt: 'Campus Copilot Events Interface',
+      isPlaceholder: false
+    },
+    {
+      id: 'project-loganalyzer',
+      caseStudy: 'loganalyzer',
+      order: 4,
+      title: 'Log Analyzer',
+      tag: 'Infrastructure & Analytics',
+      desc: 'High-throughput server log parsing engine, anomaly detector, and traffic analytics.',
+      image: 'assets/images/log_analyzer_hourly.png',
+      alt: 'Log Analyzer Hourly Metrics Interface',
+      isPlaceholder: false
+    },
+    {
+      id: 'project-phishguard',
+      caseStudy: 'phishguard',
+      order: 5,
+      title: 'Phish Guard',
+      tag: 'Cybersecurity Heuristics',
+      desc: 'Real-time URL heuristic analysis, SSL certificate inspection, and threat gateway.',
+      image: 'assets/images/phishguard_placeholder.svg',
+      alt: 'Phish Guard Heuristic Inspection Engine (Screenshot Pending)',
+      isPlaceholder: true // Clearly identified in code as temporary
+    },
+    {
+      id: 'project-eplatform',
+      caseStudy: 'eplatform',
+      order: 6,
+      title: 'E-Platform',
+      tag: 'Reactive E-Commerce',
+      desc: 'High-concurrency digital store with dynamic inventory, filtering, and instant checkout.',
+      image: 'assets/images/gadgetpro_preview.png',
+      alt: 'GadgetPro E-Platform Interface',
+      isPlaceholder: false
+    }
+  ];
+
+  // Wire Welcome Reel Card Click Interactions (Dismiss Intro & Scroll to Project)
+  const welcomeReelCards = document.querySelectorAll('.welcome-reel-card');
+  welcomeReelCards.forEach((card) => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = card.getAttribute('data-project-id');
+      if (targetId) {
+        finishIntro(false, false, targetId);
+      }
+    });
+  });
+
   // Stage C Primary Action: Explore Portfolio Button (Enters Swiss Editorial Portfolio)
   if (welcomeExploreBtn) {
     welcomeExploreBtn.addEventListener('click', () => finishIntro(false, false));
@@ -389,6 +504,10 @@ document.addEventListener('DOMContentLoaded', () => {
       finishIntro(true, false);
     } else if (e.key === 'Enter') {
       if (introWelcomeScreen && introWelcomeScreen.classList.contains('active')) {
+        // If an interactive child element (button or link) is currently focused, let native event dispatch
+        if (document.activeElement && (document.activeElement.tagName === 'A' || document.activeElement.tagName === 'BUTTON')) {
+          return;
+        }
         finishIntro(false, false);
       }
     }
@@ -1679,6 +1798,7 @@ export const routes: Routes = [
       });
     }
   }
+  window.goToGallerySlide = updateGalleryUI;
 
   if (galleryPrevBtn) {
     galleryPrevBtn.addEventListener('click', () => {

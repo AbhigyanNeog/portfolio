@@ -162,33 +162,249 @@
         <div class="welcome-grid-subtle"></div>
       </div>
 
-      <div class="welcome-card" id="welcome-card">
-        <div class="welcome-header-meta">
-          <span class="welcome-kicker">Abhigyan Neog</span>
-          <span class="welcome-sep">/</span>
-          <span class="welcome-role">Portfolio</span>
+      <div class="welcome-stage" id="welcome-stage">
+        <!-- Left Column: Editorial Introduction & Core Actions -->
+        <div class="welcome-col-intro">
+          <div class="welcome-header-meta">
+            <span class="welcome-kicker">Abhigyan Neog</span>
+            <span class="welcome-sep">/</span>
+            <span class="welcome-role">Selected Works</span>
+          </div>
+
+          <h1 class="welcome-headline">Hi, I’m Abhigyan.</h1>
+
+          <p class="welcome-lead">
+            I’m a Computer Science undergraduate at CHRIST University. I build practical software systems, intelligent applications, and explore how engineering can solve real problems.
+          </p>
+
+          <div class="welcome-actions">
+            <button class="btn-welcome-explore" id="welcome-explore-btn" type="button" aria-label="Explore My Portfolio">
+              <span class="btn-text">Explore My Portfolio</span>
+              <span class="btn-arrow" aria-hidden="true">→</span>
+            </button>
+
+            <a href="assets/resume/Abhigyan_Neog_Resume.pdf" class="btn-welcome-resume" id="welcome-resume-btn" download="Abhigyan_Neog_Resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download Résumé PDF">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Download résumé</span>
+            </a>
+
+            <button class="btn-welcome-skip" id="welcome-skip-btn" type="button" aria-label="Skip directly to projects">
+              <span>Skip directly to projects ↓</span>
+            </button>
+          </div>
+
+          <div class="welcome-reel-hint" aria-hidden="true">
+            <span class="hint-pulse"></span>
+            <span class="hint-text">Hover or focus to pause reel · Click any card to inspect project</span>
+          </div>
         </div>
 
-        <h1 class="welcome-headline">Hi, I’m Abhigyan.</h1>
+        <!-- Right Column: Continuously Moving Vertical Project-Image Reel -->
+        <div class="welcome-col-reel" id="welcome-reel-col" aria-label="Selected projects reel">
+          <div class="reel-mask" id="reel-mask">
+            <div class="reel-track" id="reel-track">
+              <!-- PRIMARY REEL GROUP: 6 Projects in Exact Specified Order -->
+              <div class="reel-group reel-group-primary" id="reel-group-primary">
+                <!-- Card 1: TRACE-X -->
+                <a href="#project-tracex" class="welcome-reel-card" data-project-id="project-tracex" data-case-study="tracex" aria-label="Project 1: TRACE-X — Predictive Cybercrime Intelligence Dashboard">
+                  <div class="reel-card-img-wrap">
+                    <img src="assets/images/tracex_hero.png" alt="TRACE-X Command Center Interface" class="reel-card-img" width="320" height="180" loading="eager">
+                    <span class="reel-card-num">01</span>
+                  </div>
+                  <div class="reel-card-body">
+                    <div class="reel-card-meta">
+                      <span class="reel-card-tag">Cybercrime Intelligence</span>
+                      <span class="reel-card-jump" aria-hidden="true">↗</span>
+                    </div>
+                    <h3 class="reel-card-title">TRACE-X</h3>
+                    <p class="reel-card-desc">Predictive cash-withdrawal interception dashboard &amp; spatial forecasting.</p>
+                  </div>
+                </a>
 
-        <p class="welcome-lead">
-          I’m a Computer Science undergraduate at CHRIST University. I build practical software and explore how technology can solve real problems.
-        </p>
+                <!-- Card 2: Smart Faculty Attendance System -->
+                <a href="#project-attendance" class="welcome-reel-card" data-project-id="project-attendance" data-case-study="attendance" aria-label="Project 2: Smart Faculty Attendance System — Biometric Verification & Geofencing">
+                  <div class="reel-card-img-wrap">
+                    <!-- Temporary neutral architectural SVG placeholder pending user screenshot -->
+                    <img src="assets/images/sfas_placeholder.svg" alt="Smart Faculty Attendance System Architecture (Screenshot Pending)" class="reel-card-img is-placeholder" width="320" height="180" loading="eager">
+                    <span class="reel-card-num">02</span>
+                  </div>
+                  <div class="reel-card-body">
+                    <div class="reel-card-meta">
+                      <span class="reel-card-tag">Systems &amp; CV</span>
+                      <span class="reel-card-jump" aria-hidden="true">↗</span>
+                    </div>
+                    <h3 class="reel-card-title">Smart Faculty Attendance System</h3>
+                    <p class="reel-card-desc">Haversine GPS geofencing, classroom photo verification, and timetable OCR.</p>
+                  </div>
+                </a>
 
-        <div class="welcome-actions">
-          <button class="btn-welcome-explore" id="welcome-explore-btn" type="button" aria-label="Explore My Portfolio">
-            <span class="btn-text">Explore My Portfolio</span>
-            <span class="btn-arrow" aria-hidden="true">→</span>
-          </button>
+                <!-- Card 3: Campus Copilot -->
+                <a href="#project-copilot" class="welcome-reel-card" data-project-id="project-copilot" data-case-study="copilot" aria-label="Project 3: Campus Copilot — Multi-Agent Campus Utility System">
+                  <div class="reel-card-img-wrap">
+                    <img src="assets/images/campus_copilot_events.png" alt="Campus Copilot Events Interface" class="reel-card-img" width="320" height="180" loading="lazy">
+                    <span class="reel-card-num">03</span>
+                  </div>
+                  <div class="reel-card-body">
+                    <div class="reel-card-meta">
+                      <span class="reel-card-tag">Intelligent Agents</span>
+                      <span class="reel-card-jump" aria-hidden="true">↗</span>
+                    </div>
+                    <h3 class="reel-card-title">Campus Copilot</h3>
+                    <p class="reel-card-desc">Student utility hub with event discovery, study scheduler, and RAG knowledge base.</p>
+                  </div>
+                </a>
 
-          <a href="assets/resume/Abhigyan_Neog_Resume.pdf" class="btn-welcome-resume" id="welcome-resume-btn" download="Abhigyan_Neog_Resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download Résumé PDF">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <span>Download résumé</span>
-          </a>
+                <!-- Card 4: Log Analyzer -->
+                <a href="#project-loganalyzer" class="welcome-reel-card" data-project-id="project-loganalyzer" data-case-study="loganalyzer" aria-label="Project 4: Log Analyzer — Server Log Parsing Engine">
+                  <div class="reel-card-img-wrap">
+                    <img src="assets/images/log_analyzer_hourly.png" alt="Log Analyzer Hourly Metrics Interface" class="reel-card-img" width="320" height="180" loading="lazy">
+                    <span class="reel-card-num">04</span>
+                  </div>
+                  <div class="reel-card-body">
+                    <div class="reel-card-meta">
+                      <span class="reel-card-tag">Infrastructure &amp; Analytics</span>
+                      <span class="reel-card-jump" aria-hidden="true">↗</span>
+                    </div>
+                    <h3 class="reel-card-title">Log Analyzer</h3>
+                    <p class="reel-card-desc">High-throughput server log parsing engine, anomaly detector, and traffic analytics.</p>
+                  </div>
+                </a>
 
-          <button class="btn-welcome-skip" id="welcome-skip-btn" type="button" aria-label="Skip directly to projects">
-            <span>Skip directly to projects ↓</span>
-          </button>
+                <!-- Card 5: Phish Guard -->
+                <a href="#project-phishguard" class="welcome-reel-card" data-project-id="project-phishguard" data-case-study="phishguard" aria-label="Project 5: Phish Guard — Phishing Detection & Heuristic Analysis">
+                  <div class="reel-card-img-wrap">
+                    <!-- Temporary neutral architectural SVG placeholder pending user screenshot -->
+                    <img src="assets/images/phishguard_placeholder.svg" alt="Phish Guard Heuristic Inspection Engine (Screenshot Pending)" class="reel-card-img is-placeholder" width="320" height="180" loading="lazy">
+                    <span class="reel-card-num">05</span>
+                  </div>
+                  <div class="reel-card-body">
+                    <div class="reel-card-meta">
+                      <span class="reel-card-tag">Cybersecurity Heuristics</span>
+                      <span class="reel-card-jump" aria-hidden="true">↗</span>
+                    </div>
+                    <h3 class="reel-card-title">Phish Guard</h3>
+                    <p class="reel-card-desc">Real-time URL heuristic analysis, SSL certificate inspection, and threat gateway.</p>
+                  </div>
+                </a>
+
+                <!-- Card 6: E-Platform -->
+                <a href="#project-eplatform" class="welcome-reel-card" data-project-id="project-eplatform" data-case-study="eplatform" aria-label="Project 6: E-Platform — Reactive E-Commerce System">
+                  <div class="reel-card-img-wrap">
+                    <img src="assets/images/gadgetpro_preview.png" alt="GadgetPro E-Platform Interface" class="reel-card-img" width="320" height="180" loading="lazy">
+                    <span class="reel-card-num">06</span>
+                  </div>
+                  <div class="reel-card-body">
+                    <div class="reel-card-meta">
+                      <span class="reel-card-tag">Reactive E-Commerce</span>
+                      <span class="reel-card-jump" aria-hidden="true">↗</span>
+                    </div>
+                    <h3 class="reel-card-title">E-Platform</h3>
+                    <p class="reel-card-desc">High-concurrency digital store with dynamic inventory, filtering, and instant checkout.</p>
+                  </div>
+                </a>
+              </div>
+
+              <!-- CLONED REEL GROUP: Visual Loop Duplicate (Seamless Infinite Upward Scroll) -->
+              <!-- Marked aria-hidden="true" and tabindex="-1" so keyboard and screen reader users only navigate once -->
+              <div class="reel-group reel-group-clone" aria-hidden="true">
+                <!-- Clone Card 1: TRACE-X -->
+                <a href="#project-tracex" class="welcome-reel-card" data-project-id="project-tracex" data-case-study="tracex" tabindex="-1">
+                  <div class="reel-card-img-wrap">
+                    <img src="assets/images/tracex_hero.png" alt="" class="reel-card-img" width="320" height="180" loading="lazy">
+                    <span class="reel-card-num">01</span>
+                  </div>
+                  <div class="reel-card-body">
+                    <div class="reel-card-meta">
+                      <span class="reel-card-tag">Cybercrime Intelligence</span>
+                      <span class="reel-card-jump">↗</span>
+                    </div>
+                    <h3 class="reel-card-title">TRACE-X</h3>
+                    <p class="reel-card-desc">Predictive cash-withdrawal interception dashboard &amp; spatial forecasting.</p>
+                  </div>
+                </a>
+
+                <!-- Clone Card 2: Smart Faculty Attendance System -->
+                <a href="#project-attendance" class="welcome-reel-card" data-project-id="project-attendance" data-case-study="attendance" tabindex="-1">
+                  <div class="reel-card-img-wrap">
+                    <img src="assets/images/sfas_placeholder.svg" alt="" class="reel-card-img is-placeholder" width="320" height="180" loading="lazy">
+                    <span class="reel-card-num">02</span>
+                  </div>
+                  <div class="reel-card-body">
+                    <div class="reel-card-meta">
+                      <span class="reel-card-tag">Systems &amp; CV</span>
+                      <span class="reel-card-jump">↗</span>
+                    </div>
+                    <h3 class="reel-card-title">Smart Faculty Attendance System</h3>
+                    <p class="reel-card-desc">Haversine GPS geofencing, classroom photo verification, and timetable OCR.</p>
+                  </div>
+                </a>
+
+                <!-- Clone Card 3: Campus Copilot -->
+                <a href="#project-copilot" class="welcome-reel-card" data-project-id="project-copilot" data-case-study="copilot" tabindex="-1">
+                  <div class="reel-card-img-wrap">
+                    <img src="assets/images/campus_copilot_events.png" alt="" class="reel-card-img" width="320" height="180" loading="lazy">
+                    <span class="reel-card-num">03</span>
+                  </div>
+                  <div class="reel-card-body">
+                    <div class="reel-card-meta">
+                      <span class="reel-card-tag">Intelligent Agents</span>
+                      <span class="reel-card-jump">↗</span>
+                    </div>
+                    <h3 class="reel-card-title">Campus Copilot</h3>
+                    <p class="reel-card-desc">Student utility hub with event discovery, study scheduler, and RAG knowledge base.</p>
+                  </div>
+                </a>
+
+                <!-- Clone Card 4: Log Analyzer -->
+                <a href="#project-loganalyzer" class="welcome-reel-card" data-project-id="project-loganalyzer" data-case-study="loganalyzer" tabindex="-1">
+                  <div class="reel-card-img-wrap">
+                    <img src="assets/images/log_analyzer_hourly.png" alt="" class="reel-card-img" width="320" height="180" loading="lazy">
+                    <span class="reel-card-num">04</span>
+                  </div>
+                  <div class="reel-card-body">
+                    <div class="reel-card-meta">
+                      <span class="reel-card-tag">Infrastructure &amp; Analytics</span>
+                      <span class="reel-card-jump">↗</span>
+                    </div>
+                    <h3 class="reel-card-title">Log Analyzer</h3>
+                    <p class="reel-card-desc">High-throughput server log parsing engine, anomaly detector, and traffic analytics.</p>
+                  </div>
+                </a>
+
+                <!-- Clone Card 5: Phish Guard -->
+                <a href="#project-phishguard" class="welcome-reel-card" data-project-id="project-phishguard" data-case-study="phishguard" tabindex="-1">
+                  <div class="reel-card-img-wrap">
+                    <img src="assets/images/phishguard_placeholder.svg" alt="" class="reel-card-img is-placeholder" width="320" height="180" loading="lazy">
+                    <span class="reel-card-num">05</span>
+                  </div>
+                  <div class="reel-card-body">
+                    <div class="reel-card-meta">
+                      <span class="reel-card-tag">Cybersecurity Heuristics</span>
+                      <span class="reel-card-jump">↗</span>
+                    </div>
+                    <h3 class="reel-card-title">Phish Guard</h3>
+                    <p class="reel-card-desc">Real-time URL heuristic analysis, SSL certificate inspection, and threat gateway.</p>
+                  </div>
+                </a>
+
+                <!-- Clone Card 6: E-Platform -->
+                <a href="#project-eplatform" class="welcome-reel-card" data-project-id="project-eplatform" data-case-study="eplatform" tabindex="-1">
+                  <div class="reel-card-img-wrap">
+                    <img src="assets/images/gadgetpro_preview.png" alt="" class="reel-card-img" width="320" height="180" loading="lazy">
+                    <span class="reel-card-num">06</span>
+                  </div>
+                  <div class="reel-card-body">
+                    <div class="reel-card-meta">
+                      <span class="reel-card-tag">Reactive E-Commerce</span>
+                      <span class="reel-card-jump">↗</span>
+                    </div>
+                    <h3 class="reel-card-title">E-Platform</h3>
+                    <p class="reel-card-desc">High-concurrency digital store with dynamic inventory, filtering, and instant checkout.</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
