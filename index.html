@@ -14,10 +14,10 @@
   
   <title>Abhigyan Neog — Portfolio</title>
 
-  <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono & Caveat (Editorial Handwritten) -->
+  <!-- Google Fonts: Newsreader (Editorial Serif), Hanken Grotesk (Swiss Grotesque), Space Grotesk, Inter, JetBrains Mono, Caveat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Hanken+Grotesk:ital,wght@0,300..700;1,300..700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232449E8'/><text x='16' y='21' font-family='monospace' font-size='14' font-weight='bold' text-anchor='middle' fill='%23FFFFFF'>AN</text></svg>">
@@ -31,9 +31,12 @@
   <!-- CINEMATIC OPENING EXPERIENCE: 3D DIGITAL WORKSPACE & LAPTOP INTRO -->
   <!-- =================================================================== -->
   <aside class="cinematic-intro" id="cinematic-intro" role="region" aria-label="Digital Workspace Intro">
-    <!-- Studio Ambient Vignette & Floor Grid -->
+    <!-- Studio Ambient Backdrop, Volumetric Lighting & Atmospheric Particles -->
     <div class="intro-studio-backdrop" aria-hidden="true">
-      <div class="studio-light-radial"></div>
+      <div class="studio-ambient-vignette"></div>
+      <div class="studio-light-volumetric" id="studio-light-volumetric"></div>
+      <div class="studio-light-radial" id="studio-light-radial"></div>
+      <canvas class="intro-particles-canvas" id="intro-particles-canvas"></canvas>
       <div class="studio-grid-floor"></div>
     </div>
 
@@ -53,13 +56,18 @@
     <!-- Stage A & B: Studio 3D Laptop Viewport Rig -->
     <div class="intro-viewport-3d" id="intro-viewport-3d" aria-hidden="true">
       <div class="laptop-rig scene-closed" id="laptop-rig">
-        <!-- Realistic Dynamic Studio Floor Drop Shadow -->
-        <div class="laptop-floor-shadow" id="laptop-floor-shadow"></div>
+        <!-- Realistic Dynamic Studio Floor Drop Shadow & Grounding Plane -->
+        <div class="laptop-floor-shadow" id="laptop-floor-shadow">
+          <div class="shadow-contact"></div>
+          <div class="shadow-diffuse"></div>
+          <div class="shadow-specular-bounce"></div>
+        </div>
 
         <!-- Laptop Base Assembly (Deck, Keyboard Well, Trackpad & Chamfer) -->
         <div class="laptop-base" id="laptop-base">
           <div class="base-deck">
             <div class="keyboard-well">
+              <div class="kb-screen-glow" id="kb-screen-glow"></div>
               <div class="kb-row kb-r1"></div>
               <div class="kb-row kb-r2"></div>
               <div class="kb-row kb-r3"></div>
@@ -87,6 +95,7 @@
               </svg>
             </div>
             <div class="lid-aluminum-sheen"></div>
+            <div class="lid-edge-highlight"></div>
           </div>
 
           <!-- Inner Screen Assembly (Bezel, Screen, Camera - Revealed as lid opens) -->
@@ -107,11 +116,11 @@
                 <video class="laptop-screen-video" id="laptop-screen-video" autoplay muted playsinline loop preload="auto" poster="assets/images/tracex_hero.png" src="assets/videos/tracex_world_map.mp4"></video>
                 <div class="laptop-video-tint" aria-hidden="true"></div>
 
-                <!-- Elegant Abstract Computational Display (Atmospheric Visual - NO fake logs or status text) -->
+                <!-- Natural, Refined Identity & Computational Display -->
                 <div class="display-computational" id="display-computational">
                   <div class="comp-ambient-glow"></div>
                   <div class="comp-monogram-ring">
-                    <svg class="comp-ring-svg" viewBox="0 0 120 120">
+                    <svg class="comp-ring-svg" viewBox="0 0 120 120" aria-hidden="true">
                       <circle cx="60" cy="60" r="50" class="ring-track" />
                       <circle cx="60" cy="60" r="50" class="ring-pulse" />
                       <circle cx="60" cy="60" r="36" class="ring-inner" />
@@ -119,8 +128,8 @@
                     <span class="comp-monogram-text">AN</span>
                   </div>
                   <div class="comp-typography">
-                    <span class="comp-name">ABHIGYAN NEOG</span>
-                    <span class="comp-role">SOFTWARE ENGINEER & SYSTEMS DEVELOPER</span>
+                    <span class="comp-name">Abhigyan Neog</span>
+                    <span class="comp-role">Computer Science & Systems</span>
                   </div>
                 </div>
               </div>
@@ -163,7 +172,7 @@
         <h1 class="welcome-headline">Hi, I’m Abhigyan.</h1>
 
         <p class="welcome-lead">
-          I’m a Computer Science undergraduate at CHRIST University, interested in building practical software and solving real problems.
+          I’m a Computer Science undergraduate at CHRIST University. I build practical software and explore how technology can solve real problems.
         </p>
 
         <div class="welcome-actions">

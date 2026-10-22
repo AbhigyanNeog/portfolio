@@ -68,6 +68,19 @@ document.addEventListener('DOMContentLoaded', () => {
       introWelcomeScreen.classList.remove('active');
     }
 
+    if (particlesAnimId) {
+      cancelAnimationFrame(particlesAnimId);
+      particlesAnimId = null;
+    }
+    if (introParticlesCanvas) {
+      const pCtx = introParticlesCanvas.getContext('2d');
+      if (pCtx) pCtx.clearRect(0, 0, introParticlesCanvas.width, introParticlesCanvas.height);
+    }
+    const studioBackdrop = document.querySelector('.intro-studio-backdrop');
+    if (studioBackdrop) {
+      studioBackdrop.classList.remove('screen-lit');
+    }
+
     if (laptopScreenVideo && !laptopScreenVideo.paused) {
       laptopScreenVideo.pause();
     }
@@ -105,89 +118,86 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // WELCOME STAGE C: INTERACTIVE NEURAL LATTICE DATA CANVAS
+  // ATMOSPHERIC DUST MOTES PARTICLE FIELD (Cinema Studio Depth)
+  // Restrained, slow-floating micro particles that simulate stage lighting
   // =========================================================================
-  const neuralCanvas = document.getElementById('welcome-neural-canvas');
-  let neuralAnimId = null;
-  let neuralPoints = [];
+  const introParticlesCanvas = document.getElementById('intro-particles-canvas');
+  let particlesAnimId = null;
+  let introMotes = [];
 
-  function initNeuralCanvas() {
-    if (!neuralCanvas || prefersReducedMotion) return;
-    const ctx = neuralCanvas.getContext('2d');
+  function initIntroParticles() {
+    if (!introParticlesCanvas || prefersReducedMotion) return;
+    const ctx = introParticlesCanvas.getContext('2d');
     if (!ctx) return;
 
-    let width = neuralCanvas.width = window.innerWidth;
-    let height = neuralCanvas.height = window.innerHeight;
+    let width = introParticlesCanvas.width = window.innerWidth;
+    let height = introParticlesCanvas.height = window.innerHeight;
 
-    window.addEventListener('resize', () => {
-      if (!neuralCanvas) return;
-      width = neuralCanvas.width = window.innerWidth;
-      height = neuralCanvas.height = window.innerHeight;
-    }, { passive: true });
+    const handleResize = () => {
+      if (!introParticlesCanvas) return;
+      width = introParticlesCanvas.width = window.innerWidth;
+      height = introParticlesCanvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
 
-    const numPoints = Math.min(50, Math.floor((width * height) / 32000));
-    neuralPoints = [];
-    for (let i = 0; i < numPoints; i++) {
-      neuralPoints.push({
+    // Restrained count: ~24 motes total for quiet atmospheric depth without visual clutter
+    const numMotes = Math.min(26, Math.max(16, Math.floor((width * height) / 45000)));
+    introMotes = [];
+    for (let i = 0; i < numMotes; i++) {
+      introMotes.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        radius: Math.random() * 1.6 + 1.2,
-        pulse: Math.random() * Math.PI * 2
+        vx: (Math.random() - 0.5) * 0.16,
+        vy: -0.06 - Math.random() * 0.14, // slow upward thermal drift
+        radius: Math.random() * 1.2 + 0.8,
+        baseAlpha: Math.random() * 0.35 + 0.15,
+        phase: Math.random() * Math.PI * 2,
+        isBlue: Math.random() > 0.4
       });
     }
 
-    function renderNeural() {
-      if (!introActive && (!introWelcomeScreen || !introWelcomeScreen.classList.contains('active'))) {
-        neuralAnimId = requestAnimationFrame(renderNeural);
+    function renderParticles() {
+      if (!introActive) {
+        if (particlesAnimId) {
+          cancelAnimationFrame(particlesAnimId);
+          particlesAnimId = null;
+        }
+        ctx.clearRect(0, 0, width, height);
         return;
       }
+
       ctx.clearRect(0, 0, width, height);
 
-      for (let i = 0; i < neuralPoints.length; i++) {
-        const pt = neuralPoints[i];
-        pt.x += pt.vx;
-        pt.y += pt.vy;
-        pt.pulse += 0.02;
+      for (let i = 0; i < introMotes.length; i++) {
+        const m = introMotes[i];
+        m.x += m.vx;
+        m.y += m.vy;
+        m.phase += 0.015;
 
-        if (pt.x < 0) pt.x = width;
-        else if (pt.x > width) pt.x = 0;
-        if (pt.y < 0) pt.y = height;
-        else if (pt.y > height) pt.y = 0;
+        // Wrap around boundaries
+        if (m.x < 0) m.x = width;
+        else if (m.x > width) m.x = 0;
+        if (m.y < 0) m.y = height;
+        else if (m.y > height) m.y = 0;
 
-        const currentR = pt.radius + Math.sin(pt.pulse) * 0.5;
+        const currentAlpha = Math.max(0.05, m.baseAlpha + Math.sin(m.phase) * 0.12);
         ctx.beginPath();
-        ctx.arc(pt.x, pt.y, currentR, 0, Math.PI * 2);
-        ctx.fillStyle = i % 3 === 0 ? 'rgba(85, 214, 255, 0.75)' : 'rgba(65, 105, 255, 0.65)';
-        ctx.shadowColor = '#55D6FF';
-        ctx.shadowBlur = 6;
+        ctx.arc(m.x, m.y, m.radius, 0, Math.PI * 2);
+        ctx.fillStyle = m.isBlue
+          ? `rgba(130, 185, 255, ${currentAlpha})`
+          : `rgba(240, 244, 255, ${currentAlpha * 0.85})`;
+        ctx.shadowColor = m.isBlue ? 'rgba(85, 214, 255, 0.4)' : 'transparent';
+        ctx.shadowBlur = m.isBlue ? 4 : 0;
         ctx.fill();
-        ctx.shadowBlur = 0;
-
-        for (let j = i + 1; j < neuralPoints.length; j++) {
-          const pt2 = neuralPoints[j];
-          const dx = pt.x - pt2.x;
-          const dy = pt.y - pt2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 135) {
-            const alpha = (1 - dist / 135) * 0.32;
-            ctx.beginPath();
-            ctx.moveTo(pt.x, pt.y);
-            ctx.lineTo(pt2.x, pt2.y);
-            ctx.strokeStyle = `rgba(85, 214, 255, ${alpha})`;
-            ctx.lineWidth = 0.85;
-            ctx.stroke();
-          }
-        }
       }
 
-      neuralAnimId = requestAnimationFrame(renderNeural);
+      particlesAnimId = requestAnimationFrame(renderParticles);
     }
 
-    if (!neuralAnimId) {
-      neuralAnimId = requestAnimationFrame(renderNeural);
+    if (particlesAnimId) {
+      cancelAnimationFrame(particlesAnimId);
     }
+    particlesAnimId = requestAnimationFrame(renderParticles);
   }
 
   function runCinematicIntro() {
@@ -211,6 +221,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const displayComp = document.getElementById('display-computational');
     if (displayComp) displayComp.classList.remove('active');
     if (cobaltTunnel) cobaltTunnel.classList.remove('active');
+    const studioBackdrop = document.querySelector('.intro-studio-backdrop');
+    if (studioBackdrop) studioBackdrop.classList.remove('screen-lit');
 
     // Laptop Video Handling: start from frame 0 and handle autoplay restrictions gracefully
     if (laptopScreenVideo) {
@@ -224,6 +236,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     }
+
+    // Launch atmospheric dust particle field
+    initIntroParticles();
 
     // Force browser reflow to reset transition states
     void introEl.offsetWidth;
@@ -265,6 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (laptopDisplay) laptopDisplay.classList.add('illuminated');
         if (displayComp) displayComp.classList.add('active');
+        if (studioBackdrop) studioBackdrop.classList.add('screen-lit');
         return;
       }
       if (freezeStage === 'dive') {
@@ -274,6 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (laptopDisplay) laptopDisplay.classList.add('illuminated');
         if (displayComp) displayComp.classList.add('active');
+        if (studioBackdrop) studioBackdrop.classList.add('screen-lit');
         return;
       }
     }
@@ -298,6 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
     introTimers.push(setTimeout(() => {
       if (laptopDisplay) laptopDisplay.classList.add('illuminated');
       if (displayComp) displayComp.classList.add('active');
+      if (studioBackdrop) studioBackdrop.classList.add('screen-lit');
     }, 4400));
 
     // =========================================================================

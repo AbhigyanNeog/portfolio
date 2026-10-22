@@ -40,6 +40,8 @@
   --border-focus: #2449E8;
 
   /* Typography */
+  --font-serif-editorial: 'Newsreader', Georgia, serif;
+  --font-grotesk-swiss: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -3327,7 +3329,7 @@ code, pre {
   width: 100vw;
   height: 100vh;
   z-index: 999999;
-  background-color: #070B16;
+  background-color: #050811;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -3342,7 +3344,7 @@ code, pre {
 
 .cinematic-intro.fade-out {
   opacity: 0;
-  transform: scale(1.05);
+  transform: scale(1.04);
   pointer-events: none;
 }
 
@@ -3350,77 +3352,90 @@ code, pre {
   display: none !important;
 }
 
-/* Studio Ambient Backdrop & Lighting */
+/* Studio Ambient Backdrop with Multiple Depth Layers */
 .intro-studio-backdrop {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 1;
+  overflow: hidden;
 }
 
-.studio-light-radial {
+/* Layer 1: Ambient Occlusion Vignette */
+.studio-ambient-vignette {
   position: absolute;
-  top: 18%;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(5, 8, 17, 0) 30%, rgba(3, 5, 11, 0.88) 100%);
+  pointer-events: none;
+}
+
+/* Layer 2: Soft Volumetric Blue Light Cone behind laptop */
+.studio-light-volumetric {
+  position: absolute;
+  top: 22%;
   left: 50%;
   transform: translate(-50%, -20%);
-  width: 1000px;
-  height: 650px;
-  background: radial-gradient(ellipse 850px 520px at center, rgba(65, 105, 255, 0.24) 0%, rgba(85, 214, 255, 0.08) 45%, transparent 75%);
+  width: 860px;
+  height: 560px;
+  background: radial-gradient(ellipse 720px 480px at center, rgba(36, 73, 232, 0.28) 0%, rgba(65, 105, 255, 0.10) 45%, transparent 75%);
+  border-radius: 50%;
+  filter: blur(38px);
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 1.8s ease, transform 1.8s ease;
+}
+
+/* When lid opens & screen illuminates, soft light blooms into the atmosphere */
+.intro-studio-backdrop.screen-lit .studio-light-volumetric {
+  opacity: 1;
+  transform: translate(-50%, -20%) scale(1.1);
+}
+
+/* Layer 3: Central Ambient Light Core */
+.studio-light-radial {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  width: 1100px;
+  height: 720px;
+  background: radial-gradient(ellipse 900px 560px at center, rgba(85, 214, 255, 0.12) 0%, rgba(36, 73, 232, 0.06) 45%, transparent 75%);
   border-radius: 50%;
   pointer-events: none;
-  animation: studioLightPulse 4s ease-in-out infinite alternate;
+  animation: studioLightPulse 4.5s ease-in-out infinite alternate;
 }
 
 @keyframes studioLightPulse {
-  0% { transform: translate(-50%, -20%) scale(0.96); opacity: 0.85; }
-  100% { transform: translate(-50%, -20%) scale(1.04); opacity: 1; }
+  0% { transform: translate(-50%, -20%) scale(0.97); opacity: 0.75; }
+  100% { transform: translate(-50%, -20%) scale(1.03); opacity: 0.95; }
 }
 
+/* Layer 4: Atmospheric Particle Canvas */
+.intro-particles-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Layer 5: Faint Studio Perspective Floor Grid */
 .studio-grid-floor {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 52%;
+  height: 54%;
   background-image: 
-    linear-gradient(to right, rgba(85, 214, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(85, 214, 255, 0.08) 1px, transparent 1px);
-  background-size: 42px 42px;
-  transform: perspective(600px) rotateX(65deg);
+    linear-gradient(to right, rgba(85, 214, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(65, 105, 255, 0.055) 1px, transparent 1px);
+  background-size: 38px 38px;
+  transform: perspective(600px) rotateX(68deg);
   transform-origin: 50% 100%;
-  mask-image: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 85%);
-  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 85%);
-}
-
-/* Intro Studio Telemetry Meta Header */
-.intro-studio-meta {
-  position: absolute;
-  top: 2rem;
-  left: 2.5rem;
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: #94A3B8;
-  letter-spacing: 0.08em;
-  z-index: 25;
+  mask-image: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 45%, transparent 80%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 45%, transparent 80%);
   pointer-events: none;
-}
-
-.intro-studio-meta .meta-item {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.intro-studio-meta .meta-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background-color: var(--color-cyan);
-  box-shadow: 0 0 10px var(--color-cyan);
-  animation: statusPulse 1.5s infinite;
 }
 
 /* 3D Viewport Rig with Realistic Perspective */
@@ -3459,15 +3474,65 @@ code, pre {
   transform: rotateX(16deg) rotateY(-18deg) rotateZ(0deg) translateY(20px) scale(calc(var(--laptop-scale) * 0.95));
 }
 
-/* Scene B & C: Lid opened & camera smoothly orbiting to face display squarely */
+/* Scene B & C: Lid opened & camera squarely facing display */
 .laptop-rig.scene-opened {
   transform: rotateX(4deg) rotateY(0deg) rotateZ(0deg) translateY(0px) scale(var(--laptop-scale));
 }
 
-/* Scene D: Camera aligns perpendicular to screen and dives straight forward into display */
+/* Scene D: Camera aligns perpendicular to screen and dives straight forward into display center */
 .laptop-rig.diving {
-  transform: rotateX(-12deg) rotateY(0deg) rotateZ(0deg) scale(calc(var(--laptop-scale) * 6.5)) translateY(calc(var(--laptop-scale) * 195px));
-  transition: transform 1.6s cubic-bezier(0.5, 0, 0.2, 1);
+  transform: rotateX(-12deg) rotateY(0deg) rotateZ(0deg) scale(calc(var(--laptop-scale) * 7.2)) translateY(calc(var(--laptop-scale) * 208px));
+  transition: transform 1.7s cubic-bezier(0.42, 0, 0.18, 1);
+}
+
+/* Grounding Shadow: Multi-tier contact, diffuse, and specular bounce */
+.laptop-floor-shadow {
+  position: absolute;
+  top: 195px;
+  left: -40px;
+  width: 720px;
+  height: 75px;
+  transform-origin: 50% 0%;
+  transform: rotateX(65deg);
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.shadow-contact {
+  position: absolute;
+  top: 0;
+  left: 40px;
+  right: 40px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.96) 0%, rgba(0, 0, 0, 0.6) 45%, transparent 75%);
+  filter: blur(5px);
+}
+
+.shadow-diffuse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.85) 0%, rgba(6, 12, 28, 0.5) 45%, transparent 75%);
+  filter: blur(16px);
+}
+
+.shadow-specular-bounce {
+  position: absolute;
+  top: 15px;
+  left: 120px;
+  right: 120px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(36, 73, 232, 0.18) 0%, rgba(85, 214, 255, 0.06) 40%, transparent 70%);
+  filter: blur(14px);
+  opacity: 0.6;
+  transition: opacity 0.8s ease;
+}
+
+.laptop-rig.scene-opened .shadow-specular-bounce {
+  opacity: 0.9;
 }
 
 /* Laptop Screen Lid Assembly - Rotates backward from bottom hinge at y=200px */
@@ -3490,7 +3555,7 @@ code, pre {
   transform: rotateX(-78deg);
 }
 
-/* When open: lid rotates backward around hinge to natural upright ~100deg open viewing angle */
+/* When open: lid rotates backward around hinge to natural upright ~102deg open viewing angle */
 .laptop-rig.scene-opened .laptop-lid,
 .laptop-rig.diving .laptop-lid {
   transform: rotateX(12deg);
@@ -3501,9 +3566,9 @@ code, pre {
   position: absolute;
   inset: 0;
   border-radius: 12px 12px 2px 2px;
-  background: linear-gradient(145deg, #242D3D 0%, #151D2A 50%, #0D131F 100%);
-  border: 1.5px solid rgba(148, 163, 184, 0.4);
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.9), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  background: linear-gradient(145deg, #242D3D 0%, #161F2C 50%, #0D131F 100%);
+  border: 1.5px solid rgba(148, 163, 184, 0.45);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.92), inset 0 1px 2px rgba(255, 255, 255, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3519,20 +3584,28 @@ code, pre {
   pointer-events: none;
 }
 
+.lid-edge-highlight {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px 12px 2px 2px;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), inset 1px 0 1px rgba(255, 255, 255, 0.15);
+  pointer-events: none;
+}
+
 .lid-logo-monogram {
   width: 44px;
   height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.85;
-  filter: drop-shadow(0 0 10px rgba(85, 214, 255, 0.4));
+  opacity: 0.9;
+  filter: drop-shadow(0 0 12px rgba(85, 214, 255, 0.45));
 }
 
 .lid-aluminum-sheen {
   position: absolute;
   inset: 0;
-  background: linear-gradient(125deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 40%, transparent 70%);
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.02) 40%, transparent 70%);
   pointer-events: none;
 }
 
@@ -3542,8 +3615,8 @@ code, pre {
   inset: 0;
   border-radius: 12px 12px 2px 2px;
   background: linear-gradient(160deg, #1C2433 0%, #0F1624 100%);
-  border: 1.5px solid rgba(148, 163, 184, 0.35);
-  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.85), 0 0 40px rgba(65, 105, 255, 0.25);
+  border: 1.5px solid rgba(148, 163, 184, 0.4);
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.9), 0 0 45px rgba(36, 73, 232, 0.28);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -3580,14 +3653,14 @@ code, pre {
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: var(--color-cyan);
-  box-shadow: 0 0 6px var(--color-cyan);
+  background: var(--color-cobalt, #2449E8);
+  box-shadow: 0 0 6px rgba(85, 214, 255, 0.8);
 }
 
 .laptop-glare {
   position: absolute;
   inset: 0;
-  background: linear-gradient(130deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 28%, transparent 60%);
+  background: linear-gradient(130deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.02) 28%, transparent 60%);
   pointer-events: none;
   z-index: 6;
 }
@@ -3600,16 +3673,16 @@ code, pre {
   background: #060913;
   overflow: hidden;
   position: relative;
-  border: 1px solid rgba(85, 214, 255, 0.25);
+  border: 1px solid rgba(85, 214, 255, 0.28);
   box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.95);
-  transition: box-shadow 0.8s ease, border-color 0.8s ease;
+  transition: box-shadow 0.9s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.9s ease;
 }
 
 .laptop-display.illuminated {
-  box-shadow: 0 0 65px rgba(65, 105, 255, 0.55), 
-              0 0 25px rgba(85, 214, 255, 0.4),
-              inset 0 0 25px rgba(65, 105, 255, 0.3);
-  border-color: rgba(85, 214, 255, 0.5);
+  box-shadow: 0 0 70px rgba(36, 73, 232, 0.55), 
+              0 0 28px rgba(85, 214, 255, 0.4),
+              inset 0 0 25px rgba(36, 73, 232, 0.3);
+  border-color: rgba(85, 214, 255, 0.55);
 }
 
 /* Cinematic Laptop Screen Video Stream */
@@ -3619,7 +3692,7 @@ code, pre {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.75;
+  opacity: 0.82;
   z-index: 1;
   pointer-events: none;
 }
@@ -3627,12 +3700,12 @@ code, pre {
 .laptop-video-tint {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(9, 14, 26, 0.3) 0%, rgba(9, 14, 26, 0.8) 100%);
+  background: radial-gradient(circle at center, rgba(8, 13, 24, 0.28) 0%, rgba(6, 10, 20, 0.78) 100%);
   z-index: 2;
   pointer-events: none;
 }
 
-/* Elegant Abstract Computational Display */
+/* Natural Identity & Computational Display */
 .display-computational {
   position: absolute;
   inset: 0;
@@ -3640,7 +3713,7 @@ code, pre {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at center, rgba(16, 23, 42, 0.65) 0%, rgba(7, 11, 22, 0.9) 100%);
+  background: radial-gradient(circle at center, rgba(14, 22, 38, 0.65) 0%, rgba(6, 10, 20, 0.88) 100%);
   opacity: 0;
   transform: scale(0.96);
   transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s ease;
@@ -3656,22 +3729,22 @@ code, pre {
 
 .comp-ambient-glow {
   position: absolute;
-  width: 240px;
-  height: 240px;
-  background: radial-gradient(circle, rgba(65, 105, 255, 0.35) 0%, rgba(85, 214, 255, 0.15) 50%, transparent 75%);
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(36, 73, 232, 0.38) 0%, rgba(85, 214, 255, 0.14) 50%, transparent 75%);
   border-radius: 50%;
-  filter: blur(25px);
+  filter: blur(28px);
   pointer-events: none;
 }
 
 .comp-monogram-ring {
   position: relative;
-  width: 84px;
-  height: 84px;
+  width: 80px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.15rem;
+  margin-bottom: 1.1rem;
 }
 
 .comp-ring-svg {
@@ -3683,26 +3756,26 @@ code, pre {
 
 .ring-track {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.12);
+  stroke: rgba(255, 255, 255, 0.14);
   stroke-width: 1.5;
 }
 
 .ring-pulse {
   fill: none;
-  stroke: var(--color-cyan, #55D6FF);
-  stroke-width: 2.5;
+  stroke: rgba(85, 214, 255, 0.9);
+  stroke-width: 2.2;
   stroke-dasharray: 85 220;
-  animation: osSpinRing 2.4s linear infinite;
+  animation: osSpinRing 3s linear infinite;
   transform-origin: 50% 50%;
-  filter: drop-shadow(0 0 8px rgba(85, 214, 255, 0.7));
+  filter: drop-shadow(0 0 8px rgba(85, 214, 255, 0.65));
 }
 
 .ring-inner {
   fill: none;
-  stroke: var(--color-cobalt, #4169FF);
+  stroke: var(--color-cobalt, #2449E8);
   stroke-width: 1.5;
   stroke-dasharray: 40 60;
-  animation: osSpinRing 4s linear infinite reverse;
+  animation: osSpinRing 5s linear infinite reverse;
   transform-origin: 50% 50%;
 }
 
@@ -3716,7 +3789,7 @@ code, pre {
   font-weight: 700;
   color: #FFFFFF;
   letter-spacing: 0.1em;
-  text-shadow: 0 0 16px rgba(85, 214, 255, 0.8);
+  text-shadow: 0 0 16px rgba(85, 214, 255, 0.85);
 }
 
 .comp-typography {
@@ -3727,18 +3800,18 @@ code, pre {
 
 .comp-name {
   font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #F5F7FF;
-  letter-spacing: 0.12em;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #F8FAFC;
+  letter-spacing: 0.04em;
 }
 
 .comp-role {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 600;
-  color: var(--color-cyan, #55D6FF);
-  letter-spacing: 0.15em;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #94A3B8;
+  letter-spacing: 0.05em;
 }
 
 /* Hinge Cylinder - Exact shared pivot connecting base rear and lid bottom at y=200px */
@@ -3766,7 +3839,7 @@ code, pre {
   transform: rotateX(65deg);
   border-radius: 4px 4px 16px 16px;
   background: linear-gradient(180deg, #1C2433 0%, #101622 100%);
-  border: 1.5px solid rgba(148, 163, 184, 0.35);
+  border: 1.5px solid rgba(148, 163, 184, 0.4);
   box-shadow: 0 35px 80px rgba(0, 0, 0, 0.95);
   display: flex;
   flex-direction: column;
@@ -3785,16 +3858,33 @@ code, pre {
 }
 
 .keyboard-well {
+  position: relative;
   width: 92%;
   height: 60%;
-  background: rgba(8, 12, 20, 0.9);
+  background: rgba(8, 12, 20, 0.92);
   border-radius: 8px;
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  border: 1px solid rgba(148, 163, 184, 0.22);
   box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.85);
   padding: 10px 14px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
+}
+
+.kb-screen-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(85, 214, 255, 0.18) 0%, rgba(36, 73, 232, 0.08) 50%, transparent 80%);
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.laptop-display.illuminated ~ * .kb-screen-glow,
+.laptop-rig.scene-opened .kb-screen-glow {
+  opacity: 1;
 }
 
 .kb-row {
@@ -3811,7 +3901,7 @@ code, pre {
   height: 95px;
   border-radius: 8px;
   background: rgba(24, 32, 46, 0.6);
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  border: 1px solid rgba(148, 163, 184, 0.22);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
   margin-top: 10px;
 }
@@ -3835,27 +3925,11 @@ code, pre {
   border-top: none;
 }
 
-.laptop-floor-shadow {
-  position: absolute;
-  top: 195px;
-  left: -30px;
-  width: 700px;
-  height: 65px;
-  transform-origin: 50% 0%;
-  transform: rotateX(65deg);
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.92) 0%, rgba(65, 105, 255, 0.18) 45%, transparent 75%);
-  filter: blur(14px);
-  pointer-events: none;
-  z-index: 2;
-  transition: opacity 1s ease, transform 1s ease;
-}
-
 /* Spatial Warp Depth Tunnel (Smooth cinematic transition in Stage B) */
 .cobalt-tunnel {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, #0B1020 0%, #15224D 50%, #070B16 100%);
+  background: radial-gradient(circle at center, #0B1020 0%, #15224D 50%, #050811 100%);
   z-index: 20;
   opacity: 0;
   pointer-events: none;
@@ -4005,8 +4079,8 @@ code, pre {
   width: 100%;
   background: #FAF9F5;
   border: 1px solid #D2CEC4;
-  border-radius: 16px;
-  box-shadow: 0 24px 64px rgba(25, 25, 25, 0.08), 0 4px 16px rgba(25, 25, 25, 0.04);
+  border-radius: 4px;
+  box-shadow: 0 16px 48px rgba(25, 25, 25, 0.06), 0 2px 8px rgba(25, 25, 25, 0.03);
   padding: 3.2rem 3rem;
   text-align: center;
   display: flex;
@@ -4026,15 +4100,16 @@ code, pre {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-family: var(--font-grotesk-swiss, 'Hanken Grotesk', sans-serif);
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: #5D5C57;
-  background: rgba(36, 73, 232, 0.05);
-  border: 1px solid rgba(36, 73, 232, 0.12);
-  padding: 0.35rem 1.1rem;
-  border-radius: 999px;
+  background: rgba(25, 25, 25, 0.03);
+  border: 1px solid #D2CEC4;
+  padding: 0.3rem 0.95rem;
+  border-radius: 2px;
   margin-bottom: 1.6rem;
 }
 
@@ -4054,18 +4129,19 @@ code, pre {
 }
 
 .welcome-headline {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
-  font-weight: 700;
+  font-family: var(--font-serif-editorial, 'Newsreader', Georgia, serif);
+  font-size: clamp(2.5rem, 4.5vw, 3.8rem);
+  font-weight: 400;
+  font-style: normal;
   color: #191919;
   line-height: 1.15;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   margin-bottom: 1.25rem;
   text-align: center;
 }
 
 .welcome-lead {
-  font-family: var(--font-body);
+  font-family: var(--font-grotesk-swiss, 'Hanken Grotesk', sans-serif);
   font-size: clamp(1.05rem, 1.35vw, 1.2rem);
   color: #5D5C57;
   line-height: 1.68;
@@ -4086,20 +4162,21 @@ code, pre {
 }
 
 .btn-welcome-explore {
-  background: #2449E8;
-  color: #FFFFFF;
-  border: 1px solid #2449E8;
-  font-family: var(--font-display);
-  font-size: 1.05rem;
+  background: #191919;
+  color: #FAF9F5;
+  border: 1px solid #191919;
+  font-family: var(--font-grotesk-swiss, 'Hanken Grotesk', sans-serif);
+  font-size: 0.92rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
-  padding: 1rem 2.4rem;
-  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.95rem 2.2rem;
+  border-radius: 2px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  box-shadow: 0 8px 24px rgba(36, 73, 232, 0.28);
+  box-shadow: 0 4px 14px rgba(25, 25, 25, 0.12);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
 }
@@ -4109,10 +4186,11 @@ code, pre {
 }
 
 .btn-welcome-explore:hover {
-  background: #1838C7;
-  border-color: #1838C7;
+  background: #2449E8;
+  border-color: #2449E8;
+  color: #FFFFFF;
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(36, 73, 232, 0.38);
+  box-shadow: 0 8px 24px rgba(36, 73, 232, 0.32);
 }
 
 .btn-welcome-explore:hover .btn-arrow {
@@ -4120,7 +4198,7 @@ code, pre {
 }
 
 .btn-welcome-explore:focus-visible {
-  outline: 3px solid #2449E8;
+  outline: 2px solid #2449E8;
   outline-offset: 3px;
 }
 
@@ -4128,12 +4206,13 @@ code, pre {
   background: #FAF9F5;
   color: #191919;
   border: 1px solid #D2CEC4;
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  padding: 0.95rem 1.8rem;
-  border-radius: 999px;
+  font-family: var(--font-grotesk-swiss, 'Hanken Grotesk', sans-serif);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.9rem 1.8rem;
+  border-radius: 2px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -4152,7 +4231,7 @@ code, pre {
   border-color: #2449E8;
   color: #2449E8;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(25, 25, 25, 0.06);
+  box-shadow: 0 4px 14px rgba(25, 25, 25, 0.06);
 }
 
 .btn-welcome-resume:hover svg {
@@ -4160,7 +4239,7 @@ code, pre {
 }
 
 .btn-welcome-resume:focus-visible {
-  outline: 3px solid #2449E8;
+  outline: 2px solid #2449E8;
   outline-offset: 3px;
 }
 
@@ -4168,9 +4247,11 @@ code, pre {
   background: transparent;
   border: none;
   color: #5D5C57;
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  letter-spacing: 0.01em;
+  font-family: var(--font-grotesk-swiss, 'Hanken Grotesk', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   cursor: pointer;
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -4452,7 +4533,25 @@ code, pre {
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   .cinematic-intro {
+    background-color: #F2EFE7 !important;
+  }
+
+  .intro-studio-backdrop,
+  .intro-viewport-3d,
+  .cobalt-tunnel,
+  .intro-controls {
     display: none !important;
+  }
+
+  .intro-welcome-screen {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  .welcome-card {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   *, *::before, *::after {
