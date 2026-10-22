@@ -194,28 +194,69 @@
           </div>
         </div>
 
-        <!-- Primary & Secondary Interactive Action CTAs -->
-        <div class="welcome-actions">
-          <button class="btn-welcome-explore" id="welcome-explore-btn" type="button" aria-label="Explore my work">
-            <span class="btn-glow-ring" aria-hidden="true"></span>
-            <span class="btn-text">Explore my work</span>
-            <span class="btn-arrow" aria-hidden="true">→</span>
-          </button>
-          
-          <a href="assets/resume/Abhigyan_Neog_Resume.pdf" class="btn-welcome-resume" id="welcome-resume-btn" download="Abhigyan_Neog_Resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download Résumé PDF">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <span>Download résumé</span>
-          </a>
+        <!-- Dual-Theme Experience Selector (Phase 15.3) -->
+        <div class="experience-selector-wrap" id="experience-selector" role="region" aria-label="Select Experience Theme">
+          <div class="selector-header">
+            <span class="selector-kicker">CHOOSE YOUR VIEWING EXPERIENCE:</span>
+          </div>
 
-          <button class="btn-welcome-skip" id="welcome-skip-btn" type="button" aria-label="Skip directly to projects">
-            <span>Skip directly to projects ↓</span>
-          </button>
-        </div>
+          <div class="experience-options-grid">
+            <!-- Option A: Dark Experience (Default) -->
+            <button class="exp-card exp-card-dark active-choice" id="welcome-explore-btn" data-theme-choice="dark" type="button" aria-label="Select Dark Experience (Default: Midnight Navy & Deep Contrast)">
+              <div class="exp-card-header">
+                <span class="exp-card-badge" id="badge-dark">DEFAULT</span>
+                <span class="exp-card-key">KEY [1]</span>
+              </div>
+              <div class="exp-preview-canvas dark-preview" aria-hidden="true">
+                <span class="preview-orb"></span>
+                <span class="preview-line-cyan"></span>
+                <span class="preview-code">01 // SYS</span>
+              </div>
+              <div class="exp-card-info">
+                <h2 class="exp-card-title">Dark Experience</h2>
+                <p class="exp-card-desc">Cinematic night mode with 3D space, reactive glow & deep contrast.</p>
+              </div>
+              <span class="exp-btn-label">Enter Dark Portfolio →</span>
+            </button>
 
-        <div class="welcome-footnote" aria-hidden="true">
-          <span class="foot-key">PRESS [ENTER] TO EXPLORE</span>
-          <span class="foot-sep">•</span>
-          <span class="foot-key">[ESC] TO SKIP INTRO</span>
+            <!-- Option B: Editorial Experience (Swiss Warm-Light) -->
+            <button class="exp-card exp-card-editorial" id="exp-choice-editorial" data-theme-choice="editorial" type="button" aria-label="Select Editorial Experience (Swiss Editorial & Industrial Warm-Light)">
+              <div class="exp-card-header">
+                <span class="exp-card-badge badge-editorial" id="badge-editorial">SWISS LIGHT</span>
+                <span class="exp-card-key">KEY [2]</span>
+              </div>
+              <div class="exp-preview-canvas editorial-preview" aria-hidden="true">
+                <span class="preview-rule-red"></span>
+                <span class="preview-line-cobalt"></span>
+                <span class="preview-code-light">ISSUE 2026</span>
+              </div>
+              <div class="exp-card-info">
+                <h2 class="exp-card-title">Editorial Experience</h2>
+                <p class="exp-card-desc">Swiss editorial typography, warm paper tone, vermilion accents & generous whitespace.</p>
+              </div>
+              <span class="exp-btn-label">Enter Editorial Portfolio →</span>
+            </button>
+          </div>
+
+          <!-- Secondary Actions & Navigation -->
+          <div class="welcome-secondary-actions">
+            <button class="btn-welcome-skip" id="welcome-skip-btn" type="button" aria-label="Skip directly to projects">
+              <span>Skip directly to projects ↓</span>
+            </button>
+            <span class="action-divider" aria-hidden="true">•</span>
+            <a href="assets/resume/Abhigyan_Neog_Resume.pdf" class="welcome-resume-link" id="welcome-resume-btn" download="Abhigyan_Neog_Resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download Official Résumé PDF">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Download résumé</span>
+            </a>
+          </div>
+
+          <div class="welcome-footnote" aria-hidden="true">
+            <span class="foot-key">PRESS [1] DARK</span>
+            <span class="foot-sep">•</span>
+            <span class="foot-key">[2] EDITORIAL</span>
+            <span class="foot-sep">•</span>
+            <span class="foot-key">[ESC] SKIP</span>
+          </div>
         </div>
       </div>
     </div>
@@ -416,6 +457,15 @@
 
       <!-- Action Buttons -->
       <div class="header-actions">
+        <!-- Theme Switcher Control (Phase 15.3) -->
+        <button class="theme-toggle-btn magnetic-target" id="theme-toggle-btn" type="button" aria-label="Toggle between Dark and Editorial experiences" title="Switch Theme">
+          <span class="theme-toggle-icon-wrap" aria-hidden="true">
+            <svg class="theme-icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="theme-icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </span>
+          <span class="theme-toggle-label" id="theme-toggle-label">EDITORIAL</span>
+        </button>
+
         <button class="universe-nav-btn magnetic-target" id="universe-nav-btn" type="button" aria-label="Open 3D Engineering Universe Hub">
           <span class="universe-beacon-dot"></span>
           <span class="universe-btn-icon">⎋</span>
@@ -444,6 +494,13 @@
         <li><a href="#about" class="mobile-link"><span>05</span> Engineering Philosophy</a></li>
         <li><a href="#contact" class="mobile-link"><span>06</span> Contact & Inquiries</a></li>
       </ul>
+      <div class="mobile-theme-switch-container">
+        <span class="mobile-theme-label">EXPERIENCE THEME</span>
+        <div class="mobile-theme-pills">
+          <button class="mobile-theme-btn active" id="mobile-theme-dark" type="button" data-theme-choice="dark">Dark</button>
+          <button class="mobile-theme-btn" id="mobile-theme-editorial" type="button" data-theme-choice="editorial">Editorial</button>
+        </div>
+      </div>
       <div class="mobile-menu-footer">
         <a href="assets/resume/Abhigyan_Neog_Resume.pdf" class="btn btn-primary btn-block" download="Abhigyan_Neog_Resume.pdf">Download Résumé</a>
       </div>
@@ -457,142 +514,262 @@
     <!-- ================================================================= -->
     <section class="section-hero" id="hero">
       
-      <!-- Ambient Studio Floating Elements & Orbs -->
-      <div class="hero-ambient-elements" aria-hidden="true">
-        <div class="ambient-orb orb-cobalt"></div>
-        <div class="ambient-orb orb-citrus"></div>
-        
-        <!-- Rotating Precision Wireframe Gyroscope / Astrolabe -->
-        <div class="floating-gyro" id="floating-gyro">
-          <svg viewBox="0 0 180 180" class="gyro-svg" width="180" height="180">
-            <circle cx="90" cy="90" r="82" class="gyro-ring ring-outer"/>
-            <circle cx="90" cy="90" r="62" class="gyro-ring ring-mid"/>
-            <ellipse cx="90" cy="90" rx="82" ry="34" class="gyro-ring ring-ellipse-a"/>
-            <ellipse cx="90" cy="90" rx="82" ry="34" class="gyro-ring ring-ellipse-b"/>
-            <circle cx="90" cy="90" r="5" class="gyro-core"/>
-            <line x1="90" y1="4" x2="90" y2="18" class="gyro-tick"/>
-            <line x1="90" y1="162" x2="90" y2="176" class="gyro-tick"/>
-            <line x1="4" y1="90" x2="18" y2="90" class="gyro-tick"/>
-            <line x1="162" y1="90" x2="176" y2="90" class="gyro-tick"/>
-          </svg>
-        </div>
-      </div>
-
-      <div class="container hero-container">
-        
-        <div class="hero-editorial-header" data-reveal="fade-up">
-          <div class="hero-meta-strip">
-            <span class="meta-tag">CHRIST UNIVERSITY CSE</span>
-            <span class="meta-tag">BANGALORE, INDIA</span>
-            <span class="meta-tag status-available"><span class="dot"></span>OPEN FOR SDE INTERNSHIPS</span>
-          </div>
+      <!-- =============================================================== -->
+      <!-- OPTION A: DARK EXPERIENCE HERO (Default Visual Identity Preserved) -->
+      <!-- =============================================================== -->
+      <div class="hero-dark-view" id="hero-dark-view">
+        <!-- Ambient Studio Floating Elements & Orbs -->
+        <div class="hero-ambient-elements" aria-hidden="true">
+          <div class="ambient-orb orb-cobalt"></div>
+          <div class="ambient-orb orb-citrus"></div>
           
-          <h1 class="hero-title">
-            <span class="hero-title-line">
-              <span class="line-reveal">Systems thinker & engineer building</span>
-            </span>
-            <span class="hero-title-line kinetic-line">
-              <span class="line-reveal kinetic-sentence">
-                <span class="kinetic-wrapper" id="kinetic-wrapper" aria-live="polite">
-                  <span class="kinetic-word active">INTELLIGENT</span>
-                  <span class="kinetic-word">ALGORITHMIC</span>
-                  <span class="kinetic-word">HIGH-ASSURANCE</span>
-                  <span class="kinetic-word">REACTIVE</span>
-                  <span class="kinetic-word">FAULT-TOLERANT</span>
-                </span>
-                <span class="hero-title-rest">software.</span>
+          <!-- Rotating Precision Wireframe Gyroscope / Astrolabe -->
+          <div class="floating-gyro" id="floating-gyro">
+            <svg viewBox="0 0 180 180" class="gyro-svg" width="180" height="180">
+              <circle cx="90" cy="90" r="82" class="gyro-ring ring-outer"/>
+              <circle cx="90" cy="90" r="62" class="gyro-ring ring-mid"/>
+              <ellipse cx="90" cy="90" rx="82" ry="34" class="gyro-ring ring-ellipse-a"/>
+              <ellipse cx="90" cy="90" rx="82" ry="34" class="gyro-ring ring-ellipse-b"/>
+              <circle cx="90" cy="90" r="5" class="gyro-core"/>
+              <line x1="90" y1="4" x2="90" y2="18" class="gyro-tick"/>
+              <line x1="90" y1="162" x2="90" y2="176" class="gyro-tick"/>
+              <line x1="4" y1="90" x2="18" y2="90" class="gyro-tick"/>
+              <line x1="162" y1="90" x2="176" y2="90" class="gyro-tick"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="container hero-container">
+          
+          <div class="hero-editorial-header" data-reveal="fade-up">
+            <div class="hero-meta-strip">
+              <span class="meta-tag">CHRIST UNIVERSITY CSE</span>
+              <span class="meta-tag">BANGALORE, INDIA</span>
+              <span class="meta-tag status-available"><span class="dot"></span>OPEN FOR SDE INTERNSHIPS</span>
+            </div>
+            
+            <h1 class="hero-title">
+              <span class="hero-title-line">
+                <span class="line-reveal">Systems thinker & engineer building</span>
               </span>
-            </span>
-          </h1>
-        </div>
-
-        <div class="hero-grid">
-          <div class="hero-col-main" data-reveal="fade-up" data-delay="100">
-            <p class="hero-lead">
-              I am an engineering student at Christ University, Bangalore, writing software that holds up under real conditions—from mule fraud interception algorithms and geofenced attendance tracking to high-throughput log forensics and distributed web services. No buzzword fluff; just verified code and solid architectural decisions.
-            </p>
-            <div class="hero-annotation-wrap">
-              <span class="editorial-note">★ 6 verified projects in production, research & hackathons</span>
-            </div>
-            <div class="hero-actions">
-              <a href="#projects" class="btn btn-primary magnetic-target">
-                Explore Selected Projects
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-              </a>
-              <a href="assets/resume/Abhigyan_Neog_Resume.pdf" class="btn btn-secondary magnetic-target" download="Abhigyan_Neog_Resume.pdf" target="_blank" rel="noopener noreferrer">
-                Download Résumé (PDF)
-              </a>
-              <a href="https://github.com/AbhigyanNeog" class="btn btn-ghost magnetic-target" target="_blank" rel="noopener noreferrer">
-                GitHub ↗
-              </a>
-            </div>
+              <span class="hero-title-line kinetic-line">
+                <span class="line-reveal kinetic-sentence">
+                  <span class="kinetic-wrapper" id="kinetic-wrapper" aria-live="polite">
+                    <span class="kinetic-word active">INTELLIGENT</span>
+                    <span class="kinetic-word">ALGORITHMIC</span>
+                    <span class="kinetic-word">HIGH-ASSURANCE</span>
+                    <span class="kinetic-word">REACTIVE</span>
+                    <span class="kinetic-word">FAULT-TOLERANT</span>
+                  </span>
+                  <span class="hero-title-rest">software.</span>
+                </span>
+              </span>
+            </h1>
           </div>
 
-          <div class="hero-col-featured" data-reveal="fade-up" data-delay="200">
-            <!-- Featured Architecture Spotlight Card (Replaces Synthetic Telemetry Matrix) -->
-            <div class="hero-project-spotlight" id="hero-spotlight">
-              <div class="spotlight-header">
-                <div class="spotlight-label-group">
-                  <span class="spotlight-badge">FEATURED ARCHITECTURE</span>
-                  <span class="spotlight-provenance">SIH '24 NATIONAL FINALIST</span>
-                </div>
-                <span class="spotlight-track">PROJECT 01 / 06</span>
+          <div class="hero-grid">
+            <div class="hero-col-main" data-reveal="fade-up" data-delay="100">
+              <p class="hero-lead">
+                I am an engineering student at Christ University, Bangalore, writing software that holds up under real conditions—from mule fraud interception algorithms and geofenced attendance tracking to high-throughput log forensics and distributed web services. No buzzword fluff; just verified code and solid architectural decisions.
+              </p>
+              <div class="hero-annotation-wrap">
+                <span class="editorial-note">★ 6 verified projects in production, research & hackathons</span>
               </div>
-
-              <!-- Real Project Visual Preview -->
-              <div class="spotlight-preview-media">
-                <img src="assets/images/tracex_hero.png" alt="TRACE-X Platform Dashboard & Mule Account Graph Analytics" class="spotlight-img" loading="eager" />
-                <div class="spotlight-media-overlay">
-                  <span class="overlay-tag">CYBER FRAUD INTERCEPTION</span>
-                  <span class="overlay-stack">REACT • NODE • GRAPH ALGORITHMS</span>
-                </div>
+              <div class="hero-actions">
+                <a href="#projects" class="btn btn-primary magnetic-target">
+                  Explore Selected Projects
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+                <a href="assets/resume/Abhigyan_Neog_Resume.pdf" class="btn btn-secondary magnetic-target" download="Abhigyan_Neog_Resume.pdf" target="_blank" rel="noopener noreferrer">
+                  Download Résumé (PDF)
+                </a>
+                <a href="https://github.com/AbhigyanNeog" class="btn btn-ghost magnetic-target" target="_blank" rel="noopener noreferrer">
+                  GitHub ↗
+                </a>
               </div>
+            </div>
 
-              <!-- Authentic Project Details -->
-              <div class="spotlight-body">
-                <h3 class="spotlight-title">TRACE-X: Mule Account Detection</h3>
-                <p class="spotlight-description">
-                  Real-time financial transaction monitoring and graph cycle detection platform engineered for banking forensics. Intercepts rapid layered fund dispersion across mule account syndicates using directed graph cycle analysis.
-                </p>
-
-                <div class="spotlight-specs">
-                  <div class="spec-item">
-                    <span class="spec-label">PROBLEM STATEMENT</span>
-                    <span class="spec-val">Ministry of Home Affairs (MHA)</span>
+            <div class="hero-col-featured" data-reveal="fade-up" data-delay="200">
+              <!-- Featured Architecture Spotlight Card (Dark Experience) -->
+              <div class="hero-project-spotlight" id="hero-spotlight">
+                <div class="spotlight-header">
+                  <div class="spotlight-label-group">
+                    <span class="spotlight-badge">FEATURED ARCHITECTURE</span>
+                    <span class="spotlight-provenance">SIH '24 NATIONAL FINALIST</span>
                   </div>
-                  <div class="spec-item">
-                    <span class="spec-label">CORE ARCHITECTURE</span>
-                    <span class="spec-val">Transaction Graph Analytics & Risk Engine</span>
+                  <span class="spotlight-track">PROJECT 01 / 06</span>
+                </div>
+
+                <!-- Real Project Visual Preview -->
+                <div class="spotlight-preview-media">
+                  <img src="assets/images/tracex_hero.png" alt="TRACE-X Platform Dashboard & Mule Account Graph Analytics" class="spotlight-img" loading="eager" />
+                  <div class="spotlight-media-overlay">
+                    <span class="overlay-tag">CYBER FRAUD INTERCEPTION</span>
+                    <span class="overlay-stack">REACT • NODE • GRAPH ALGORITHMS</span>
                   </div>
                 </div>
 
-                <div class="spotlight-actions">
-                  <a href="#projects" class="btn btn-primary btn-sm magnetic-target">
-                    View in Project Gallery →
-                  </a>
-                  <button class="btn btn-secondary btn-sm open-case-study magnetic-target" data-project="tracex" type="button">
-                    Read Case Study
-                  </button>
+                <!-- Authentic Project Details -->
+                <div class="spotlight-body">
+                  <h3 class="spotlight-title">TRACE-X: Mule Account Detection</h3>
+                  <p class="spotlight-description">
+                    Real-time financial transaction monitoring and graph cycle detection platform engineered for banking forensics. Intercepts rapid layered fund dispersion across mule account syndicates using directed graph cycle analysis.
+                  </p>
+
+                  <div class="spotlight-specs">
+                    <div class="spec-item">
+                      <span class="spec-label">PROBLEM STATEMENT</span>
+                      <span class="spec-val">Ministry of Home Affairs (MHA)</span>
+                    </div>
+                    <div class="spec-item">
+                      <span class="spec-label">CORE ARCHITECTURE</span>
+                      <span class="spec-val">Transaction Graph Analytics & Risk Engine</span>
+                    </div>
+                  </div>
+
+                  <div class="spotlight-actions">
+                    <a href="#projects" class="btn btn-primary btn-sm magnetic-target">
+                      View in Project Gallery →
+                    </a>
+                    <button class="btn btn-secondary btn-sm open-case-study magnetic-target" data-project="tracex" type="button">
+                      Read Case Study
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Subtle Scroll Cue -->
-        <div class="hero-scroll-cue" data-reveal="fade-up" data-delay="300">
-          <a href="#projects" class="scroll-cue-link magnetic-target" aria-label="Scroll down to projects">
-            <span class="cue-mouse">
-              <span class="cue-wheel"></span>
-            </span>
-            <span class="cue-text">SCROLL TO INSPECT PROJECTS</span>
-            <span class="cue-arrow-stream" aria-hidden="true">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-            </span>
-          </a>
-        </div>
+          <!-- Subtle Scroll Cue -->
+          <div class="hero-scroll-cue" data-reveal="fade-up" data-delay="300">
+            <a href="#projects" class="scroll-cue-link magnetic-target" aria-label="Scroll down to projects">
+              <span class="cue-mouse">
+                <span class="cue-wheel"></span>
+              </span>
+              <span class="cue-text">SCROLL TO INSPECT PROJECTS</span>
+              <span class="cue-arrow-stream" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </a>
+          </div>
 
+        </div>
       </div>
+
+      <!-- =============================================================== -->
+      <!-- OPTION B: EDITORIAL EXPERIENCE HERO (Phase 15.3 Swiss Architecture) -->
+      <!-- =============================================================== -->
+      <div class="hero-editorial-view" id="hero-editorial-view">
+        <div class="container editorial-hero-container">
+          <div class="editorial-hero-grid">
+            
+            <!-- Left Column: Typographic & Architectural Manifesto -->
+            <div class="editorial-hero-content">
+              <div class="editorial-kicker-strip">
+                <span class="kicker-badge">SWISS EDITORIAL ISSUE 2026</span>
+                <span class="kicker-sep">/</span>
+                <span class="kicker-inst">CHRIST UNIVERSITY CSE • BANGALORE</span>
+                <span class="kicker-sep">/</span>
+                <span class="kicker-stat"><span class="stat-dot-vermilion"></span>OPEN FOR SDE INTERNSHIPS</span>
+              </div>
+
+              <h1 class="editorial-main-headline">
+                Software, built with intent.
+              </h1>
+
+              <p class="editorial-supporting-line">
+                From algorithms to applications.
+              </p>
+
+              <p class="editorial-description-para">
+                Computer Science undergraduate at CHRIST University, interested in building practical software systems, intelligent applications, and tools that solve real problems.
+              </p>
+
+              <div class="editorial-actions-row">
+                <a href="#projects" class="btn-editorial-primary magnetic-target">
+                  <span>Explore Selected Projects</span>
+                  <span class="btn-arrow" aria-hidden="true">→</span>
+                </a>
+                <a href="assets/resume/Abhigyan_Neog_Resume.pdf" class="btn-editorial-secondary magnetic-target" download="Abhigyan_Neog_Resume.pdf" target="_blank" rel="noopener noreferrer">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <span>Download Résumé (PDF)</span>
+                </a>
+                <a href="https://github.com/AbhigyanNeog" class="btn-editorial-link magnetic-target" target="_blank" rel="noopener noreferrer">
+                  GitHub ↗
+                </a>
+              </div>
+
+              <!-- Minimalist Editorial Data Dossier Strip -->
+              <div class="editorial-dossier-grid">
+                <div class="dossier-cell">
+                  <span class="dossier-index">01</span>
+                  <div class="dossier-info">
+                    <span class="dossier-key">CORE DISCIPLINES</span>
+                    <span class="dossier-val">Distributed Systems, ML & Graph Forensics</span>
+                  </div>
+                </div>
+                <div class="dossier-cell">
+                  <span class="dossier-index">02</span>
+                  <div class="dossier-info">
+                    <span class="dossier-key">VERIFIED PROJECTS</span>
+                    <span class="dossier-val">6 Production Architectures (Audited)</span>
+                  </div>
+                </div>
+                <div class="dossier-cell">
+                  <span class="dossier-index">03</span>
+                  <div class="dossier-info">
+                    <span class="dossier-key">LOCATION</span>
+                    <span class="dossier-val">Bangalore, IN • 12°58'N 77°35'E</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Asymmetric Swiss Architectural Plate -->
+            <div class="editorial-hero-showcase">
+              <div class="editorial-plate-frame">
+                <div class="plate-top-header">
+                  <span class="plate-num">FIG. 01</span>
+                  <span class="plate-divider"></span>
+                  <span class="plate-label">TRACE-X // FRAUD DETECTION</span>
+                  <span class="plate-tag-sih">SIH '24 FINALIST</span>
+                </div>
+
+                <div class="plate-media-container">
+                  <img src="assets/images/tracex_hero.png" alt="TRACE-X Platform Dashboard & Mule Account Graph Analytics" class="plate-image" loading="eager" />
+                  <div class="plate-accent-tag">MHA FORENSICS ENGINE</div>
+                </div>
+
+                <div class="plate-editorial-caption">
+                  <div class="caption-title-row">
+                    <span class="caption-strong">Mule Account Interception System</span>
+                    <span class="caption-tech">REACT • NODE.JS • D3.JS • GRAPH ANALYSIS</span>
+                  </div>
+                  <p class="caption-summary">
+                    Real-time transaction forensics engine tracking complex cycle syndicates and rapid layered fund dispersion across high-risk banking networks.
+                  </p>
+                  <div class="plate-nav-actions">
+                    <a href="#projects" class="plate-explore-btn magnetic-target">Inspect Architecture ↓</a>
+                    <button class="plate-case-btn open-case-study magnetic-target" data-project="tracex" type="button">Read Case Study ↗</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Editorial Scroll Indicator -->
+          <div class="editorial-scroll-indicator">
+            <a href="#projects" class="editorial-scroll-link magnetic-target" aria-label="Scroll down to projects">
+              <span class="editorial-scroll-rule"></span>
+              <span class="editorial-scroll-text">CONTINUE TO CHAPTER 01 — PROJECT GALLERY</span>
+              <span class="editorial-scroll-arrow">↓</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
     </section>
 
     <!-- ================================================================= -->
@@ -1970,10 +2147,16 @@
         <span class="footer-name">ABHIGYAN NEOG</span>
         <p class="footer-tagline">Crafted with Swiss editorial typography, purposeful motion, and pure semantic web fundamentals.</p>
         <span class="footer-copy">© 2026 Abhigyan Neog. All rights reserved.</span>
-        <button class="footer-replay-btn magnetic-target" id="footer-replay-btn" type="button">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
-          Replay Cinematic Intro
-        </button>
+        <div class="footer-actions-row">
+          <button class="footer-replay-btn magnetic-target" id="footer-replay-btn" type="button">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
+            Replay Intro
+          </button>
+          <button class="footer-theme-toggle magnetic-target" id="footer-theme-btn" type="button" aria-label="Switch between Dark and Editorial experiences">
+            <span class="footer-theme-icon" aria-hidden="true">◐</span>
+            <span class="footer-theme-text" id="footer-theme-text">Switch to Editorial Experience</span>
+          </button>
+        </div>
       </div>
 
       <div class="footer-col-telemetry">

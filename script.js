@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const cobaltTunnel = document.getElementById('cobalt-tunnel');
   const introWelcomeScreen = document.getElementById('intro-welcome-screen');
   const welcomeExploreBtn = document.getElementById('welcome-explore-btn');
+  const expChoiceEditorial = document.getElementById('exp-choice-editorial');
   const welcomeSkipBtn = document.getElementById('welcome-skip-btn');
   const introSkipBtn = document.getElementById('intro-skip-btn');
   const introPlayBtn = document.getElementById('intro-play-btn');
@@ -39,6 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const welcomeAmbientVideo = document.getElementById('welcome-ambient-video');
   const footerReplayBtn = document.getElementById('footer-replay-btn');
   const introScreenClock = document.getElementById('intro-screen-clock');
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
+  const footerThemeBtn = document.getElementById('footer-theme-btn');
+  const mobileThemeDark = document.getElementById('mobile-theme-dark');
+  const mobileThemeEditorial = document.getElementById('mobile-theme-editorial');
 
   let introActive = false;
   let introTimers = [];
@@ -359,14 +364,118 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Stage C Primary Action: Explore Portfolio Button (Enters Portfolio, NOT 3D Universe)
+  // =========================================================================
+  // DUAL-THEME EXPERIENCE MANAGER (Phase 15.3)
+  // =========================================================================
+  const THEME_STORAGE_KEY = 'portfolio_theme';
+  let currentTheme = 'dark';
+
+  function getStoredTheme() {
+    try {
+      const stored = localStorage.getItem(THEME_STORAGE_KEY);
+      if (stored === 'editorial' || stored === 'dark') {
+        return stored;
+      }
+    } catch (_) {
+      // Storage unavailable fallback
+    }
+    return null;
+  }
+
+  function applyTheme(theme, save = true) {
+    currentTheme = (theme === 'editorial') ? 'editorial' : 'dark';
+
+    if (currentTheme === 'editorial') {
+      document.documentElement.setAttribute('data-theme', 'editorial');
+      document.body.setAttribute('data-theme', 'editorial');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.body.setAttribute('data-theme', 'dark');
+    }
+
+    if (save) {
+      try {
+        localStorage.setItem(THEME_STORAGE_KEY, currentTheme);
+      } catch (_) {}
+    }
+
+    // Update Header Theme Toggle UI
+    const themeToggleText = document.getElementById('theme-toggle-label');
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    if (themeToggleText) {
+      themeToggleText.textContent = currentTheme === 'editorial' ? 'DARK' : 'EDITORIAL';
+    }
+    if (themeBtn) {
+      themeBtn.setAttribute('aria-label', currentTheme === 'editorial' ? 'Switch to Dark Experience' : 'Switch to Editorial Experience');
+      themeBtn.setAttribute('title', currentTheme === 'editorial' ? 'Switch to Dark Experience' : 'Switch to Editorial Experience');
+    }
+
+    // Update Footer Theme Toggle UI
+    const footerThemeText = document.getElementById('footer-theme-text');
+    if (footerThemeText) {
+      footerThemeText.textContent = currentTheme === 'editorial' ? 'Switch to Dark Experience' : 'Switch to Editorial Experience';
+    }
+
+    // Update Mobile Menu Pills
+    const mobDark = document.getElementById('mobile-theme-dark');
+    const mobEd = document.getElementById('mobile-theme-editorial');
+    if (mobDark && mobEd) {
+      if (currentTheme === 'editorial') {
+        mobDark.classList.remove('active');
+        mobEd.classList.add('active');
+      } else {
+        mobDark.classList.add('active');
+        mobEd.classList.remove('active');
+      }
+    }
+
+    // Update Stage C Welcome Cards UI (Highlight selected choice & badges)
+    const cardDark = document.getElementById('welcome-explore-btn');
+    const cardEd = document.getElementById('exp-choice-editorial');
+    const badgeDark = document.getElementById('badge-dark');
+    const badgeEd = document.getElementById('badge-editorial');
+    const hasStored = getStoredTheme() !== null;
+
+    if (cardDark && cardEd) {
+      if (currentTheme === 'editorial') {
+        cardDark.classList.remove('active-choice');
+        cardEd.classList.add('active-choice');
+        if (badgeEd) badgeEd.textContent = hasStored ? 'ACTIVE' : 'SWISS LIGHT';
+        if (badgeDark) badgeDark.textContent = 'DEFAULT';
+      } else {
+        cardDark.classList.add('active-choice');
+        cardEd.classList.remove('active-choice');
+        if (badgeDark) badgeDark.textContent = hasStored ? 'ACTIVE' : 'DEFAULT';
+        if (badgeEd) badgeEd.textContent = 'SWISS LIGHT';
+      }
+    }
+  }
+
+  // Initialize theme from storage (or default to dark without forcing light)
+  const initialSavedTheme = getStoredTheme();
+  applyTheme(initialSavedTheme || 'dark', false);
+
+  // Stage C Action: Option A — Dark Experience
   if (welcomeExploreBtn) {
-    welcomeExploreBtn.addEventListener('click', () => finishIntro(false, false));
+    welcomeExploreBtn.addEventListener('click', () => {
+      applyTheme('dark', true);
+      finishIntro(false, false);
+    });
+  }
+
+  // Stage C Action: Option B — Editorial Experience
+  if (expChoiceEditorial) {
+    expChoiceEditorial.addEventListener('click', () => {
+      applyTheme('editorial', true);
+      finishIntro(false, false);
+    });
   }
 
   // Stage C Secondary Action: Skip Directly to Projects
   if (welcomeSkipBtn) {
-    welcomeSkipBtn.addEventListener('click', () => finishIntro(false, true));
+    welcomeSkipBtn.addEventListener('click', () => {
+      finishIntro(false, true);
+    });
   }
 
   // Persistent Top-Right Skip Intro Button
@@ -374,18 +483,55 @@ document.addEventListener('DOMContentLoaded', () => {
     introSkipBtn.addEventListener('click', () => finishIntro(true, false));
   }
 
+  // Header Theme Switcher Toggle Button
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const nextTheme = currentTheme === 'editorial' ? 'dark' : 'editorial';
+      applyTheme(nextTheme, true);
+    });
+  }
 
+  // Footer Theme Switcher Button
+  if (footerThemeBtn) {
+    footerThemeBtn.addEventListener('click', () => {
+      const nextTheme = currentTheme === 'editorial' ? 'dark' : 'editorial';
+      applyTheme(nextTheme, true);
+    });
+  }
 
-  // Global Keyboard Shortcuts (Escape to Skip, Enter on Welcome to Explore Portfolio)
+  // Mobile Menu Theme Pills
+  if (mobileThemeDark) {
+    mobileThemeDark.addEventListener('click', () => applyTheme('dark', true));
+  }
+  if (mobileThemeEditorial) {
+    mobileThemeEditorial.addEventListener('click', () => applyTheme('editorial', true));
+  }
+
+  // Global Keyboard Shortcuts (1 for Dark, 2 for Editorial, Escape to Skip, Enter to enter active choice)
   document.addEventListener('keydown', (e) => {
     if (!introActive) return;
     if (e.key === 'Escape') {
       finishIntro(true, false);
+    } else if (e.key === '1') {
+      if (introWelcomeScreen && introWelcomeScreen.classList.contains('active')) {
+        applyTheme('dark', true);
+        finishIntro(false, false);
+      }
+    } else if (e.key === '2') {
+      if (introWelcomeScreen && introWelcomeScreen.classList.contains('active')) {
+        applyTheme('editorial', true);
+        finishIntro(false, false);
+      }
     } else if (e.key === 'Enter') {
       const activeEl = document.activeElement;
       if (activeEl === welcomeSkipBtn) {
         finishIntro(false, true);
+      } else if (activeEl === expChoiceEditorial) {
+        applyTheme('editorial', true);
+        finishIntro(false, false);
       } else if (introWelcomeScreen && introWelcomeScreen.classList.contains('active')) {
+        // Enters currently selected / default choice
+        applyTheme(currentTheme, true);
         finishIntro(false, false);
       }
     }
@@ -395,7 +541,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function triggerReplay(e) {
     if (e && e.preventDefault) e.preventDefault();
     clearIntroTimers();
-    sessionStorage.removeItem(STORAGE_KEY);
     window.scrollTo({ top: 0, behavior: 'instant' });
     runCinematicIntro();
   }
