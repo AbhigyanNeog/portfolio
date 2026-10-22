@@ -3940,7 +3940,8 @@ code, pre {
 }
 
 /* ==========================================================================
-   STAGE C: WELCOME & EXPLORE SCREEN (High Contrast, Stable & Pauses Here)
+   STAGE C: SWISS EDITORIAL WELCOME & EXPLORE SCREEN
+   Warm Ivory Canvas (#F2EFE7), Off-White Card (#FAF9F5), Ink Typography (#191919), Cobalt Accent (#2449E8)
    ========================================================================== */
 .intro-welcome-screen {
   position: absolute;
@@ -3949,13 +3950,13 @@ code, pre {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(ellipse 95% 85% at center, rgba(16, 23, 42, 0.97) 0%, rgba(11, 16, 32, 0.98) 65%, #070B16 100%);
+  background: radial-gradient(ellipse 95% 85% at center, rgba(242, 239, 231, 0.99) 0%, rgba(234, 230, 220, 0.99) 65%, #E2DDD2 100%);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.85s ease;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.75s ease;
   overflow-y: auto;
-  padding: 2rem 1.5rem;
+  padding: 2.5rem 1.5rem;
 }
 
 .intro-welcome-screen.active {
@@ -3964,7 +3965,7 @@ code, pre {
   pointer-events: auto;
 }
 
-/* Computational Landscape Background FX */
+/* Subtle Paper Ambient Warmth Background */
 .welcome-bg-fx {
   position: absolute;
   inset: 0;
@@ -3973,198 +3974,47 @@ code, pre {
   overflow: hidden;
 }
 
-/* Atmospheric Ambient Video Layer (Stage C) */
-.welcome-ambient-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.20;
-  filter: saturate(1.2) brightness(0.65) blur(1px);
-  pointer-events: none;
-  z-index: 0;
-  transition: opacity 1.2s ease;
-}
-
-.welcome-video-scrim {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 90% 80% at center, rgba(11, 16, 32, 0.78) 0%, rgba(7, 11, 22, 0.95) 85%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.welcome-neural-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.75;
-}
-
-.welcome-horizon-glow {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 900px;
-  height: 520px;
-  background: radial-gradient(ellipse at center, rgba(65, 105, 255, 0.18) 0%, rgba(85, 214, 255, 0.08) 35%, rgba(150, 112, 255, 0.04) 55%, transparent 75%);
-  border-radius: 50%;
-  filter: blur(30px);
-  animation: welcomeGlowPulse 6s ease-in-out infinite alternate;
-}
-
-@keyframes welcomeGlowPulse {
-  0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.75; }
-  100% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
-}
-
-/* 3D Subtle Orbital Celestial Rings */
-.welcome-orbital-rig {
+.welcome-ambient-warmth {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) perspective(900px) rotateX(68deg);
+  transform: translate(-50%, -50%);
   width: 900px;
-  height: 900px;
-  transform-style: preserve-3d;
-  pointer-events: none;
-}
-
-.orbital-ring {
-  position: absolute;
-  inset: 0;
-  margin: auto;
+  height: 600px;
+  background: radial-gradient(ellipse at center, rgba(36, 73, 232, 0.05) 0%, rgba(228, 84, 54, 0.03) 40%, transparent 70%);
   border-radius: 50%;
-  border: 1px dashed rgba(85, 214, 255, 0.18);
-  box-shadow: 0 0 20px rgba(65, 105, 255, 0.12), inset 0 0 20px rgba(85, 214, 255, 0.08);
+  filter: blur(40px);
 }
 
-.orbital-ring.ring-1 {
-  width: 480px;
-  height: 480px;
-  animation: orbitalSpin 35s linear infinite;
-  border-color: rgba(85, 214, 255, 0.22);
-}
-
-.orbital-ring.ring-2 {
-  width: 720px;
-  height: 720px;
-  animation: orbitalSpin 55s linear infinite reverse;
-  border-color: rgba(65, 105, 255, 0.2);
-}
-
-.orbital-ring.ring-3 {
-  width: 920px;
-  height: 920px;
-  animation: orbitalSpin 80s linear infinite;
-  border-color: rgba(150, 112, 255, 0.15);
-}
-
-@keyframes orbitalSpin {
-  100% { transform: rotateZ(360deg); }
-}
-
-.orbital-axis {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  pointer-events: none;
-}
-
-.orbital-axis.axis-x {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(85, 214, 255, 0.15) 50%, transparent 100%);
-}
-
-.orbital-axis.axis-y {
-  height: 100%;
-  width: 1px;
-  background: linear-gradient(180deg, transparent 0%, rgba(85, 214, 255, 0.15) 50%, transparent 100%);
-}
-
-.welcome-grid-overlay {
+.welcome-grid-subtle {
   position: absolute;
   inset: 0;
   background-image: 
-    linear-gradient(to right, rgba(85, 214, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(85, 214, 255, 0.03) 1px, transparent 1px);
-  background-size: 54px 54px;
-  mask-image: radial-gradient(ellipse 85% 75% at center, black 35%, transparent 85%);
-  -webkit-mask-image: radial-gradient(ellipse 85% 75% at center, black 35%, transparent 85%);
+    linear-gradient(to right, rgba(210, 206, 196, 0.35) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(210, 206, 196, 0.35) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 85% 75% at center, black 30%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 75% at center, black 30%, transparent 85%);
 }
 
-/* Peripheral Telemetry HUD Chips */
-.welcome-telemetry-hud {
-  position: absolute;
-  inset: 2rem 2.5rem;
-  pointer-events: none;
-  z-index: 5;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.welcome-telemetry-hud .hud-chip {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: #94A3B8;
-  letter-spacing: 0.06em;
-  background: rgba(16, 23, 42, 0.65);
-  border: 1px solid rgba(85, 214, 255, 0.15);
-  border-radius: 4px;
-  padding: 4px 10px;
-  backdrop-filter: blur(8px);
-}
-
-.welcome-telemetry-hud .hud-chip.chip-bl,
-.welcome-telemetry-hud .hud-chip.chip-br {
-  position: absolute;
-  bottom: 0;
-}
-.welcome-telemetry-hud .hud-chip.chip-bl { left: 0; }
-.welcome-telemetry-hud .hud-chip.chip-br { right: 0; }
-
-.welcome-telemetry-hud .hud-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-cyan);
-  box-shadow: 0 0 6px var(--color-cyan);
-}
-
-.welcome-telemetry-hud .hud-dot.dot-live {
-  background: #27C93F;
-  box-shadow: 0 0 6px #27C93F;
-}
-
-/* Central High-Contrast Editorial Content Card */
+/* Central Swiss Editorial Welcome Card */
 .welcome-card {
   position: relative;
   z-index: 10;
-  max-width: 860px;
+  max-width: 680px;
   width: 100%;
-  background: rgba(16, 23, 42, 0.92);
-  border: 1px solid rgba(85, 214, 255, 0.28);
-  border-radius: 20px;
-  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.88), 0 0 55px rgba(65, 105, 255, 0.22);
-  backdrop-filter: blur(18px);
+  background: #FAF9F5;
+  border: 1px solid #D2CEC4;
+  border-radius: 16px;
+  box-shadow: 0 24px 64px rgba(25, 25, 25, 0.08), 0 4px 16px rgba(25, 25, 25, 0.04);
   padding: 3.2rem 3rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .intro-welcome-screen.active .welcome-card {
@@ -4175,94 +4025,54 @@ code, pre {
 .welcome-header-meta {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--color-cyan);
-  background: rgba(85, 214, 255, 0.08);
-  border: 1px solid rgba(85, 214, 255, 0.25);
-  padding: 0.38rem 1rem;
+  letter-spacing: 0.02em;
+  color: #5D5C57;
+  background: rgba(36, 73, 232, 0.05);
+  border: 1px solid rgba(36, 73, 232, 0.12);
+  padding: 0.35rem 1.1rem;
   border-radius: 999px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.6rem;
 }
 
-.welcome-header-meta .welcome-author {
-  color: #F5F7FF;
+.welcome-header-meta .welcome-kicker {
+  color: #191919;
   font-weight: 700;
 }
 
 .welcome-header-meta .welcome-sep {
-  color: rgba(85, 214, 255, 0.4);
+  color: #2449E8;
+  font-weight: 400;
+}
+
+.welcome-header-meta .welcome-role {
+  color: #5D5C57;
+  font-weight: 500;
 }
 
 .welcome-headline {
   font-family: var(--font-display);
-  font-size: clamp(2.1rem, 4.2vw, 3.2rem);
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
   font-weight: 700;
-  color: #F5F7FF;
-  line-height: 1.18;
-  letter-spacing: -0.025em;
+  color: #191919;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
   margin-bottom: 1.25rem;
-  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.9);
-  max-width: 760px;
   text-align: center;
 }
 
 .welcome-lead {
   font-family: var(--font-body);
-  font-size: clamp(1.02rem, 1.45vw, 1.18rem);
-  color: #CBD5E1;
-  line-height: 1.7;
-  max-width: 680px;
-  margin-bottom: 2.25rem;
+  font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+  color: #5D5C57;
+  line-height: 1.68;
+  max-width: 580px;
+  margin-bottom: 2.4rem;
   font-weight: 400;
   text-align: center;
-}
-
-/* Distant Architectural Project Preview Ribbon */
-.welcome-project-ribbon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 2.2rem;
-  width: 100%;
-}
-
-.ribbon-label {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: #94A3B8;
-  letter-spacing: 0.15em;
-  font-weight: 600;
-}
-
-.ribbon-items {
-  display: flex;
-  gap: 0.65rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.ribbon-chip {
-  background: rgba(11, 16, 32, 0.85);
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  border-radius: 6px;
-  padding: 0.45rem 0.85rem;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: #E2E8F0;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.ribbon-chip .chip-num {
-  color: var(--color-cyan);
-  font-weight: 700;
-  font-size: 0.65rem;
 }
 
 /* Primary & Secondary Action Buttons */
@@ -4270,110 +4080,138 @@ code, pre {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.1rem;
+  gap: 1rem;
   flex-wrap: wrap;
   width: 100%;
 }
 
 .btn-welcome-explore {
-  background: #4169FF;
+  background: #2449E8;
   color: #FFFFFF;
-  border: 1.5px solid #55D6FF;
+  border: 1px solid #2449E8;
   font-family: var(--font-display);
   font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  padding: 1.05rem 2.6rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 1rem 2.4rem;
   border-radius: 999px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.85rem;
-  box-shadow: 0 6px 25px rgba(65, 105, 255, 0.5), 0 0 35px rgba(85, 214, 255, 0.35);
+  gap: 0.75rem;
+  box-shadow: 0 8px 24px rgba(36, 73, 232, 0.28);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
 }
 
+.btn-welcome-explore .btn-arrow {
+  transition: transform 0.25s ease;
+}
+
 .btn-welcome-explore:hover {
-  background: #3355E0;
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 10px 35px rgba(65, 105, 255, 0.7), 0 0 45px rgba(85, 214, 255, 0.55);
+  background: #1838C7;
+  border-color: #1838C7;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(36, 73, 232, 0.38);
+}
+
+.btn-welcome-explore:hover .btn-arrow {
+  transform: translateX(4px);
 }
 
 .btn-welcome-explore:focus-visible {
-  outline: 3px solid #55D6FF;
-  outline-offset: 4px;
+  outline: 3px solid #2449E8;
+  outline-offset: 3px;
 }
 
 .btn-welcome-resume {
-  background: rgba(16, 23, 42, 0.85);
-  color: #F5F7FF;
-  border: 1px solid rgba(85, 214, 255, 0.35);
+  background: #FAF9F5;
+  color: #191919;
+  border: 1px solid #D2CEC4;
   font-family: var(--font-display);
   font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  padding: 1.05rem 2.2rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 0.95rem 1.8rem;
   border-radius: 999px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.6rem;
   transition: all 0.25s ease;
   text-decoration: none;
-  backdrop-filter: blur(8px);
+}
+
+.btn-welcome-resume svg {
+  stroke: #5D5C57;
+  transition: stroke 0.25s ease;
 }
 
 .btn-welcome-resume:hover {
-  background: rgba(65, 105, 255, 0.18);
-  border-color: #55D6FF;
-  color: #FFFFFF;
+  background: #FFFFFF;
+  border-color: #2449E8;
+  color: #2449E8;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 6px 18px rgba(25, 25, 25, 0.06);
+}
+
+.btn-welcome-resume:hover svg {
+  stroke: #2449E8;
 }
 
 .btn-welcome-resume:focus-visible {
-  outline: 3px solid #55D6FF;
-  outline-offset: 4px;
+  outline: 3px solid #2449E8;
+  outline-offset: 3px;
 }
 
 .btn-welcome-skip {
   background: transparent;
   border: none;
-  color: #94A3B8;
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
+  color: #5D5C57;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.01em;
   cursor: pointer;
   text-decoration: underline;
   text-underline-offset: 4px;
-  transition: color var(--transition-fast);
+  transition: color 0.2s ease;
   padding: 0.5rem 1rem;
   width: 100%;
-  margin-top: 0.3rem;
+  margin-top: 0.5rem;
 }
 
 .btn-welcome-skip:hover {
-  color: #F5F7FF;
+  color: #191919;
 }
 
-.welcome-footnote {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: #64748B;
-  letter-spacing: 0.08em;
-  margin-top: 1.4rem;
+.btn-welcome-skip:focus-visible {
+  outline: 2px solid #2449E8;
+  outline-offset: 2px;
 }
 
-.welcome-footnote .foot-key {
-  background: rgba(148, 163, 184, 0.1);
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  padding: 2px 6px;
-  border-radius: 4px;
+@media (max-width: 680px) {
+  .intro-welcome-screen {
+    padding: 1.5rem 1rem;
+  }
+  .welcome-card {
+    padding: 2.2rem 1.5rem;
+  }
+  .welcome-headline {
+    font-size: 2.1rem;
+  }
+  .welcome-lead {
+    font-size: 1rem;
+    margin-bottom: 1.8rem;
+  }
+  .welcome-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .btn-welcome-explore,
+  .btn-welcome-resume {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* Intro Skip & Replay Controls */

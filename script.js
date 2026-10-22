@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const introSkipBtn = document.getElementById('intro-skip-btn');
   const introPlayBtn = document.getElementById('intro-play-btn');
   const laptopScreenVideo = document.getElementById('laptop-screen-video');
+  const introWelcomeScreen = document.getElementById('intro-welcome-screen');
+  const welcomeExploreBtn = document.getElementById('welcome-explore-btn');
+  const welcomeSkipBtn = document.getElementById('welcome-skip-btn');
   const footerReplayBtn = document.getElementById('footer-replay-btn');
   const introScreenClock = document.getElementById('intro-screen-clock');
 
@@ -61,6 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
     clearIntroTimers();
     introActive = false;
     document.body.style.overflow = '';
+    if (introWelcomeScreen) {
+      introWelcomeScreen.classList.remove('active');
+    }
 
     if (laptopScreenVideo && !laptopScreenVideo.paused) {
       laptopScreenVideo.pause();
@@ -194,6 +200,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Reset all intro elements to initial frame state (Scene A: Closed laptop in 3/4 angle)
     introEl.classList.remove('hidden', 'fade-out');
+    if (introWelcomeScreen) {
+      introWelcomeScreen.classList.remove('active');
+    }
     if (laptopRig) {
       laptopRig.classList.remove('scene-opened', 'diving');
       laptopRig.classList.add('scene-closed');
@@ -219,9 +228,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Force browser reflow to reset transition states
     void introEl.offsetWidth;
 
-    // Respect reduced motion preference: immediately skip intro to Swiss Editorial hero
+    // Respect reduced motion preference: immediately show Swiss Editorial welcome screen
     if (prefersReducedMotion) {
-      finishIntro(true, false);
+      if (introWelcomeScreen) {
+        introWelcomeScreen.classList.add('active');
+      }
+      if (welcomeExploreBtn) {
+        welcomeExploreBtn.focus();
+      }
       return;
     }
 
@@ -297,10 +311,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (cobaltTunnel) cobaltTunnel.classList.add('active');
     }, 6800));
 
-    // Directly transitions into the warm Swiss Editorial portfolio (no selector screen)
+    // =========================================================================
+    // STAGE C (7.0s): Reveal Swiss Editorial Welcome Screen (Pauses Here)
+    // =========================================================================
     introTimers.push(setTimeout(() => {
-      finishIntro(false, false);
-    }, 7200));
+      if (introWelcomeScreen) {
+        introWelcomeScreen.classList.add('active');
+      }
+      if (welcomeExploreBtn) {
+        welcomeExploreBtn.focus();
+      }
+    }, 7000));
   }
 
   // Refresh behavior: Every full page refresh restarts the cinematic intro from its first frame.
@@ -328,16 +349,30 @@ document.addEventListener('DOMContentLoaded', () => {
   document.documentElement.setAttribute('data-theme', 'editorial');
   document.body.setAttribute('data-theme', 'editorial');
 
+  // Stage C Primary Action: Explore Portfolio Button (Enters Swiss Editorial Portfolio)
+  if (welcomeExploreBtn) {
+    welcomeExploreBtn.addEventListener('click', () => finishIntro(false, false));
+  }
+
+  // Stage C Secondary Action: Skip Directly to Projects
+  if (welcomeSkipBtn) {
+    welcomeSkipBtn.addEventListener('click', () => finishIntro(false, true));
+  }
+
   // Persistent Top-Right Skip Intro Button
   if (introSkipBtn) {
     introSkipBtn.addEventListener('click', () => finishIntro(true, false));
   }
 
-  // Global Keyboard Shortcuts (Escape to Skip Intro)
+  // Global Keyboard Shortcuts (Escape to Skip Intro, Enter on Welcome to Explore Portfolio)
   document.addEventListener('keydown', (e) => {
     if (!introActive) return;
     if (e.key === 'Escape') {
       finishIntro(true, false);
+    } else if (e.key === 'Enter') {
+      if (introWelcomeScreen && introWelcomeScreen.classList.contains('active')) {
+        finishIntro(false, false);
+      }
     }
   });
 
