@@ -112,13 +112,97 @@
 
               <!-- Laptop Display Screen -->
               <div class="laptop-display" id="laptop-display">
-                <!-- Cinematic Video Stream / Abstract Computational Visual -->
+                <!-- Layer 1: Cinematic World Map Video Stream -->
                 <video class="laptop-screen-video" id="laptop-screen-video" autoplay muted playsinline loop preload="auto" poster="assets/images/tracex_hero.png" src="assets/videos/tracex_world_map.mp4"></video>
+                
+                <!-- Layer 2: Subtle Depth Tint (Non-destructive to map visibility) -->
                 <div class="laptop-video-tint" aria-hidden="true"></div>
 
-                <!-- Natural, Refined Identity & Computational Display -->
+                <!-- Layer 3: Dynamic Geospatial Network Arcs & Traveling Light Points -->
+                <div class="screen-network-overlay" id="screen-network-overlay" aria-hidden="true">
+                  <svg class="network-arcs-svg" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice">
+                    <defs>
+                      <linearGradient id="netArcGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#2449E8" stop-opacity="0.3"/>
+                        <stop offset="50%" stop-color="#55D6FF" stop-opacity="0.95"/>
+                        <stop offset="100%" stop-color="#2449E8" stop-opacity="0.3"/>
+                      </linearGradient>
+                      <linearGradient id="netArcGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#55D6FF" stop-opacity="0.3"/>
+                        <stop offset="50%" stop-color="#FFFFFF" stop-opacity="1"/>
+                        <stop offset="100%" stop-color="#4169FF" stop-opacity="0.4"/>
+                      </linearGradient>
+                      <filter id="arcGlow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="3.5" result="blur"/>
+                        <feMerge>
+                          <feMergeNode in="blur"/>
+                          <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                      </filter>
+                    </defs>
+
+                    <!-- Persistent Great-Circle Network Paths -->
+                    <path class="network-path path-1" d="M 230,230 Q 360,110 500,200" filter="url(#arcGlow)"/>
+                    <path class="network-path path-2" d="M 500,200 Q 600,140 680,310" filter="url(#arcGlow)"/>
+                    <path class="network-path path-3" d="M 680,310 Q 760,260 830,240" filter="url(#arcGlow)"/>
+                    <path class="network-path path-4" d="M 230,230 Q 380,380 500,300" filter="url(#arcGlow)"/>
+                    <path class="network-path path-5" d="M 500,300 Q 610,340 680,310" filter="url(#arcGlow)"/>
+                    <path class="network-path path-core-w" d="M 120,300 L 500,300"/>
+                    <path class="network-path path-core-e" d="M 880,300 L 500,300"/>
+
+                    <!-- Animated Traveling Light Pulses Moving Along Curves -->
+                    <path class="traveler-pulse pulse-1" d="M 230,230 Q 360,110 500,200"/>
+                    <path class="traveler-pulse pulse-2" d="M 500,200 Q 600,140 680,310"/>
+                    <path class="traveler-pulse pulse-3" d="M 680,310 Q 760,260 830,240"/>
+                    <path class="traveler-pulse pulse-4" d="M 230,230 Q 380,380 500,300"/>
+                    <path class="traveler-pulse pulse-5" d="M 500,300 Q 610,340 680,310"/>
+                    <path class="traveler-pulse pulse-core-w" d="M 120,300 L 500,300"/>
+                    <path class="traveler-pulse pulse-core-e" d="M 880,300 L 500,300"/>
+
+                    <!-- Global Tech & Research Nodes -->
+                    <!-- San Francisco (SFO) -->
+                    <g class="network-node node-sfo" transform="translate(230, 230)">
+                      <circle r="12" class="node-ripple"/>
+                      <circle r="3.5" class="node-core"/>
+                      <text x="8" y="4" class="node-label">SFO</text>
+                    </g>
+                    <!-- Zurich (ZRH) -->
+                    <g class="network-node node-zrh" transform="translate(500, 200)">
+                      <circle r="14" class="node-ripple"/>
+                      <circle r="4" class="node-core"/>
+                      <text x="10" y="4" class="node-label">ZRH</text>
+                    </g>
+                    <!-- Bengaluru (BLR - CHRIST University) -->
+                    <g class="network-node node-blr" transform="translate(680, 310)">
+                      <circle r="16" class="node-ripple node-blr-ripple"/>
+                      <circle r="4.5" class="node-core node-blr-core"/>
+                      <text x="10" y="4" class="node-label node-blr-label">BLR</text>
+                    </g>
+                    <!-- Tokyo (TYO) -->
+                    <g class="network-node node-tyo" transform="translate(830, 240)">
+                      <circle r="12" class="node-ripple"/>
+                      <circle r="3.5" class="node-core"/>
+                      <text x="8" y="4" class="node-label">TYO</text>
+                    </g>
+
+                    <!-- Central Dive Convergence Beacon (Center Bullseye Target) -->
+                    <g class="core-dive-target" transform="translate(500, 300)">
+                      <circle r="42" class="core-reticle-outer"/>
+                      <circle r="26" class="core-reticle-mid"/>
+                      <circle r="10" class="core-reticle-glow"/>
+                      <circle r="3.5" class="core-reticle-dot"/>
+                    </g>
+                  </svg>
+
+                  <!-- Dynamic Inward Particle Converger Rays -->
+                  <div class="screen-convergence-rays" id="screen-convergence-rays"></div>
+                </div>
+
+                <!-- Layer 4: Screen Horizon Perspective & Optical Vignette -->
+                <div class="screen-depth-sheen" aria-hidden="true"></div>
+
+                <!-- Layer 5: Refined Computational Identity (Transparent, Non-Obscuring) -->
                 <div class="display-computational" id="display-computational">
-                  <div class="comp-ambient-glow"></div>
                   <div class="comp-monogram-ring">
                     <svg class="comp-ring-svg" viewBox="0 0 120 120" aria-hidden="true">
                       <circle cx="60" cy="60" r="50" class="ring-track" />
@@ -129,7 +213,11 @@
                   </div>
                   <div class="comp-typography">
                     <span class="comp-name">Abhigyan Neog</span>
-                    <span class="comp-role">Computer Science & Systems</span>
+                    <span class="comp-role">Computer Science &amp; Systems Engineering</span>
+                  </div>
+                  <div class="comp-telemetry-badge">
+                    <span class="tele-dot"></span>
+                    <span class="tele-text">GLOBAL INTELLIGENCE NETWORK · ACTIVE</span>
                   </div>
                 </div>
               </div>

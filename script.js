@@ -126,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
       introEl.classList.add('hidden');
       introEl.classList.remove('fade-out');
       if (laptopRig) laptopRig.classList.remove('diving', 'scene-opened', 'scene-closed');
+      if (laptopDisplay) laptopDisplay.classList.remove('illuminated', 'anticipating');
       if (cobaltTunnel) cobaltTunnel.classList.remove('active');
       executeDestination();
     } else {
@@ -134,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         introEl.classList.add('hidden');
         introEl.classList.remove('fade-out');
         if (laptopRig) laptopRig.classList.remove('diving', 'scene-opened', 'scene-closed');
+        if (laptopDisplay) laptopDisplay.classList.remove('illuminated', 'anticipating');
         if (cobaltTunnel) cobaltTunnel.classList.remove('active');
         executeDestination();
       }, 650);
@@ -240,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
       laptopRig.classList.remove('scene-opened', 'diving');
       laptopRig.classList.add('scene-closed');
     }
-    if (laptopDisplay) laptopDisplay.classList.remove('illuminated');
+    if (laptopDisplay) laptopDisplay.classList.remove('illuminated', 'anticipating');
     const displayComp = document.getElementById('display-computational');
     if (displayComp) displayComp.classList.remove('active');
     if (cobaltTunnel) cobaltTunnel.classList.remove('active');
@@ -306,12 +308,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (studioBackdrop) studioBackdrop.classList.add('screen-lit');
         return;
       }
+      if (freezeStage === 'anticipation') {
+        if (laptopRig) {
+          laptopRig.classList.remove('scene-closed');
+          laptopRig.classList.add('scene-opened');
+          laptopRig.style.transition = 'none';
+        }
+        if (laptopDisplay) laptopDisplay.classList.add('illuminated', 'anticipating');
+        if (displayComp) displayComp.classList.add('active');
+        if (studioBackdrop) studioBackdrop.classList.add('screen-lit');
+        return;
+      }
       if (freezeStage === 'dive') {
         if (laptopRig) {
           laptopRig.className = 'laptop-rig diving';
           laptopRig.style.transition = 'none';
         }
-        if (laptopDisplay) laptopDisplay.classList.add('illuminated');
+        if (laptopDisplay) laptopDisplay.classList.add('illuminated', 'anticipating');
         if (displayComp) displayComp.classList.add('active');
         if (studioBackdrop) studioBackdrop.classList.add('screen-lit');
         return;
@@ -325,34 +338,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================================
-    // SCENE A (0.0s – 2.2s): Closed Laptop Reveal in 3/4 Studio Camera Angle
+    // SCENE A (0.0s – 2.0s): Closed Laptop Reveal in 3/4 Studio Camera Angle
     // =========================================================================
 
     // =========================================================================
-    // SCENE B (2.2s – 4.4s): Physical Lid Opens on Hinge & Camera Moves to Face
+    // SCENE B (2.0s – 3.8s): Physical Lid Opens on Hinge & Camera Moves to Face
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopRig) {
         laptopRig.classList.remove('scene-closed');
         laptopRig.classList.add('scene-opened');
       }
-    }, 2200));
+    }, 2000));
 
     // =========================================================================
-    // SCENE C (4.4s – 6.0s): Screen Illuminates with Subtle Glow & Visual
+    // SCENE C (3.8s – 5.4s): Screen Illuminates, World Map & Network Awakening
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopDisplay) laptopDisplay.classList.add('illuminated');
       if (displayComp) displayComp.classList.add('active');
       if (studioBackdrop) studioBackdrop.classList.add('screen-lit');
-    }, 4400));
+    }, 3800));
 
     // =========================================================================
-    // SCENE D (6.0s – 7.2s): Camera Dives into Display -> Cobalt Tunnel -> Swiss Editorial
+    // SCENE C.2 (5.4s – 6.2s): Anticipation Glow & Particle Convergence to Center
+    // =========================================================================
+    introTimers.push(setTimeout(() => {
+      if (laptopDisplay) laptopDisplay.classList.add('anticipating');
+    }, 5400));
+
+    // =========================================================================
+    // SCENE D (6.2s – 7.2s): Camera Dives through Display -> Cobalt Tunnel -> Swiss Editorial
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopRig) laptopRig.classList.add('diving');
-    }, 6000));
+    }, 6200));
 
     introTimers.push(setTimeout(() => {
       if (cobaltTunnel) cobaltTunnel.classList.add('active');
