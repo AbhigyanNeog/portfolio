@@ -30,20 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const laptopDisplay = document.getElementById('laptop-display');
   const displayOs = document.getElementById('display-os');
   const cobaltTunnel = document.getElementById('cobalt-tunnel');
-  const introWelcomeScreen = document.getElementById('intro-welcome-screen');
-  const welcomeExploreBtn = document.getElementById('welcome-explore-btn');
-  const expChoiceEditorial = document.getElementById('exp-choice-editorial');
-  const welcomeSkipBtn = document.getElementById('welcome-skip-btn');
   const introSkipBtn = document.getElementById('intro-skip-btn');
   const introPlayBtn = document.getElementById('intro-play-btn');
   const laptopScreenVideo = document.getElementById('laptop-screen-video');
-  const welcomeAmbientVideo = document.getElementById('welcome-ambient-video');
   const footerReplayBtn = document.getElementById('footer-replay-btn');
   const introScreenClock = document.getElementById('intro-screen-clock');
-  const themeToggleBtn = document.getElementById('theme-toggle-btn');
-  const footerThemeBtn = document.getElementById('footer-theme-btn');
-  const mobileThemeDark = document.getElementById('mobile-theme-dark');
-  const mobileThemeEditorial = document.getElementById('mobile-theme-editorial');
 
   let introActive = false;
   let introTimers = [];
@@ -74,9 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (laptopScreenVideo && !laptopScreenVideo.paused) {
       laptopScreenVideo.pause();
     }
-    if (welcomeAmbientVideo && !welcomeAmbientVideo.paused) {
-      welcomeAmbientVideo.pause();
-    }
 
     const executeDestination = () => {
       if (scrollToProjects) {
@@ -97,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
       introEl.classList.remove('fade-out');
       if (laptopRig) laptopRig.classList.remove('diving', 'scene-opened', 'scene-closed');
       if (cobaltTunnel) cobaltTunnel.classList.remove('active');
-      if (introWelcomeScreen) introWelcomeScreen.classList.remove('active');
       executeDestination();
     } else {
       introEl.classList.add('fade-out');
@@ -106,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
         introEl.classList.remove('fade-out');
         if (laptopRig) laptopRig.classList.remove('diving', 'scene-opened', 'scene-closed');
         if (cobaltTunnel) cobaltTunnel.classList.remove('active');
-        if (introWelcomeScreen) introWelcomeScreen.classList.remove('active');
         executeDestination();
       }, 650);
     }
@@ -216,11 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const displayComp = document.getElementById('display-computational');
     if (displayComp) displayComp.classList.remove('active');
     if (cobaltTunnel) cobaltTunnel.classList.remove('active');
-    if (introWelcomeScreen) introWelcomeScreen.classList.remove('active');
-    if (welcomeAmbientVideo) {
-      welcomeAmbientVideo.pause();
-      try { welcomeAmbientVideo.currentTime = 0; } catch (_) {}
-    }
 
     // Laptop Video Handling: start from frame 0 and handle autoplay restrictions gracefully
     if (laptopScreenVideo) {
@@ -230,7 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
         playPromise.then(() => {
           if (introPlayBtn) introPlayBtn.classList.add('hidden');
         }).catch(() => {
-          // Browser blocked autoplay: show clear Play Intro control rather than silently replacing
           if (introPlayBtn) introPlayBtn.classList.remove('hidden');
         });
       }
@@ -239,13 +219,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Force browser reflow to reset transition states
     void introEl.offsetWidth;
 
-    // Respect reduced motion preference: immediately show the static Welcome Screen
+    // Respect reduced motion preference: immediately skip intro to Swiss Editorial hero
     if (prefersReducedMotion) {
-      if (introWelcomeScreen) {
-        introWelcomeScreen.classList.add('active');
-        initNeuralCanvas();
-      }
-      if (welcomeExploreBtn) welcomeExploreBtn.focus();
+      finishIntro(true, false);
       return;
     }
 
@@ -253,10 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const freezeStage = urlParams.get('freeze');
     if (freezeStage) {
-      if (freezeStage === 'closed') {
-        // Statically frozen at closed laptop state
-        return;
-      }
+      if (freezeStage === 'closed') return;
       if (freezeStage === 'halfway') {
         if (laptopRig) {
           laptopRig.classList.remove('scene-closed');
@@ -289,14 +262,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (displayComp) displayComp.classList.add('active');
         return;
       }
-      if (freezeStage === 'welcome') {
-        if (introWelcomeScreen) {
-          introWelcomeScreen.classList.add('active');
-          introWelcomeScreen.style.transition = 'none';
-          initNeuralCanvas();
-        }
-        return;
-      }
     }
 
     // =========================================================================
@@ -322,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4400));
 
     // =========================================================================
-    // SCENE D (6.0s – 7.6s): Camera Enters Display -> Cobalt Tunnel -> Welcome
+    // SCENE D (6.0s – 7.2s): Camera Dives into Display -> Cobalt Tunnel -> Swiss Editorial
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopRig) laptopRig.classList.add('diving');
@@ -332,21 +297,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (cobaltTunnel) cobaltTunnel.classList.add('active');
     }, 6800));
 
-    // =========================================================================
-    // STAGE C: Welcome Screen Reveal (7.6s — Pauses Here for Visitor Choice)
-    // =========================================================================
+    // Directly transitions into the warm Swiss Editorial portfolio (no selector screen)
     introTimers.push(setTimeout(() => {
-      if (introWelcomeScreen) {
-        introWelcomeScreen.classList.add('active');
-        initNeuralCanvas();
-        if (welcomeAmbientVideo && !prefersReducedMotion && window.innerWidth > 768) {
-          welcomeAmbientVideo.play().catch(() => {});
-        }
-      }
-      if (welcomeExploreBtn) {
-        welcomeExploreBtn.focus();
-      }
-    }, 7000));
+      finishIntro(false, false);
+    }, 7200));
   }
 
   // Refresh behavior: Every full page refresh restarts the cinematic intro from its first frame.
@@ -365,175 +319,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // DUAL-THEME EXPERIENCE MANAGER (Phase 15.3)
+  // SINGLE SWISS EDITORIAL THEME ENFORCEMENT (Phase 15.3)
   // =========================================================================
-  const THEME_STORAGE_KEY = 'portfolio_theme';
-  let currentTheme = 'dark';
-
-  function getStoredTheme() {
-    try {
-      const stored = localStorage.getItem(THEME_STORAGE_KEY);
-      if (stored === 'editorial' || stored === 'dark') {
-        return stored;
-      }
-    } catch (_) {
-      // Storage unavailable fallback
-    }
-    return null;
-  }
-
-  function applyTheme(theme, save = true) {
-    currentTheme = (theme === 'editorial') ? 'editorial' : 'dark';
-
-    if (currentTheme === 'editorial') {
-      document.documentElement.setAttribute('data-theme', 'editorial');
-      document.body.setAttribute('data-theme', 'editorial');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      document.body.setAttribute('data-theme', 'dark');
-    }
-
-    if (save) {
-      try {
-        localStorage.setItem(THEME_STORAGE_KEY, currentTheme);
-      } catch (_) {}
-    }
-
-    // Update Header Theme Toggle UI
-    const themeToggleText = document.getElementById('theme-toggle-label');
-    const themeBtn = document.getElementById('theme-toggle-btn');
-    if (themeToggleText) {
-      themeToggleText.textContent = currentTheme === 'editorial' ? 'DARK' : 'EDITORIAL';
-    }
-    if (themeBtn) {
-      themeBtn.setAttribute('aria-label', currentTheme === 'editorial' ? 'Switch to Dark Experience' : 'Switch to Editorial Experience');
-      themeBtn.setAttribute('title', currentTheme === 'editorial' ? 'Switch to Dark Experience' : 'Switch to Editorial Experience');
-    }
-
-    // Update Footer Theme Toggle UI
-    const footerThemeText = document.getElementById('footer-theme-text');
-    if (footerThemeText) {
-      footerThemeText.textContent = currentTheme === 'editorial' ? 'Switch to Dark Experience' : 'Switch to Editorial Experience';
-    }
-
-    // Update Mobile Menu Pills
-    const mobDark = document.getElementById('mobile-theme-dark');
-    const mobEd = document.getElementById('mobile-theme-editorial');
-    if (mobDark && mobEd) {
-      if (currentTheme === 'editorial') {
-        mobDark.classList.remove('active');
-        mobEd.classList.add('active');
-      } else {
-        mobDark.classList.add('active');
-        mobEd.classList.remove('active');
-      }
-    }
-
-    // Update Stage C Welcome Cards UI (Highlight selected choice & badges)
-    const cardDark = document.getElementById('welcome-explore-btn');
-    const cardEd = document.getElementById('exp-choice-editorial');
-    const badgeDark = document.getElementById('badge-dark');
-    const badgeEd = document.getElementById('badge-editorial');
-    const hasStored = getStoredTheme() !== null;
-
-    if (cardDark && cardEd) {
-      if (currentTheme === 'editorial') {
-        cardDark.classList.remove('active-choice');
-        cardEd.classList.add('active-choice');
-        if (badgeEd) badgeEd.textContent = hasStored ? 'ACTIVE' : 'SWISS LIGHT';
-        if (badgeDark) badgeDark.textContent = 'DEFAULT';
-      } else {
-        cardDark.classList.add('active-choice');
-        cardEd.classList.remove('active-choice');
-        if (badgeDark) badgeDark.textContent = hasStored ? 'ACTIVE' : 'DEFAULT';
-        if (badgeEd) badgeEd.textContent = 'SWISS LIGHT';
-      }
-    }
-  }
-
-  // Initialize theme from storage (or default to dark without forcing light)
-  const initialSavedTheme = getStoredTheme();
-  applyTheme(initialSavedTheme || 'dark', false);
-
-  // Stage C Action: Option A — Dark Experience
-  if (welcomeExploreBtn) {
-    welcomeExploreBtn.addEventListener('click', () => {
-      applyTheme('dark', true);
-      finishIntro(false, false);
-    });
-  }
-
-  // Stage C Action: Option B — Editorial Experience
-  if (expChoiceEditorial) {
-    expChoiceEditorial.addEventListener('click', () => {
-      applyTheme('editorial', true);
-      finishIntro(false, false);
-    });
-  }
-
-  // Stage C Secondary Action: Skip Directly to Projects
-  if (welcomeSkipBtn) {
-    welcomeSkipBtn.addEventListener('click', () => {
-      finishIntro(false, true);
-    });
-  }
+  // Clear any legacy saved theme so visitors always enjoy the warm Swiss Editorial design
+  try {
+    localStorage.removeItem('portfolio_theme');
+  } catch (_) {}
+  document.documentElement.setAttribute('data-theme', 'editorial');
+  document.body.setAttribute('data-theme', 'editorial');
 
   // Persistent Top-Right Skip Intro Button
   if (introSkipBtn) {
     introSkipBtn.addEventListener('click', () => finishIntro(true, false));
   }
 
-  // Header Theme Switcher Toggle Button
-  if (themeToggleBtn) {
-    themeToggleBtn.addEventListener('click', () => {
-      const nextTheme = currentTheme === 'editorial' ? 'dark' : 'editorial';
-      applyTheme(nextTheme, true);
-    });
-  }
-
-  // Footer Theme Switcher Button
-  if (footerThemeBtn) {
-    footerThemeBtn.addEventListener('click', () => {
-      const nextTheme = currentTheme === 'editorial' ? 'dark' : 'editorial';
-      applyTheme(nextTheme, true);
-    });
-  }
-
-  // Mobile Menu Theme Pills
-  if (mobileThemeDark) {
-    mobileThemeDark.addEventListener('click', () => applyTheme('dark', true));
-  }
-  if (mobileThemeEditorial) {
-    mobileThemeEditorial.addEventListener('click', () => applyTheme('editorial', true));
-  }
-
-  // Global Keyboard Shortcuts (1 for Dark, 2 for Editorial, Escape to Skip, Enter to enter active choice)
+  // Global Keyboard Shortcuts (Escape to Skip Intro)
   document.addEventListener('keydown', (e) => {
     if (!introActive) return;
     if (e.key === 'Escape') {
       finishIntro(true, false);
-    } else if (e.key === '1') {
-      if (introWelcomeScreen && introWelcomeScreen.classList.contains('active')) {
-        applyTheme('dark', true);
-        finishIntro(false, false);
-      }
-    } else if (e.key === '2') {
-      if (introWelcomeScreen && introWelcomeScreen.classList.contains('active')) {
-        applyTheme('editorial', true);
-        finishIntro(false, false);
-      }
-    } else if (e.key === 'Enter') {
-      const activeEl = document.activeElement;
-      if (activeEl === welcomeSkipBtn) {
-        finishIntro(false, true);
-      } else if (activeEl === expChoiceEditorial) {
-        applyTheme('editorial', true);
-        finishIntro(false, false);
-      } else if (introWelcomeScreen && introWelcomeScreen.classList.contains('active')) {
-        // Enters currently selected / default choice
-        applyTheme(currentTheme, true);
-        finishIntro(false, false);
-      }
     }
   });
 
