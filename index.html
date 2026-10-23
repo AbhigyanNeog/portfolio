@@ -31,11 +31,70 @@
   <!-- CINEMATIC OPENING EXPERIENCE: 3D DIGITAL WORKSPACE & LAPTOP INTRO -->
   <!-- =================================================================== -->
   <aside class="cinematic-intro" id="cinematic-intro" role="region" aria-label="Digital Workspace Intro">
-    <!-- Studio Ambient Backdrop, Volumetric Lighting & Atmospheric Particles -->
+    <!-- Studio Ambient Backdrop, Volumetric Lighting, Rotating Orbital Wireframe Globe & Atmospheric Particles -->
     <div class="intro-studio-backdrop" aria-hidden="true">
       <div class="studio-ambient-vignette"></div>
       <div class="studio-light-volumetric" id="studio-light-volumetric"></div>
       <div class="studio-light-radial" id="studio-light-radial"></div>
+
+      <!-- Scene D: Subtle Rotating Wireframe Globe and Delicate Orbital Rings Behind Laptop -->
+      <div class="studio-orbital-backdrop" id="studio-orbital-backdrop">
+        <svg class="orbital-globe-svg" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="globeCoreGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#2449E8" stop-opacity="0.22"/>
+              <stop offset="55%" stop-color="#0E1E4D" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#040711" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="ringGradA" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#55D6FF" stop-opacity="0.6"/>
+              <stop offset="50%" stop-color="#2449E8" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#55D6FF" stop-opacity="0.6"/>
+            </linearGradient>
+            <linearGradient id="ringGradB" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+              <stop offset="50%" stop-color="#55D6FF" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#2449E8" stop-opacity="0.5"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Core Ambient Glow -->
+          <circle cx="400" cy="400" r="330" fill="url(#globeCoreGlow)"/>
+
+          <!-- Slow Rotating Wireframe Globe -->
+          <g class="rotating-wireframe-globe">
+            <!-- Latitude Parallels -->
+            <ellipse cx="400" cy="400" rx="260" ry="260" class="globe-lat lat-equator"/>
+            <ellipse cx="400" cy="400" rx="250" ry="170" class="globe-lat lat-1"/>
+            <ellipse cx="400" cy="400" rx="225" ry="95" class="globe-lat lat-2"/>
+            <ellipse cx="400" cy="400" rx="160" ry="40" class="globe-lat lat-3"/>
+
+            <!-- Longitude Meridians -->
+            <ellipse cx="400" cy="400" rx="260" ry="260" class="globe-lon lon-prime"/>
+            <ellipse cx="400" cy="400" rx="180" ry="260" class="globe-lon lon-1"/>
+            <ellipse cx="400" cy="400" rx="100" ry="260" class="globe-lon lon-2"/>
+            <ellipse cx="400" cy="400" rx="30" ry="260" class="globe-lon lon-3"/>
+          </g>
+
+          <!-- Inclined Orbital Rings with Micro-Traveling Nodes -->
+          <g class="orbital-ring-group ring-inclined-a">
+            <ellipse cx="400" cy="400" rx="360" ry="120" stroke="url(#ringGradA)" class="orbital-ring-path ring-a"/>
+            <circle cx="760" cy="400" r="3" class="orbital-node node-a1"/>
+            <circle cx="40" cy="400" r="2.5" class="orbital-node node-a2"/>
+          </g>
+
+          <g class="orbital-ring-group ring-inclined-b">
+            <ellipse cx="400" cy="400" rx="380" ry="110" stroke="url(#ringGradB)" class="orbital-ring-path ring-b"/>
+            <circle cx="400" cy="510" r="3.5" class="orbital-node node-b1"/>
+            <circle cx="400" cy="290" r="2" class="orbital-node node-b2"/>
+          </g>
+
+          <g class="orbital-ring-group ring-inclined-c">
+            <ellipse cx="400" cy="400" rx="340" ry="90" stroke="rgba(85,214,255,0.3)" class="orbital-ring-path ring-c"/>
+          </g>
+        </svg>
+      </div>
+
       <canvas class="intro-particles-canvas" id="intro-particles-canvas"></canvas>
       <div class="studio-grid-floor"></div>
     </div>
@@ -68,9 +127,16 @@
           <div class="base-deck">
             <div class="keyboard-well">
               <div class="kb-screen-glow" id="kb-screen-glow"></div>
+              <div class="kb-travel-pulse" id="kb-travel-pulse"></div>
               <div class="kb-row kb-r1"></div>
               <div class="kb-row kb-r2"></div>
-              <div class="kb-row kb-r3"></div>
+              <div class="kb-row kb-r3">
+                <div class="kb-r3-keys-left"></div>
+                <div class="kb-enter-key" id="kb-enter-key" aria-hidden="true">
+                  <span class="enter-glyph">↵</span>
+                  <div class="enter-key-glow"></div>
+                </div>
+              </div>
               <div class="kb-row kb-r4"></div>
               <div class="kb-row kb-r5"></div>
             </div>

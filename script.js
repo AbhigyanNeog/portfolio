@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const welcomeSkipBtn = document.getElementById('welcome-skip-btn');
   const footerReplayBtn = document.getElementById('footer-replay-btn');
   const introScreenClock = document.getElementById('intro-screen-clock');
+  const kbEnterKey = document.getElementById('kb-enter-key');
+  const kbTravelPulse = document.getElementById('kb-travel-pulse');
 
   let introActive = false;
   let introTimers = [];
@@ -80,6 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (studioBackdrop) {
       studioBackdrop.classList.remove('screen-lit');
     }
+
+    const kbEnterKey = document.getElementById('kb-enter-key');
+    if (kbEnterKey) kbEnterKey.classList.remove('pressed');
+    const kbTravelPulse = document.getElementById('kb-travel-pulse');
+    if (kbTravelPulse) kbTravelPulse.classList.remove('traveling');
 
     if (laptopScreenVideo && !laptopScreenVideo.paused) {
       laptopScreenVideo.pause();
@@ -125,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (immediate) {
       introEl.classList.add('hidden');
       introEl.classList.remove('fade-out');
-      if (laptopRig) laptopRig.classList.remove('diving', 'scene-opened', 'scene-closed');
+      if (laptopRig) laptopRig.classList.remove('diving', 'scene-opened', 'scene-closed', 'scene-arriving');
       if (laptopDisplay) laptopDisplay.classList.remove('illuminated', 'anticipating');
       if (cobaltTunnel) cobaltTunnel.classList.remove('active');
       executeDestination();
@@ -134,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         introEl.classList.add('hidden');
         introEl.classList.remove('fade-out');
-        if (laptopRig) laptopRig.classList.remove('diving', 'scene-opened', 'scene-closed');
+        if (laptopRig) laptopRig.classList.remove('diving', 'scene-opened', 'scene-closed', 'scene-arriving');
         if (laptopDisplay) laptopDisplay.classList.remove('illuminated', 'anticipating');
         if (cobaltTunnel) cobaltTunnel.classList.remove('active');
         executeDestination();
@@ -242,15 +249,24 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
     document.body.style.overflow = 'hidden';
 
-    // Reset all intro elements to initial frame state (Scene A: Closed laptop in 3/4 angle)
+    // Reset all intro elements to initial frame state (Scene A: Laptop Arrival from Studio Darkness)
     introEl.classList.remove('hidden', 'fade-out');
     if (introWelcomeScreen) {
       introWelcomeScreen.classList.remove('active');
     }
     if (laptopRig) {
-      laptopRig.classList.remove('scene-opened', 'diving');
-      laptopRig.classList.add('scene-closed');
+      laptopRig.classList.remove('scene-opened', 'diving', 'scene-closed');
+      laptopRig.classList.add('scene-arriving');
+      laptopRig.style.transition = '';
+      laptopRig.style.animationPlayState = '';
     }
+    const lidEl = document.getElementById('laptop-lid');
+    if (lidEl) {
+      lidEl.style.transition = '';
+      lidEl.style.transform = '';
+    }
+    if (kbEnterKey) kbEnterKey.classList.remove('pressed');
+    if (kbTravelPulse) kbTravelPulse.classList.remove('traveling');
     if (laptopDisplay) laptopDisplay.classList.remove('illuminated', 'anticipating');
     const displayComp = document.getElementById('display-computational');
     if (displayComp) displayComp.classList.remove('active');
@@ -292,23 +308,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const freezeStage = urlParams.get('freeze');
     if (freezeStage) {
-      if (freezeStage === 'closed') return;
+      if (freezeStage === 'arriving') {
+        if (laptopRig) {
+          laptopRig.classList.remove('scene-closed', 'scene-opened', 'diving');
+          laptopRig.classList.add('scene-arriving');
+          laptopRig.style.animationPlayState = 'paused';
+        }
+        return;
+      }
+      if (freezeStage === 'closed') {
+        if (laptopRig) {
+          laptopRig.classList.remove('scene-arriving', 'scene-opened', 'diving');
+          laptopRig.classList.add('scene-closed');
+        }
+        return;
+      }
       if (freezeStage === 'halfway') {
         if (laptopRig) {
-          laptopRig.classList.remove('scene-closed');
+          laptopRig.classList.remove('scene-arriving', 'scene-closed');
           laptopRig.classList.add('scene-opened');
           laptopRig.style.transition = 'none';
         }
-        const lidEl = document.getElementById('laptop-lid');
         if (lidEl) {
           lidEl.style.transition = 'none';
           lidEl.style.transform = 'rotateX(-35deg)';
         }
         return;
       }
+      if (freezeStage === 'enter') {
+        if (laptopRig) {
+          laptopRig.classList.remove('scene-arriving', 'scene-closed');
+          laptopRig.classList.add('scene-opened');
+          laptopRig.style.transition = 'none';
+        }
+        if (kbEnterKey) kbEnterKey.classList.add('pressed');
+        return;
+      }
+      if (freezeStage === 'pulse') {
+        if (laptopRig) {
+          laptopRig.classList.remove('scene-arriving', 'scene-closed');
+          laptopRig.classList.add('scene-opened');
+          laptopRig.style.transition = 'none';
+        }
+        if (kbTravelPulse) kbTravelPulse.classList.add('traveling');
+        return;
+      }
       if (freezeStage === 'open') {
         if (laptopRig) {
-          laptopRig.classList.remove('scene-closed');
+          laptopRig.classList.remove('scene-arriving', 'scene-closed');
           laptopRig.classList.add('scene-opened');
           laptopRig.style.transition = 'none';
         }
@@ -319,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (freezeStage === 'anticipation') {
         if (laptopRig) {
-          laptopRig.classList.remove('scene-closed');
+          laptopRig.classList.remove('scene-arriving', 'scene-closed');
           laptopRig.classList.add('scene-opened');
           laptopRig.style.transition = 'none';
         }
@@ -347,45 +394,57 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================================
-    // SCENE A (0.0s – 2.2s): Closed Laptop Reveal in Studio with Gentle Push-In
+    // SCENE A (0.0s – 1.5s): Laptop Arrival from Studio Darkness & Grounding
     // =========================================================================
 
     // =========================================================================
-    // SCENE B (2.2s – 4.0s): Physical Lid Opens on Hinge & Camera Faces Display
+    // SCENE B (1.5s – 3.8s): Physical Lid Opens on Hinge & Camera Faces Display
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopRig) {
-        laptopRig.classList.remove('scene-closed');
+        laptopRig.classList.remove('scene-arriving', 'scene-closed');
         laptopRig.classList.add('scene-opened');
       }
-    }, 2200));
+    }, 1500));
 
     // =========================================================================
-    // SCENE C (4.0s – 5.8s): Screen Illuminates, Network Routes Draw Across Globe
+    // SCENE C (3.8s – 4.6s): Automatic Enter-Key Press & Light Pulse to Display
+    // =========================================================================
+    introTimers.push(setTimeout(() => {
+      if (kbEnterKey) kbEnterKey.classList.add('pressed');
+    }, 3800));
+
+    introTimers.push(setTimeout(() => {
+      if (kbEnterKey) kbEnterKey.classList.remove('pressed');
+      if (kbTravelPulse) kbTravelPulse.classList.add('traveling');
+    }, 4050));
+
+    // =========================================================================
+    // SCENE E (4.5s – 5.8s): Screen Power-Up, Network Routes, Display Illumination
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopDisplay) laptopDisplay.classList.add('illuminated');
       if (displayComp) displayComp.classList.add('active');
       if (studioBackdrop) studioBackdrop.classList.add('screen-lit');
-    }, 4000));
+    }, 4500));
 
     // =========================================================================
-    // SCENE D (5.8s – 7.0s): Anticipation Glow, Inward Rays & Particle Convergence
+    // SCENE D (5.8s – 6.8s): Anticipation Glow, Inward Rays & Particle Convergence
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopDisplay) laptopDisplay.classList.add('anticipating');
     }, 5800));
 
     // =========================================================================
-    // SCENE E (7.0s – 8.0s): Camera Dives into Display Center -> Perspective Tunnel
+    // SCENE F (6.8s – 8.0s): Camera Dives into Display Center -> Perspective Tunnel
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopRig) laptopRig.classList.add('diving');
-    }, 7000));
+    }, 6800));
 
     introTimers.push(setTimeout(() => {
       if (cobaltTunnel) cobaltTunnel.classList.add('active');
-    }, 7500));
+    }, 7400));
 
     // =========================================================================
     // STAGE C (8.0s): Seamless Reveal of Swiss Editorial Welcome Screen
@@ -521,16 +580,39 @@ document.addEventListener('DOMContentLoaded', () => {
     welcomeSkipBtn.addEventListener('click', () => finishIntro(false, true));
   }
 
+  function skipToWelcome() {
+    clearIntroTimers();
+    if (laptopRig) {
+      laptopRig.className = 'laptop-rig scene-opened';
+    }
+    if (introWelcomeScreen) {
+      introWelcomeScreen.classList.add('active');
+    }
+    if (welcomeExploreBtn) {
+      welcomeExploreBtn.focus();
+    }
+  }
+
   // Persistent Top-Right Skip Intro Button
   if (introSkipBtn) {
-    introSkipBtn.addEventListener('click', () => finishIntro(true, false));
+    introSkipBtn.addEventListener('click', () => {
+      if (introWelcomeScreen && !introWelcomeScreen.classList.contains('active')) {
+        skipToWelcome();
+      } else {
+        finishIntro(true, false);
+      }
+    });
   }
 
   // Global Keyboard Shortcuts (Escape to Skip Intro, Enter on Welcome to Explore Portfolio)
   document.addEventListener('keydown', (e) => {
     if (!introActive) return;
     if (e.key === 'Escape') {
-      finishIntro(true, false);
+      if (introWelcomeScreen && !introWelcomeScreen.classList.contains('active')) {
+        skipToWelcome();
+      } else {
+        finishIntro(true, false);
+      }
     } else if (e.key === 'Enter') {
       if (introWelcomeScreen && introWelcomeScreen.classList.contains('active')) {
         // If an interactive child element (button or link) is currently focused, let native event dispatch

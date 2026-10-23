@@ -3472,6 +3472,15 @@ code, pre {
   display: none !important;
 }
 
+.cinematic-intro.hidden .rotating-wireframe-globe,
+.cinematic-intro.hidden .ring-inclined-a,
+.cinematic-intro.hidden .ring-inclined-b,
+.cinematic-intro.hidden .ring-inclined-c,
+.cinematic-intro.hidden .orbital-node,
+.cinematic-intro.hidden .studio-light-pulse {
+  animation: none !important;
+}
+
 /* Studio Ambient Backdrop with Multiple Depth Layers */
 .intro-studio-backdrop {
   position: absolute;
@@ -3530,6 +3539,146 @@ code, pre {
   100% { transform: translate(-50%, -20%) scale(1.03); opacity: 0.95; }
 }
 
+/* Layer 3.5: Scene D Subtle Rotating Wireframe Globe & Orbital Rings Behind Laptop */
+.studio-orbital-backdrop {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 780px;
+  height: 780px;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.82;
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+@media (max-width: 768px) {
+  .studio-orbital-backdrop {
+    width: 440px;
+    height: 440px;
+    top: 42%;
+  }
+}
+
+.intro-studio-backdrop.screen-lit .studio-orbital-backdrop {
+  opacity: 1;
+}
+
+.orbital-globe-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Rotating Wireframe Globe */
+.rotating-wireframe-globe {
+  transform-origin: 400px 400px;
+  animation: wireframeSpin 55s linear infinite;
+}
+
+@keyframes wireframeSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.globe-lat {
+  fill: none;
+  stroke: rgba(36, 73, 232, 0.28);
+  stroke-width: 1px;
+  stroke-dasharray: 4 3;
+}
+
+.globe-lat.lat-equator {
+  stroke: rgba(85, 214, 255, 0.45);
+  stroke-width: 1.5px;
+  stroke-dasharray: none;
+}
+
+.globe-lon {
+  fill: none;
+  stroke: rgba(36, 73, 232, 0.22);
+  stroke-width: 1px;
+  stroke-dasharray: 5 4;
+}
+
+.globe-lon.lon-prime {
+  stroke: rgba(85, 214, 255, 0.4);
+  stroke-width: 1.5px;
+  stroke-dasharray: none;
+}
+
+/* Orbital Rings & Nodes */
+.orbital-ring-group {
+  transform-origin: 400px 400px;
+}
+
+.ring-inclined-a {
+  transform: rotate(-22deg);
+  animation: orbitRingA 34s linear infinite;
+}
+
+.ring-inclined-b {
+  transform: rotate(34deg);
+  animation: orbitRingB 28s linear infinite reverse;
+}
+
+.ring-inclined-c {
+  transform: rotate(-65deg);
+  animation: orbitRingC 42s linear infinite;
+}
+
+@keyframes orbitRingA {
+  0% { transform: rotate(-22deg); }
+  100% { transform: rotate(338deg); }
+}
+
+@keyframes orbitRingB {
+  0% { transform: rotate(34deg); }
+  100% { transform: rotate(-326deg); }
+}
+
+@keyframes orbitRingC {
+  0% { transform: rotate(-65deg); }
+  100% { transform: rotate(295deg); }
+}
+
+.orbital-ring-path {
+  fill: none;
+  stroke-width: 1.5px;
+  stroke-dasharray: 6 5;
+}
+
+.orbital-ring-path.ring-a {
+  stroke-dasharray: 8 6;
+  filter: drop-shadow(0 0 6px rgba(85, 214, 255, 0.4));
+}
+
+.orbital-ring-path.ring-b {
+  stroke-dasharray: 12 8;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+}
+
+.orbital-node {
+  fill: #FFFFFF;
+  filter: drop-shadow(0 0 5px #55D6FF);
+}
+
+.orbital-node.node-a1 {
+  fill: #55D6FF;
+  animation: orbitalPulse 2.4s ease-in-out infinite alternate;
+}
+
+.orbital-node.node-b1 {
+  fill: #FFFFFF;
+  animation: orbitalPulse 1.8s ease-in-out infinite alternate 0.5s;
+}
+
+@keyframes orbitalPulse {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.3); opacity: 1; }
+}
+
 /* Layer 4: Atmospheric Particle Canvas */
 .intro-particles-canvas {
   position: absolute;
@@ -3537,7 +3686,7 @@ code, pre {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 2;
+  z-index: 4;
 }
 
 /* Layer 5: Faint Studio Perspective Floor Grid */
@@ -3589,21 +3738,36 @@ code, pre {
   }
 }
 
-/* Scene A: Closed laptop reveal in realistic 3/4 front-side studio camera angle with gentle push-in */
-.laptop-rig.scene-closed {
-  transform: rotateX(16deg) rotateY(-18deg) rotateZ(0deg) translateY(20px) scale(calc(var(--laptop-scale) * 0.95));
-  animation: laptopRevealPush 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Scene A: Laptop Arrival from Studio Darkness (0s – 1.5s) */
+.laptop-rig.scene-arriving {
+  transform: rotateX(18.5deg) rotateY(-24deg) rotateZ(0deg) translateY(42px) scale(calc(var(--laptop-scale) * 0.74));
+  opacity: 0.92;
+  filter: brightness(0.4) contrast(1.1);
+  animation: laptopArrival 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes laptopRevealPush {
+@keyframes laptopArrival {
   0% {
-    transform: rotateX(17.5deg) rotateY(-21deg) rotateZ(0deg) translateY(26px) scale(calc(var(--laptop-scale) * 0.91));
-    opacity: 0.9;
+    transform: rotateX(18.5deg) rotateY(-24deg) rotateZ(0deg) translateY(42px) scale(calc(var(--laptop-scale) * 0.74));
+    opacity: 0.92;
+    filter: brightness(0.4) contrast(1.1);
+  }
+  60% {
+    opacity: 1;
+    filter: brightness(0.85);
   }
   100% {
     transform: rotateX(15.5deg) rotateY(-17.5deg) rotateZ(0deg) translateY(18px) scale(calc(var(--laptop-scale) * 0.96));
     opacity: 1;
+    filter: brightness(1);
   }
+}
+
+/* Settled Closed Laptop State (3/4 Studio Angle) */
+.laptop-rig.scene-closed {
+  transform: rotateX(15.5deg) rotateY(-17.5deg) rotateZ(0deg) translateY(18px) scale(calc(var(--laptop-scale) * 0.96));
+  opacity: 1;
+  filter: brightness(1);
 }
 
 /* Scene B & C: Lid opened & camera squarely facing display */
@@ -3630,6 +3794,21 @@ code, pre {
   pointer-events: none;
   z-index: 2;
   transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.laptop-rig.scene-arriving .laptop-floor-shadow {
+  animation: shadowArrivalGround 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes shadowArrivalGround {
+  0% {
+    opacity: 0.25;
+    transform: rotateX(65deg) scale(0.72);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateX(65deg) scale(1);
+  }
 }
 
 .shadow-contact {
@@ -3684,8 +3863,9 @@ code, pre {
 }
 
 /* When closed: lid rotated forward around hinge to lie flat directly on top of base deck */
-.laptop-rig.scene-closed .laptop-lid {
-  transform: rotateX(-78deg);
+.laptop-rig.scene-closed .laptop-lid,
+.laptop-rig.scene-arriving .laptop-lid {
+  transform: rotateX(-115deg);
 }
 
 /* When open: lid rotates backward around hinge to natural upright ~102deg open viewing angle */
@@ -4270,6 +4450,111 @@ code, pre {
   border-radius: 3px;
   border: 0.5px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.kb-row.kb-r3 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.kb-r3-keys-left {
+  flex: 1;
+  height: 100%;
+  background: linear-gradient(180deg, #1C2433 0%, #121824 100%);
+  border-radius: 3px;
+  border: 0.5px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Enter Key - Distinct ANSI Return Key Geometry on Row 3 */
+.kb-enter-key {
+  position: relative;
+  width: 58px;
+  height: 100%;
+  background: linear-gradient(180deg, #242E40 0%, #141C2A 100%);
+  border: 1px solid rgba(148, 163, 184, 0.38);
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.22s cubic-bezier(0.18, 0.89, 0.32, 1.28), box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+  user-select: none;
+}
+
+.enter-glyph {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: rgba(220, 235, 255, 0.85);
+  line-height: 1;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.enter-key-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 5px;
+  background: radial-gradient(circle at center, rgba(85, 214, 255, 0.6) 0%, rgba(36, 73, 232, 0.2) 60%, transparent 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+/* Automatic Enter Key Press Animation State (Scene C) */
+.kb-enter-key.pressed {
+  transform: translateY(2.5px) scale(0.96);
+  background: linear-gradient(180deg, #101724 0%, #0B101A 100%);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.95), 0 0 12px rgba(85, 214, 255, 0.75);
+  border-color: #55D6FF;
+}
+
+.kb-enter-key.pressed .enter-glyph {
+  color: #FFFFFF;
+  text-shadow: 0 0 8px #55D6FF, 0 0 16px rgba(36, 73, 232, 0.8);
+}
+
+.kb-enter-key.pressed .enter-key-glow {
+  opacity: 1;
+}
+
+/* Traveling Light Pulse from Enter Key up across Keyboard Rows toward Screen */
+.kb-travel-pulse {
+  position: absolute;
+  bottom: 28%;
+  right: 18px;
+  width: 52px;
+  height: 26px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(85, 214, 255, 0.85) 0%, rgba(36, 73, 232, 0.4) 50%, transparent 75%);
+  filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.kb-travel-pulse.traveling {
+  animation: kbPulseTravel 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes kbPulseTravel {
+  0% {
+    opacity: 0.95;
+    transform: scale(0.8) translate(0, 0);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.4) translate(-130px, -50px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.3) translate(-260px, -100px);
+  }
 }
 
 .trackpad {
@@ -5292,7 +5577,8 @@ code, pre {
   .universe-rig-3d, .ring-outer, .ring-mid, .ring-ellipse-a, .ring-ellipse-b,
   .u-constellation-line, .universe-beacon-dot, .mule-arrow-flow,
   .radar-sweep-beam, .radar-device-ring, .stream-live-dot, .hint-pulse,
-  .reel-track {
+  .reel-track, .rotating-wireframe-globe, .ring-inclined-a, .ring-inclined-b,
+  .ring-inclined-c, .kb-travel-pulse {
     animation: none !important;
   }
 }
