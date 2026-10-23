@@ -497,10 +497,10 @@ document.addEventListener('DOMContentLoaded', () => {
       caseStudy: 'attendance',
       order: 1,
       title: 'VeriClass — Faculty Attendance Management System',
-      tag: 'Systems & CV',
-      desc: 'Haversine GPS geofencing, classroom photo verification, and timetable OCR.',
+      tag: 'Systems & Verification',
+      desc: 'A web-based faculty attendance management system combining location verification, classroom photo capture, and timetable management.',
       image: 'assets/images/sfas_placeholder.svg',
-      alt: 'Smart Faculty Attendance System Architecture (Screenshot Pending)',
+      alt: 'VeriClass Architecture (Screenshot Pending)',
       isPlaceholder: true
     },
     {
@@ -508,8 +508,8 @@ document.addEventListener('DOMContentLoaded', () => {
       caseStudy: 'copilot',
       order: 2,
       title: 'Campus Copilot',
-      tag: 'Intelligent Agents',
-      desc: 'Student utility hub with event discovery, study scheduler, and RAG knowledge base.',
+      tag: 'Algorithms & Visualization',
+      desc: 'A campus-focused application developed during a five-hour hackathon, using algorithms and data visualization to support campus-related workflows.',
       image: 'assets/images/campus_copilot_events.png',
       alt: 'Campus Copilot Events Interface',
       isPlaceholder: false
@@ -911,27 +911,35 @@ document.addEventListener('DOMContentLoaded', () => {
   const CASE_STUDIES = {
     attendance: {
       number: 'CASE STUDY 01 / 08',
-      badge: 'INSTITUTIONAL GEOFENCING',
+      badge: 'INSTITUTIONAL SYSTEMS',
       title: 'VeriClass — Faculty Attendance Management System',
-      subtitle: 'Haversine GPS Geofencing, Live Photo Capture & Timetable Schedule OCR Ingestion',
+      subtitle: 'Location Verification, Classroom Photo Capture & Timetable Management',
       content: `
-        <h4 class="drawer-section-heading">1. Institutional Problem Formulation</h4>
+        <h4 class="drawer-section-heading">1. System Overview & Problem Formulation</h4>
         <p class="drawer-p">
-          University faculty attendance recording typically suffers from two vulnerabilities: static biometric fingerprint readers placed at central building entrances (which prove arrival on campus, but not presence in the scheduled classroom) and manual registers prone to buddy-punching or discrepancies.
+          VeriClass is a web-based faculty attendance management system developed to replace manual registers and centralized entrance biometrics. Conventional entry logs only confirm physical arrival at a campus gate rather than presence inside an assigned classroom during scheduled lecture periods.
         </p>
         <p class="drawer-p">
-          <strong>The Objective:</strong> Automate presence verification directly inside classrooms by marrying physical coordinates (GPS geofencing) with optical evidence (compressed classroom photo) and comparing both against an automated timetable parser.
+          <strong>The Objective:</strong> Combine browser-based location verification, classroom photo capture, and timetable parsing into an automated, role-aware workflow for faculty check-ins and academic administration.
         </p>
 
-        <h4 class="drawer-section-heading">2. Mathematical Formulation: Haversine Geofencing</h4>
+        <h4 class="drawer-section-heading">2. Core Implementation Features</h4>
+        <ul class="drawer-p" style="padding-left: 1.25rem;">
+          <li><strong>Role-Based Authentication:</strong> Granular authentication isolating administrative timetable management and audit logs from faculty attendance submission interfaces.</li>
+          <li><strong>GPS-Based Location Verification & Geofencing:</strong> Calculates great-circle distance between faculty device coordinates and campus boundary thresholds, flagging out-of-bounds submissions.</li>
+          <li><strong>Classroom Photo Capture:</strong> Integrated browser photo capture with OpenCV image array conversion and compression for visual attendance confirmation.</li>
+          <li><strong>Timetable Management & Parsing:</strong> Parsing pipeline handling structured schedule files and scanned documents via Tesseract OCR fallback.</li>
+          <li><strong>SQLite / PostgreSQL Database Configuration:</strong> SQLAlchemy ORM configuration supporting local SQLite development and scalable PostgreSQL production environments.</li>
+        </ul>
+
+        <h4 class="drawer-section-heading">3. GPS Geofencing Implementation</h4>
         <p class="drawer-p">
-          To verify faculty presence without relying on proprietary hardware beacons, VeriClass calculates the great-circle distance between the faculty device's HTML5 GPS coordinates and the institution's geographical center using the Haversine formula in <code>utils.py</code>:
+          To verify presence without proprietary hardware beacons, VeriClass calculates the great-circle distance between device GPS coordinates and the institution's geographical center using the Haversine formula:
         </p>
         <div class="drawer-code-block">
 def calculate_distance(lat1, lon1, lat2, lon2):
     R = 6371000.0  # Earth's radius in meters
-    phi1 = math.radians(lat1)
-    phi2 = math.radians(lat2)
+    phi1, phi2 = math.radians(lat1), math.radians(lat2)
     delta_phi = math.radians(lat2 - lat1)
     delta_lambda = math.radians(lon2 - lon1)
     
@@ -941,30 +949,20 @@ def calculate_distance(lat1, lon1, lat2, lon2):
     return R * c
         </div>
         <p class="drawer-p">
-          If <code>distance <= CampusSetting.radius_meters</code>, the location check passes; otherwise, the check-in is logged as <code>Out of Bounds</code>.
+          If <code>distance &lt;= CampusSetting.radius_meters</code>, the location check succeeds and enables the classroom photo submission workflow.
         </p>
 
-        <h4 class="drawer-section-heading">3. Timetable Document Ingestion Pipeline</h4>
-        <p class="drawer-p">
-          College departments distribute timetables in wildly heterogeneous formats: Excel spreadsheets, multi-column PDFs, and Word documents. The 23 KB <code>timetable_parser.py</code> leverages:
-        </p>
-        <ul class="drawer-p" style="padding-left: 1.25rem;">
-          <li><code>pdfplumber</code>: Extracting complex cell grids and time slot columns from PDF files.</li>
-          <li><code>openpyxl</code>: Reading multi-sheet institutional schedules.</li>
-          <li><code>pytesseract</code>: Optical Character Recognition (OCR) fallback for scanned schedules.</li>
-          <li><code>difflib</code>: Fuzzy string matching resolving naming variations in course and teacher profiles.</li>
-        </ul>
-
-        <h4 class="drawer-section-heading">4. Architectural Verification</h4>
+        <h4 class="drawer-section-heading">4. Technology Stack & Architecture</h4>
         <table class="drawer-metrics-table">
           <thead>
-            <tr><th>Metric</th><th>Details</th></tr>
+            <tr><th>Component</th><th>Technology Stack</th></tr>
           </thead>
           <tbody>
-            <tr><td>Image Pipeline</td><td>Base64 capture → OpenCV array conversion → Pillow 75% JPEG compression</td></tr>
-            <tr><td>Database Architecture</td><td>SQLAlchemy supporting local SQLite (WAL mode) and Render PostgreSQL</td></tr>
-            <tr><td>Automated Tests</td><td>13.8 KB test suite in <code>test_database_flows.py</code> with isolated in-memory DB</td></tr>
-            <tr><td>Security Alerts</td><td>Automated SMTP email notifications to administrators on credential changes</td></tr>
+            <tr><td>Backend Framework</td><td>Python, Flask</td></tr>
+            <tr><td>ORM & Database</td><td>SQLAlchemy (SQLite / PostgreSQL configuration)</td></tr>
+            <tr><td>Computer Vision</td><td>OpenCV, Pillow JPEG compression</td></tr>
+            <tr><td>Document Ingestion</td><td>Tesseract OCR, pdfplumber, openpyxl</td></tr>
+            <tr><td>Repository</td><td><a href="https://github.com/AbhigyanNeog/college_faculty_attendence" target="_blank" rel="noopener noreferrer" style="color: var(--color-electric-blue);">AbhigyanNeog/college_faculty_attendence ↗</a></td></tr>
           </tbody>
         </table>
       `
@@ -972,61 +970,72 @@ def calculate_distance(lat1, lon1, lat2, lon2):
 
     copilot: {
       number: 'CASE STUDY 02 / 08',
-      badge: 'CLASSICAL ALGORITHMS',
+      badge: 'ALGORITHMS & VISUALIZATION',
       title: 'Campus Copilot',
-      subtitle: 'Algorithmic University Assistant with 4 Classical DSA Implementations',
+      subtitle: 'Algorithms & Data Visualization for Campus Workflows',
       content: `
-        <h4 class="drawer-section-heading">1. Hackathon Challenge & Engineering Philosophy</h4>
+        <h4 class="drawer-section-heading">1. Project Context & Team Scope</h4>
         <p class="drawer-p">
-          Built during an intensive 5-hour hackathon by a 5-member team. The project goal was to deliver an explainable, responsive campus assistant without deploying opaque deep-learning models that cannot be mathematically proven or traced in real time.
+          Campus Copilot is a campus-focused application developed by a team of five during an intensive five-hour hackathon. The system was designed to assist students and staff with event discovery, scheduling, and geospatial campus insights using classical computer science algorithms and data visualization.
         </p>
         <p class="drawer-p">
-          <strong>Verified Personal Attribution:</strong> Served as <strong>Core Algorithm & NLP Engineer</strong>, architecting the classical algorithmic models in <code>src/algorithms.py</code> and the tokenized fuzzy intent resolver in <code>src/chatbot.py</code>.
+          <strong>Collaborative Scope:</strong> Built collaboratively within a strict five-hour timeframe, focusing on explainable algorithmic solutions and responsive visual workflows rather than uninterpretable black-box models.
         </p>
 
-        <h4 class="drawer-section-heading">2. The Four Classical Algorithms</h4>
+        <h4 class="drawer-section-heading">2. Technical Highlights & Algorithm Mapping</h4>
         <p class="drawer-p">
-          Each algorithm was specifically mapped to a concrete, real-world user feature:
+          The application leverages four classical algorithmic paradigms directly integrated into user-facing features:
         </p>
         <table class="drawer-metrics-table">
           <thead>
-            <tr><th>Algorithm</th><th>Paradigm</th><th>Complexity</th><th>Concrete Feature</th></tr>
+            <tr><th>Algorithm</th><th>Paradigm</th><th>Campus Workflow Feature</th></tr>
           </thead>
           <tbody>
             <tr>
               <td><strong>Levenshtein Distance</strong></td>
               <td>Dynamic Programming</td>
-              <td>O(m · n) time & space</td>
-              <td>Typo-tolerant chatbot intent matching ("evnts" → "events", "scedule" → "schedule")</td>
+              <td>Typo-tolerant fuzzy intent matching for campus user queries across services and categories.</td>
             </tr>
             <tr>
-              <td><strong>Activity Selection</strong></td>
+              <td><strong>Activity-Selection Algorithm</strong></td>
               <td>Greedy Algorithm</td>
-              <td>O(n log n) time</td>
-              <td>Optimizes daily student itinerary to attend maximum non-overlapping campus events</td>
+              <td>Computes optimal, conflict-free student itineraries across overlapping campus events and sessions.</td>
             </tr>
             <tr>
-              <td><strong>0/1 Knapsack</strong></td>
+              <td><strong>0/1 Knapsack Algorithm</strong></td>
               <td>Dynamic Programming</td>
-              <td>O(n · W) pseudo-poly</td>
-              <td>Maximizes total student footfall given a finite event sponsorship budget W</td>
+              <td>Optimizes student organization event budget allocation under fixed financial and resource constraints.</td>
             </tr>
             <tr>
               <td><strong>Binary Search</strong></td>
-              <td>Divide & Conquer</td>
-              <td>O(log n) time</td>
-              <td>Rapid target date retrieval across pre-sorted academic calendar datasets</td>
+              <td>Divide &amp; Conquer</td>
+              <td>Accelerates target date and deadline retrieval across pre-sorted academic calendar datasets.</td>
             </tr>
           </tbody>
         </table>
 
-        <h4 class="drawer-section-heading">3. Fuzzy Intent Dispatch Architecture</h4>
+        <h4 class="drawer-section-heading">3. Data Visualization & Mapping</h4>
         <p class="drawer-p">
-          In <code>src/chatbot.py</code>, user queries are lower-cased and tokenized. Tokens are tested against an O(1) hash set of known keywords. Any word missing the hash table falls through to the Levenshtein dynamic programming matrix. Action intents (like <code>optimize</code>) are prioritized over noun intents in tie situations.
+          To provide clear operational insights for campus life, the application incorporates data visualization and mapping layers:
         </p>
-        <p class="drawer-p">
-          <strong>Visual & Geospatial Engine:</strong> Connected to a Folium map generator producing an interactive HTML venue map (<code>campus_map.html</code>) and Matplotlib scripts outputting budget and attendance charts.
-        </p>
+        <ul class="drawer-p" style="padding-left: 1.25rem;">
+          <li><strong>Geospatial Mapping:</strong> Interactive campus maps generated using Folium to visualize event venues, study spaces, and key navigational points of interest.</li>
+          <li><strong>Data Visualization:</strong> Statistical plots generated with Pandas and Matplotlib illustrating event attendance density, expense allocations, and fee distributions.</li>
+        </ul>
+
+        <h4 class="drawer-section-heading">4. Technology Stack & Repository</h4>
+        <table class="drawer-metrics-table">
+          <thead>
+            <tr><th>Component</th><th>Technology Stack</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Backend Framework</td><td>Python, Flask</td></tr>
+            <tr><td>Data Analytics & Visuals</td><td>Pandas, Matplotlib</td></tr>
+            <tr><td>Geospatial Mapping</td><td>Folium</td></tr>
+            <tr><td>Core Logic</td><td>Classical Algorithms (Levenshtein, Greedy, Knapsack, Binary Search)</td></tr>
+            <tr><td>Repository</td><td><a href="https://github.com/Deepak-Reddy-56/campuscopilot" target="_blank" rel="noopener noreferrer" style="color: var(--color-electric-blue);">Deepak-Reddy-56/campuscopilot ↗</a></td></tr>
+          </tbody>
+        </table>
       `
     },
 
