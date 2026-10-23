@@ -530,8 +530,8 @@ document.addEventListener('DOMContentLoaded', () => {
       caseStudy: 'llmassistant',
       order: 4,
       title: 'LLM Educational Assistant',
-      tag: 'Pedagogical Language Agent',
-      desc: 'Interactive pedagogical dialogue engine with contextual retrieval and guided learning.',
+      tag: 'Educational AI & RAG',
+      desc: 'An educational AI assistant intended to help students ask course-related questions using teacher-managed learning materials and retrieval-augmented generation.',
       image: 'assets/images/llm_placeholder.svg',
       alt: 'LLM Educational Assistant Architecture (Screenshot Pending)',
       isPlaceholder: true
@@ -1111,50 +1111,67 @@ def calculate_distance(lat1, lon1, lat2, lon2):
 
     llmassistant: {
       number: 'CASE STUDY 04 / 08',
-      badge: 'PEDAGOGICAL AGENT & RETRIEVAL',
+      badge: 'EDUCATIONAL AI & RETRIEVAL',
       title: 'LLM Educational Assistant',
-      subtitle: 'Interactive Pedagogical Dialogue, Contextual Retrieval & Socratic Reasoning Guidance',
+      subtitle: 'Course Question-Answering, Teacher Materials Grounding & QLoRA/RAG Exploration',
       content: `
-        <h4 class="drawer-section-heading">1. Pedagogical Problem & Objectives</h4>
+        <h4 class="drawer-section-heading">1. Project Context & Intended Scope</h4>
         <p class="drawer-p">
-          Standard conversational AI models generate direct answers to student homework problems. While convenient, this passive solution delivery short-circuits active recall, hinders conceptual development, and fails to identify underlying misconceptions in algorithmic and mathematical foundations.
+          LLM Educational Assistant is an educational AI assistant intended to help students ask course-related questions using teacher-managed learning materials and retrieval-augmented generation.
         </p>
         <p class="drawer-p">
-          <strong>The Objective:</strong> Engineer an intelligent educational assistant that steers students through Socratic dialogue—prompting reflection, validating intermediate steps, and providing contextual hints derived directly from authoritative course materials via retrieval-augmented generation (RAG).
-        </p>
-
-        <h4 class="drawer-section-heading">2. Architecture & Retrieval Pipeline</h4>
-        <p class="drawer-p">
-          The system pairs dynamic pedagogical prompt frameworks with an indexed curriculum corpus:
-        </p>
-        <div class="drawer-code-block">
-[Student Problem Statement]
-          ↓
-[Pedagogical Intent Classifier & Misconception Detector]
-          ↓
-[Contextual Vector Retrieval over Curriculum Corpus]
-          ↓
-[Socratic Scaffolding Engine (Hint Generation)]
-          ↓
-[Interactive Dialogue Stream & Telemetry]
-        </div>
-        <p class="drawer-p">
-          <strong>Curriculum Retrieval Engine:</strong> Semantic chunking and vector embeddings over lecture notes, syllabus concepts, and textbook references ensure grounded explanations without hallucination.
-        </p>
-        <p class="drawer-p">
-          <strong>Adaptive Scaffolding:</strong> Evaluates student attempt quality, calibrating hint specificity across 3 graduated tiers (Concept reminder → Guiding question → Concrete step breakdown).
+          <strong>Development Status:</strong> The project is currently under active development. Current work focuses on document processing of syllabus units, local model quantization budgeting on consumer GPUs, and exploring the trade-offs between parameter-efficient fine-tuning (QLoRA) and retrieval-augmented generation (RAG) for academic materials.
         </p>
 
-        <h4 class="drawer-section-heading">3. Implementation Status & Telemetry</h4>
+        <h4 class="drawer-section-heading">2. Technical Approaches Explored</h4>
+        <p class="drawer-p">
+          The engineering investigation is organized around four core technical pillars:
+        </p>
+        <ul class="drawer-p" style="padding-left: 1.25rem;">
+          <li><strong>Document Processing & Dataset Preparation:</strong> Extracted, cleaned, and structured raw course PDF content (Java Object-Oriented Programming, CSE335P) across 5 syllabus units into cleaned markdown and ChatML-formatted instruction pairs (<code>train.jsonl</code>, <code>val.jsonl</code>).</li>
+          <li><strong>Base Model Quantization (Qwen3-8B):</strong> Configured 4-bit NormalFloat4 (NF4) double-quantization loading via BitsAndBytes to operate within an 8 GB VRAM hardware budget on an NVIDIA RTX 4060.</li>
+          <li><strong>QLoRA Fine-Tuning Exploration:</strong> Formulated a local adaptation pipeline (<code>train_qlora.py</code>) using PEFT LoRA (r=8, alpha=16) on attention projection layers with PagedAdamW8bit and gradient checkpointing, producing experimental adapter checkpoints.</li>
+          <li><strong>Planned Retrieval-Augmented Generation (RAG):</strong> Architecting a retrieval pipeline intended to ground responses dynamically on teacher-uploaded syllabi, lecture slides, assignments, and question papers to mitigate hallucinations and maintain domain precision.</li>
+        </ul>
+
+        <h4 class="drawer-section-heading">3. Implementation Status Audit</h4>
+        <p class="drawer-p">
+          To maintain engineering rigor, current progress is distinguished across verified implementation stages and planned capabilities:
+        </p>
         <table class="drawer-metrics-table">
           <thead>
-            <tr><th>Module</th><th>Stack</th><th>Status</th></tr>
+            <tr><th>Status Category</th><th>Capabilities & Components</th><th>Verification Details</th></tr>
           </thead>
           <tbody>
-            <tr><td>Dialogue Scaffolding</td><td>Python, LangChain, Custom Guardrails</td><td>Validated</td></tr>
-            <tr><td>Curriculum Vector Store</td><td>FAISS / ChromaDB</td><td>Complete</td></tr>
-            <tr><td>Misconception Telemetry</td><td>Analytics logging pipeline</td><td>Prototype</td></tr>
-            <tr><td>Student Web Client</td><td>Reactive Frontend</td><td>Screenshot Pending</td></tr>
+            <tr>
+              <td><strong>Verified Implementation</strong></td>
+              <td>Document processing and syllabus cleaning (Units 1–5); ChatML instruction tuning dataset preparation; Qwen3-8B 4-bit NF4 quantized loading test harness with VRAM allocation telemetry; local QLoRA training script with 8 GB VRAM stability constraints; offline evaluation benchmark script (<code>evaluate_accuracy.py</code>) assessing academic accuracy and concept coverage.</td>
+              <td>Implemented in local repository (<code>E:\\LLM_LMS_PROJECT</code>); adapter trained and evaluated locally against 15 academic benchmark questions.</td>
+            </tr>
+            <tr>
+              <td><strong>In Progress / Planned</strong></td>
+              <td>Teacher-managed upload interface for course plans, lecture slides, notes, assignments, and question papers; active vector store document chunking and real-time similarity retrieval; online evaluation of answer correctness, groundedness, hallucination mitigation, response latency, and live VRAM usage.</td>
+              <td>Conceptual and planned for upcoming integration phases.</td>
+            </tr>
+            <tr>
+              <td><strong>Not Deployed</strong></td>
+              <td>Production server deployment and live student-facing learning management system (LMS) web portal.</td>
+              <td>Offline research and development build; no public production deployment.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="drawer-section-heading">4. Technology Stack & Repository</h4>
+        <table class="drawer-metrics-table">
+          <thead>
+            <tr><th>Component</th><th>Technology Stack</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Base Language Model</td><td>Qwen3-8B</td></tr>
+            <tr><td>Fine-Tuning & Quantization</td><td>QLoRA (PEFT), BitsAndBytes 4-bit NF4, PyTorch</td></tr>
+            <tr><td>Architecture Approach</td><td>Document Processing, RAG (Planned), QLoRA Adaptation</td></tr>
+            <tr><td>Hardware Target</td><td>NVIDIA RTX 4060 (8 GB VRAM optimization)</td></tr>
+            <tr><td>Repository</td><td><a href="https://github.com/AbhigyanNeog/LLM_LMS_PROJECT" target="_blank" rel="noopener noreferrer" style="color: var(--color-electric-blue);">AbhigyanNeog/LLM_LMS_PROJECT ↗</a></td></tr>
           </tbody>
         </table>
       `
