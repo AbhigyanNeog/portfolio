@@ -519,8 +519,8 @@ document.addEventListener('DOMContentLoaded', () => {
       caseStudy: 'nexora',
       order: 3,
       title: 'NEXORA — Hierarchical AI Research Prototype',
-      tag: 'Hierarchical Multi-Agent AI',
-      desc: 'Hierarchical multi-agent research prototype with task delegation and reasoning lattice.',
+      tag: 'Modular AI Engineering',
+      desc: 'A modular AI engineering system designed to process source data, generate events, combine alerts, support governed recommendations, maintain operational state, and provide integration and monitoring capabilities.',
       image: 'assets/images/nexora_placeholder.svg',
       alt: 'NEXORA Architecture (Screenshot Pending)',
       isPlaceholder: true
@@ -1041,51 +1041,69 @@ def calculate_distance(lat1, lon1, lat2, lon2):
 
     nexora: {
       number: 'CASE STUDY 03 / 08',
-      badge: 'HIERARCHICAL MULTI-AGENT AI',
+      badge: 'MODULAR AI SYSTEM',
       title: 'NEXORA — Hierarchical AI Research Prototype',
-      subtitle: 'Hierarchical Multi-Agent Task Decomposition, Systematic Reasoning Lattice & Evaluation Harness',
+      subtitle: 'Event-Driven Modular Architecture Across 6 Subsystems & Integration Assurance',
       content: `
-        <h4 class="drawer-section-heading">1. Research Context & Problem Formulation</h4>
+        <h4 class="drawer-section-heading">1. System Overview & Architectural Purpose</h4>
         <p class="drawer-p">
-          Single-agent LLM systems struggle with compound engineering tasks that require multi-step verification, specialized domain context, and self-correcting execution loops. Monolithic prompts often suffer from context degradation, catastrophic forgetting, and inability to maintain strict procedural invariants.
+          NEXORA is a modular AI engineering system designed to process source data, generate events, combine alerts, support governed recommendations, maintain operational state, and provide integration and monitoring capabilities.
         </p>
         <p class="drawer-p">
-          <strong>The Research Objective:</strong> Architect a hierarchical multi-agent prototype where a top-level supervisory orchestrator decomposes complex goals into structured sub-tasks, assigns them to specialized worker agents, and systematically verifies outputs through an evaluation lattice before state convergence.
-        </p>
-
-        <h4 class="drawer-section-heading">2. Multi-Tier Agent Topology & State Flow</h4>
-        <p class="drawer-p">
-          NEXORA separates strategic planning from tactical tool execution using a strict three-tier hierarchy:
-        </p>
-        <div class="drawer-code-block">
-[Goal Ingestion & Constraint Decomposition]
-                    ↓
-     [Supervisory Orchestrator Agent]
-      ↙            ↓            ↘
-[Research Sub-Agent] [Synthesis Agent] [Validation Engine]
-      ↘            ↓            ↙
-     [Evaluation Benchmark & State Commit]
-        </div>
-        <p class="drawer-p">
-          <strong>Supervisory Orchestrator:</strong> Manages top-level workflow state, maintains task dependency graphs, and dynamically generates sub-goals.
-        </p>
-        <p class="drawer-p">
-          <strong>Specialized Sub-Agents:</strong> Execute targeted queries, process domain-specific corpora, and return structured payloads with confidence scores and reasoning traces.
-        </p>
-        <p class="drawer-p">
-          <strong>Verification & Validation Layer:</strong> Deterministic rubric evaluation checking consistency, factual grounding, and execution constraints prior to final synthesis.
+          <strong>Architectural Philosophy:</strong> Structured as an ongoing research prototype, the system enforces strict contract boundaries across six decoupled subsystems. Inter-module communication relies on an event-driven NATS JetStream message bus with standard envelope schemas (Draft 2020-12) to ensure auditable provenance and operational separation of concerns.
         </p>
 
-        <h4 class="drawer-section-heading">3. Implementation Status & Roadmap</h4>
+        <h4 class="drawer-section-heading">2. Six-Module Subsystem Architecture</h4>
+        <p class="drawer-p">
+          The pipeline divides responsibilities across six specialized functional modules:
+        </p>
+        <ul class="drawer-p" style="padding-left: 1.25rem;">
+          <li><strong>Module 1 — Source Ingestion & Health Reporting:</strong> Ingests raw optical camera feeds and sensor sources, computes SHA-256 binary frame integrity checksums, tracks source availability, and provides deterministic video replay capabilities.</li>
+          <li><strong>Module 2 — Visual Analysis & Event Generation:</strong> Edge vision pipeline executing YOLOv8n object detection, multi-object tracking (IOU tracker), privacy-preserving human region blurring, and local UnitEvent generation.</li>
+          <li><strong>Module 3 — Event Fusion & Higher-Level Alert Generation:</strong> Correlates multi-camera observations through spatiotemporal clustering, provenance-weighted evidence fusion, and decoupled operational risk scoring to emit DomainAlerts.</li>
+          <li><strong>Module 4 — Recommendations, Authorization & Audit:</strong> Rule evaluation engine generating operational recommendations, enforcing authorization constraints, and maintaining immutable audit ledgers.</li>
+          <li><strong>Module 5 — Operational State & Approval Decisions:</strong> Manages human-in-the-loop operator approval workflows, tracks decision state transitions, and maintains a unified operational picture.</li>
+          <li><strong>Module 6 — Integration, Gateway, Monitoring & Assurance:</strong> The communication and assurance backbone featuring a NATS JetStream message bus, schema validation engine, health aggregation daemon, FastAPI/SSE gateway, deterministic JSONL capture/replay, and an operational monitoring dashboard.</li>
+        </ul>
+
+        <h4 class="drawer-section-heading">3. Implementation Status Audit</h4>
+        <p class="drawer-p">
+          To maintain engineering transparency, component readiness is classified across three distinct operational states:
+        </p>
         <table class="drawer-metrics-table">
           <thead>
-            <tr><th>Component</th><th>Technology</th><th>Status</th></tr>
+            <tr><th>Status Category</th><th>Subsystems & Features</th><th>Verification Level</th></tr>
           </thead>
           <tbody>
-            <tr><td>Agent Orchestrator</td><td>Python 3.11, AsyncIO</td><td>Functional Prototype</td></tr>
-            <tr><td>State Communication</td><td>Pydantic schemas & JSON-RPC</td><td>Complete</td></tr>
-            <tr><td>Evaluation Benchmarks</td><td>Pytest & rubric scorers</td><td>In Progress</td></tr>
-            <tr><td>UI Observatory</td><td>Web Interface</td><td>Interface Screenshot Pending</td></tr>
+            <tr>
+              <td><strong>Implemented & Tested</strong></td>
+              <td>Module 6 message bus, Draft 2020-12 schema validation, and FastAPI/SSE streaming gateway; Module 1 ingestion API and video replay; Module 2 YOLOv8n detection and tracking; Module 3 domain fusion service; Module 4 rule evaluation and audit logging; Module 5 state contracts.</td>
+              <td>Verified by 424 automated regression tests in Module 6, plus dedicated unit test suites across Modules 1–4.</td>
+            </tr>
+            <tr>
+              <td><strong>Partially Implemented</strong></td>
+              <td>Cross-module integration adapter shims connecting file/HTTP outputs to NATS JetStream; periodic continuous ServiceHealth heartbeats (currently bridged via adapter layer).</td>
+              <td>Validated via standalone integration runner scripts and single-node JetStream test benches.</td>
+            </tr>
+            <tr>
+              <td><strong>Planned / Disconnected</strong></td>
+              <td>Unified autonomous end-to-end integration without adapter shims; full multi-node physical edge cluster deployment on target hardware.</td>
+              <td>Evaluated in air-gapped lab and synthetic mock environments; production cluster deployment remains future work.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="drawer-section-heading">4. Technologies & Repository Verification</h4>
+        <table class="drawer-metrics-table">
+          <thead>
+            <tr><th>Component</th><th>Technology Stack</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Core Language & APIs</td><td>Python, REST APIs (FastAPI / Starlette)</td></tr>
+            <tr><td>Edge Vision</td><td>YOLOv8n, OpenCV, NumPy</td></tr>
+            <tr><td>Event Bus & Streaming</td><td>NATS JetStream (HEV_EVENTS stream), Server-Sent Events (SSE)</td></tr>
+            <tr><td>Contract Engine</td><td>JSON Schema (Draft 2020-12), Pydantic v2</td></tr>
+            <tr><td>Repository</td><td><a href="https://github.com/AbhigyanNeog/IBM-project" target="_blank" rel="noopener noreferrer" style="color: var(--color-electric-blue);">AbhigyanNeog/IBM-project ↗</a></td></tr>
           </tbody>
         </table>
       `
