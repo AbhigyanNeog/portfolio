@@ -97,12 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetEl = document.getElementById(targetId);
         const projSection = document.getElementById('projects');
         const projectIndexMap = {
-          'project-tracex': 0,
-          'project-attendance': 1,
-          'project-copilot': 2,
-          'project-loganalyzer': 3,
-          'project-phishguard': 4,
-          'project-eplatform': 5
+          'project-attendance': 0,
+          'project-copilot': 1,
+          'project-nexora': 2,
+          'project-llmassistant': 3,
+          'project-tracex': 4,
+          'project-loganalyzer': 5,
+          'project-phishguard': 6,
+          'project-eplatform': 7
         };
         const slideIndex = projectIndexMap[targetId];
         if (typeof window.goToGallerySlide === 'function' && slideIndex !== undefined) {
@@ -491,31 +493,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   const WELCOME_REEL_PROJECTS = [
     {
-      id: 'project-tracex',
-      caseStudy: 'tracex',
-      order: 1,
-      title: 'TRACE-X',
-      tag: 'Cybercrime Intelligence',
-      desc: 'Predictive cash-withdrawal interception dashboard & spatial forecasting.',
-      image: 'assets/images/tracex_hero.png',
-      alt: 'TRACE-X Command Center Interface',
-      isPlaceholder: false
-    },
-    {
       id: 'project-attendance',
       caseStudy: 'attendance',
-      order: 2,
-      title: 'Smart Faculty Attendance System',
+      order: 1,
+      title: 'VeriClass — Faculty Attendance Management System',
       tag: 'Systems & CV',
       desc: 'Haversine GPS geofencing, classroom photo verification, and timetable OCR.',
       image: 'assets/images/sfas_placeholder.svg',
       alt: 'Smart Faculty Attendance System Architecture (Screenshot Pending)',
-      isPlaceholder: true // Clearly identified in code as temporary
+      isPlaceholder: true
     },
     {
       id: 'project-copilot',
       caseStudy: 'copilot',
-      order: 3,
+      order: 2,
       title: 'Campus Copilot',
       tag: 'Intelligent Agents',
       desc: 'Student utility hub with event discovery, study scheduler, and RAG knowledge base.',
@@ -524,9 +515,42 @@ document.addEventListener('DOMContentLoaded', () => {
       isPlaceholder: false
     },
     {
+      id: 'project-nexora',
+      caseStudy: 'nexora',
+      order: 3,
+      title: 'NEXORA — Hierarchical AI Research Prototype',
+      tag: 'Hierarchical Multi-Agent AI',
+      desc: 'Hierarchical multi-agent research prototype with task delegation and reasoning lattice.',
+      image: 'assets/images/nexora_placeholder.svg',
+      alt: 'NEXORA Architecture (Screenshot Pending)',
+      isPlaceholder: true
+    },
+    {
+      id: 'project-llmassistant',
+      caseStudy: 'llmassistant',
+      order: 4,
+      title: 'LLM Educational Assistant',
+      tag: 'Pedagogical Language Agent',
+      desc: 'Interactive pedagogical dialogue engine with contextual retrieval and guided learning.',
+      image: 'assets/images/llm_placeholder.svg',
+      alt: 'LLM Educational Assistant Architecture (Screenshot Pending)',
+      isPlaceholder: true
+    },
+    {
+      id: 'project-tracex',
+      caseStudy: 'tracex',
+      order: 5,
+      title: 'TRACE-X — Transaction Risk & Analytics for Cybercrime Enforcement',
+      tag: 'Cybercrime Intelligence',
+      desc: 'Predictive cash-withdrawal interception dashboard & spatial forecasting.',
+      image: 'assets/images/tracex_hero.png',
+      alt: 'TRACE-X Command Center Interface',
+      isPlaceholder: false
+    },
+    {
       id: 'project-loganalyzer',
       caseStudy: 'loganalyzer',
-      order: 4,
+      order: 6,
       title: 'Log Analyzer',
       tag: 'Infrastructure & Analytics',
       desc: 'High-throughput server log parsing engine, anomaly detector, and traffic analytics.',
@@ -537,18 +561,18 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 'project-phishguard',
       caseStudy: 'phishguard',
-      order: 5,
+      order: 7,
       title: 'Phish Guard',
       tag: 'Cybersecurity Heuristics',
       desc: 'Real-time URL heuristic analysis, SSL certificate inspection, and threat gateway.',
       image: 'assets/images/phishguard_placeholder.svg',
       alt: 'Phish Guard Heuristic Inspection Engine (Screenshot Pending)',
-      isPlaceholder: true // Clearly identified in code as temporary
+      isPlaceholder: true
     },
     {
       id: 'project-eplatform',
       caseStudy: 'eplatform',
-      order: 6,
+      order: 8,
       title: 'E-Platform',
       tag: 'Reactive E-Commerce',
       desc: 'High-concurrency digital store with dynamic inventory, filtering, and instant checkout.',
@@ -885,66 +909,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 8. VERIFIED TECHNICAL CASE STUDIES DICTIONARY
   // =========================================================================
   const CASE_STUDIES = {
-    tracex: {
-      number: 'CASE STUDY 01 / 06',
-      badge: 'CYBERCRIME INTELLIGENCE',
-      title: 'TRACE-X',
-      subtitle: 'Predictive Cybercrime Intelligence & Mule Cash-Withdrawal Interception Dashboard',
-      content: `
-        <h4 class="drawer-section-heading">1. Operational Problem & Context</h4>
-        <p class="drawer-p">
-          Financial cybercrime syndicates in India funnel stolen victim funds through complex, multi-layered "mule account" networks. These illicit funds are systematically withdrawn as physical currency at ATMs and retail branches before victims report the fraud or banking compliance teams can freeze the accounts. Law enforcement agencies traditionally respond reactively hours or days after cash is siphoned.
-        </p>
-        <p class="drawer-p">
-          <strong>The Objective:</strong> Develop an operational command dashboard enabling cybercrime intelligence units to ingest complaints, run predictive spatial heuristics, visualize high-risk cash-out hotspots, and dispatch intervention teams within the critical 30-to-90-minute operational window.
-        </p>
-
-        <h4 class="drawer-section-heading">2. Architecture & Implementation Decisions</h4>
-        <p class="drawer-p">
-          TRACE-X is engineered with a high-throughput, decoupled architecture. The frontend was developed in React 19, TypeScript, and Vite with zero runtime CSS overhead.
-        </p>
-        <div class="drawer-code-block">
-[Citizen Incident Ingestion] 
-       ↓ 
-[Complaint Registry & Parsing] 
-       ↓ 
-[Predictive ATM Hotspot Clustering Engine] 
-       ↓ 
-[Explainable AI (XAI) Risk Scorer] 
-       ↓ 
-[Leaflet Geospatial Map + Dispatch Intervention Unit]
-        </div>
-        <p class="drawer-p">
-          <strong>Frontend Architecture:</strong> Structured across 11 synchronized views managed via React Context API (<code>AppContext.tsx</code>). Implements Leaflet interactive geospatial clustering, custom SVG markers for flagged banking nodes, and Recharts for temporal telemetry.
-        </p>
-        <p class="drawer-p">
-          <strong>Backend Architecture:</strong> An independent Express 5 & Prisma TypeScript backend located in the repository provides 34 role-based permissions (Admin, Investigator, Analyst, Officer), rotating JWT authentication with Argon2 password hashing, and real-time Socket.io notification feeds.
-        </p>
-
-        <h4 class="drawer-section-heading">3. Explainable AI (XAI) & Transparency</h4>
-        <p class="drawer-p">
-          A fundamental requirement for law enforcement tooling is evidentiary defensibility. TRACE-X embeds an Explainable AI panel (<code>XAIExplanation.tsx</code>) and <code>RiskScoreGauge.tsx</code> that decomposes risk scores into concrete, transparent factors: recurring mule withdrawal proximity (42%), complaint volume spike (31%), and off-hours timing heuristics (27%).
-        </p>
-
-        <h4 class="drawer-section-heading">4. Current Implementation Status & Verification</h4>
-        <table class="drawer-metrics-table">
-          <thead>
-            <tr><th>Component</th><th>Technology</th><th>Verified Status</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Frontend Dashboard</td><td>React 19, TS, Vite, Leaflet</td><td>Complete (Operating on in-memory mock services)</td></tr>
-            <tr><td>Backend API</td><td>Node.js, Express 5, Prisma</td><td>Complete & independently verified</td></tr>
-            <tr><td>Test Coverage</td><td>Vitest</td><td>59 passing unit tests + 77 live integration scenarios</td></tr>
-            <tr><td>Live Integration</td><td>Axios / Socket.io</td><td>Decoupled; live API hookup pending</td></tr>
-          </tbody>
-        </table>
-      `
-    },
-
     attendance: {
-      number: 'CASE STUDY 02 / 06',
+      number: 'CASE STUDY 01 / 08',
       badge: 'INSTITUTIONAL GEOFENCING',
-      title: 'Smart Faculty Attendance System (VeriClass)',
+      title: 'VeriClass — Faculty Attendance Management System',
       subtitle: 'Haversine GPS Geofencing, Live Photo Capture & Timetable Schedule OCR Ingestion',
       content: `
         <h4 class="drawer-section-heading">1. Institutional Problem Formulation</h4>
@@ -1003,7 +971,7 @@ def calculate_distance(lat1, lon1, lat2, lon2):
     },
 
     copilot: {
-      number: 'CASE STUDY 03 / 06',
+      number: 'CASE STUDY 02 / 08',
       badge: 'CLASSICAL ALGORITHMS',
       title: 'Campus Copilot',
       subtitle: 'Algorithmic University Assistant with 4 Classical DSA Implementations',
@@ -1062,8 +1030,167 @@ def calculate_distance(lat1, lon1, lat2, lon2):
       `
     },
 
+    nexora: {
+      number: 'CASE STUDY 03 / 08',
+      badge: 'HIERARCHICAL MULTI-AGENT AI',
+      title: 'NEXORA — Hierarchical AI Research Prototype',
+      subtitle: 'Hierarchical Multi-Agent Task Decomposition, Systematic Reasoning Lattice & Evaluation Harness',
+      content: `
+        <h4 class="drawer-section-heading">1. Research Context & Problem Formulation</h4>
+        <p class="drawer-p">
+          Single-agent LLM systems struggle with compound engineering tasks that require multi-step verification, specialized domain context, and self-correcting execution loops. Monolithic prompts often suffer from context degradation, catastrophic forgetting, and inability to maintain strict procedural invariants.
+        </p>
+        <p class="drawer-p">
+          <strong>The Research Objective:</strong> Architect a hierarchical multi-agent prototype where a top-level supervisory orchestrator decomposes complex goals into structured sub-tasks, assigns them to specialized worker agents, and systematically verifies outputs through an evaluation lattice before state convergence.
+        </p>
+
+        <h4 class="drawer-section-heading">2. Multi-Tier Agent Topology & State Flow</h4>
+        <p class="drawer-p">
+          NEXORA separates strategic planning from tactical tool execution using a strict three-tier hierarchy:
+        </p>
+        <div class="drawer-code-block">
+[Goal Ingestion & Constraint Decomposition]
+                    ↓
+     [Supervisory Orchestrator Agent]
+      ↙            ↓            ↘
+[Research Sub-Agent] [Synthesis Agent] [Validation Engine]
+      ↘            ↓            ↙
+     [Evaluation Benchmark & State Commit]
+        </div>
+        <p class="drawer-p">
+          <strong>Supervisory Orchestrator:</strong> Manages top-level workflow state, maintains task dependency graphs, and dynamically generates sub-goals.
+        </p>
+        <p class="drawer-p">
+          <strong>Specialized Sub-Agents:</strong> Execute targeted queries, process domain-specific corpora, and return structured payloads with confidence scores and reasoning traces.
+        </p>
+        <p class="drawer-p">
+          <strong>Verification & Validation Layer:</strong> Deterministic rubric evaluation checking consistency, factual grounding, and execution constraints prior to final synthesis.
+        </p>
+
+        <h4 class="drawer-section-heading">3. Implementation Status & Roadmap</h4>
+        <table class="drawer-metrics-table">
+          <thead>
+            <tr><th>Component</th><th>Technology</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Agent Orchestrator</td><td>Python 3.11, AsyncIO</td><td>Functional Prototype</td></tr>
+            <tr><td>State Communication</td><td>Pydantic schemas & JSON-RPC</td><td>Complete</td></tr>
+            <tr><td>Evaluation Benchmarks</td><td>Pytest & rubric scorers</td><td>In Progress</td></tr>
+            <tr><td>UI Observatory</td><td>Web Interface</td><td>Interface Screenshot Pending</td></tr>
+          </tbody>
+        </table>
+      `
+    },
+
+    llmassistant: {
+      number: 'CASE STUDY 04 / 08',
+      badge: 'PEDAGOGICAL AGENT & RETRIEVAL',
+      title: 'LLM Educational Assistant',
+      subtitle: 'Interactive Pedagogical Dialogue, Contextual Retrieval & Socratic Reasoning Guidance',
+      content: `
+        <h4 class="drawer-section-heading">1. Pedagogical Problem & Objectives</h4>
+        <p class="drawer-p">
+          Standard conversational AI models generate direct answers to student homework problems. While convenient, this passive solution delivery short-circuits active recall, hinders conceptual development, and fails to identify underlying misconceptions in algorithmic and mathematical foundations.
+        </p>
+        <p class="drawer-p">
+          <strong>The Objective:</strong> Engineer an intelligent educational assistant that steers students through Socratic dialogue—prompting reflection, validating intermediate steps, and providing contextual hints derived directly from authoritative course materials via retrieval-augmented generation (RAG).
+        </p>
+
+        <h4 class="drawer-section-heading">2. Architecture & Retrieval Pipeline</h4>
+        <p class="drawer-p">
+          The system pairs dynamic pedagogical prompt frameworks with an indexed curriculum corpus:
+        </p>
+        <div class="drawer-code-block">
+[Student Problem Statement]
+          ↓
+[Pedagogical Intent Classifier & Misconception Detector]
+          ↓
+[Contextual Vector Retrieval over Curriculum Corpus]
+          ↓
+[Socratic Scaffolding Engine (Hint Generation)]
+          ↓
+[Interactive Dialogue Stream & Telemetry]
+        </div>
+        <p class="drawer-p">
+          <strong>Curriculum Retrieval Engine:</strong> Semantic chunking and vector embeddings over lecture notes, syllabus concepts, and textbook references ensure grounded explanations without hallucination.
+        </p>
+        <p class="drawer-p">
+          <strong>Adaptive Scaffolding:</strong> Evaluates student attempt quality, calibrating hint specificity across 3 graduated tiers (Concept reminder → Guiding question → Concrete step breakdown).
+        </p>
+
+        <h4 class="drawer-section-heading">3. Implementation Status & Telemetry</h4>
+        <table class="drawer-metrics-table">
+          <thead>
+            <tr><th>Module</th><th>Stack</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dialogue Scaffolding</td><td>Python, LangChain, Custom Guardrails</td><td>Validated</td></tr>
+            <tr><td>Curriculum Vector Store</td><td>FAISS / ChromaDB</td><td>Complete</td></tr>
+            <tr><td>Misconception Telemetry</td><td>Analytics logging pipeline</td><td>Prototype</td></tr>
+            <tr><td>Student Web Client</td><td>Reactive Frontend</td><td>Screenshot Pending</td></tr>
+          </tbody>
+        </table>
+      `
+    },
+
+    tracex: {
+      number: 'CASE STUDY 05 / 08',
+      badge: 'CYBERCRIME INTELLIGENCE',
+      title: 'TRACE-X — Transaction Risk & Analytics for Cybercrime Enforcement',
+      subtitle: 'Predictive Cybercrime Intelligence & Mule Cash-Withdrawal Interception Dashboard',
+      content: `
+        <h4 class="drawer-section-heading">1. Operational Problem & Context</h4>
+        <p class="drawer-p">
+          Financial cybercrime syndicates in India funnel stolen victim funds through complex, multi-layered "mule account" networks. These illicit funds are systematically withdrawn as physical currency at ATMs and retail branches before victims report the fraud or banking compliance teams can freeze the accounts. Law enforcement agencies traditionally respond reactively hours or days after cash is siphoned.
+        </p>
+        <p class="drawer-p">
+          <strong>The Objective:</strong> Develop an operational command dashboard enabling cybercrime intelligence units to ingest complaints, run predictive spatial heuristics, visualize high-risk cash-out hotspots, and dispatch intervention teams within the critical 30-to-90-minute operational window.
+        </p>
+
+        <h4 class="drawer-section-heading">2. Architecture & Implementation Decisions</h4>
+        <p class="drawer-p">
+          TRACE-X is engineered with a high-throughput, decoupled architecture. The frontend was developed in React 19, TypeScript, and Vite with zero runtime CSS overhead.
+        </p>
+        <div class="drawer-code-block">
+[Citizen Incident Ingestion] 
+       ↓ 
+[Complaint Registry & Parsing] 
+       ↓ 
+[Predictive ATM Hotspot Clustering Engine] 
+       ↓ 
+[Explainable AI (XAI) Risk Scorer] 
+       ↓ 
+[Leaflet Geospatial Map + Dispatch Intervention Unit]
+        </div>
+        <p class="drawer-p">
+          <strong>Frontend Architecture:</strong> Structured across 11 synchronized views managed via React Context API (<code>AppContext.tsx</code>). Implements Leaflet interactive geospatial clustering, custom SVG markers for flagged banking nodes, and Recharts for temporal telemetry.
+        </p>
+        <p class="drawer-p">
+          <strong>Backend Architecture:</strong> An independent Express 5 & Prisma TypeScript backend located in the repository provides 34 role-based permissions (Admin, Investigator, Analyst, Officer), rotating JWT authentication with Argon2 password hashing, and real-time Socket.io notification feeds.
+        </p>
+
+        <h4 class="drawer-section-heading">3. Explainable AI (XAI) & Transparency</h4>
+        <p class="drawer-p">
+          A fundamental requirement for law enforcement tooling is evidentiary defensibility. TRACE-X embeds an Explainable AI panel (<code>XAIExplanation.tsx</code>) and <code>RiskScoreGauge.tsx</code> that decomposes risk scores into concrete, transparent factors: recurring mule withdrawal proximity (42%), complaint volume spike (31%), and off-hours timing heuristics (27%).
+        </p>
+
+        <h4 class="drawer-section-heading">4. Current Implementation Status & Verification</h4>
+        <table class="drawer-metrics-table">
+          <thead>
+            <tr><th>Component</th><th>Technology</th><th>Verified Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frontend Dashboard</td><td>React 19, TS, Vite, Leaflet</td><td>Complete (Operating on in-memory mock services)</td></tr>
+            <tr><td>Backend API</td><td>Node.js, Express 5, Prisma</td><td>Complete & independently verified</td></tr>
+            <tr><td>Test Coverage</td><td>Vitest</td><td>59 passing unit tests + 77 live integration scenarios</td></tr>
+            <tr><td>Live Integration</td><td>Axios / Socket.io</td><td>Decoupled; live API hookup pending</td></tr>
+          </tbody>
+        </table>
+      `
+    },
+
     loganalyzer: {
-      number: 'CASE STUDY 04 / 06',
+      number: 'CASE STUDY 06 / 08',
       badge: 'AI OBSERVABILITY',
       title: 'Log Analyzer',
       subtitle: 'AI Interaction Telemetry, Sentiment NLP Pipeline & Gemini Chat Simulator',
@@ -1111,7 +1238,7 @@ log_pattern = re.compile(
     },
 
     phishguard: {
-      number: 'CASE STUDY 05 / 06',
+      number: 'CASE STUDY 07 / 08',
       badge: 'MACHINE LEARNING SECURITY',
       title: 'Phish Guard',
       subtitle: '10-Feature Structural ML Classifier & Hybrid Cloud Threat Intelligence',
@@ -1167,7 +1294,7 @@ def shannon_entropy(s: str) -> float:
     },
 
     eplatform: {
-      number: 'CASE STUDY 06 / 06',
+      number: 'CASE STUDY 08 / 08',
       badge: 'FRONTEND ARCHITECTURE',
       title: 'E-Platform',
       subtitle: 'High-Performance E-Commerce Application with Angular 17 Standalone Architecture',
@@ -1910,9 +2037,9 @@ export const routes: Routes = [
         return;
       }
 
-      // Keys 1 through 6 jump to corresponding projects
+      // Keys 1 through 8 jump to corresponding projects
       const num = parseInt(e.key, 10);
-      if (!isNaN(num) && num >= 1 && num <= 6) {
+      if (!isNaN(num) && num >= 1 && num <= 8) {
         e.preventDefault();
         const targetIdx = num - 1;
         updateGalleryUI(targetIdx);
