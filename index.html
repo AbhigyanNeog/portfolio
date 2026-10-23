@@ -501,7 +501,7 @@
   <!-- =================================================================== -->
   <!-- STAGE C: INTERACTIVE 3D ENGINEERING UNIVERSE HUB -->
   <!-- =================================================================== -->
-  <aside class="engineering-universe-overlay" id="engineering-universe" role="dialog" aria-modal="true" aria-label="3D Engineering Universe Hub">
+  <aside class="engineering-universe-overlay" id="engineering-universe" role="dialog" aria-modal="true" aria-label="3D Engineering Universe & Project Atlas">
     <!-- Spatial 3D Ambient Background -->
     <div class="universe-bg-fx" aria-hidden="true">
       <div class="universe-starfield"></div>
@@ -514,9 +514,9 @@
     <div class="universe-top-bar">
       <div class="universe-meta-badge">
         <span class="universe-beacon-dot"></span>
-        <span class="universe-meta-title">3D UNIVERSE HUB</span>
+        <span class="universe-meta-title">Engineering Atlas</span>
         <span class="universe-meta-sep">•</span>
-        <span class="universe-meta-coords">SPATIAL DESTINATION MAP</span>
+        <span class="universe-meta-coords">3D PROJECT UNIVERSE (6 WORKS)</span>
       </div>
       <button class="universe-close-btn" id="universe-close-btn" type="button" aria-label="Close 3D Universe Hub">
         <span>Resume Reading</span>
@@ -528,49 +528,46 @@
     <div class="universe-spatial-stage" id="universe-spatial-stage">
       <div class="universe-rig-3d" id="universe-rig-3d">
         
-        <!-- SVG Constellation Vector Network: Lines connecting Core to all 5 Nodes -->
+        <!-- SVG Constellation Vector Network: Lines connecting Core to all 6 Project Nodes -->
         <svg class="universe-constellation-svg" viewBox="0 0 1000 640" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
           <defs>
             <linearGradient id="u-line-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#55D6FF" stop-opacity="0.8"/>
-              <stop offset="100%" stop-color="#4169FF" stop-opacity="0.2"/>
+              <stop offset="0%" stop-color="#2449E8" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="#D2CEC4" stop-opacity="0.3"/>
             </linearGradient>
-            <filter id="u-glow">
-              <feGaussianBlur stdDeviation="3" result="blur"/>
-              <feMerge>
-                <feMergeNode in="blur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
           </defs>
 
           <!-- Constellation Orbit Rings -->
-          <circle cx="500" cy="320" r="240" class="u-orbit-circle" />
+          <ellipse cx="500" cy="320" rx="360" ry="220" class="u-orbit-circle" />
           <circle cx="500" cy="320" r="140" class="u-orbit-circle-inner" />
 
-          <!-- Connection Lines from Central Hub (500, 320) -->
-          <!-- Line to Node 1 (About): (180, 130) -->
-          <line x1="500" y1="320" x2="180" y2="130" class="u-constellation-line" />
-          <circle cx="180" cy="130" r="5" class="u-line-node-dot" />
+          <!-- Connection Lines from Central Hub (500, 320) to 6 Project Nodes -->
+          <!-- Line to Project 1 (TRACE-X): (180, 100) -->
+          <line x1="500" y1="320" x2="180" y2="100" class="u-constellation-line" />
+          <circle cx="180" cy="100" r="4.5" class="u-line-node-dot dot-featured" />
 
-          <!-- Line to Node 2 (Skills): (820, 130) -->
-          <line x1="500" y1="320" x2="820" y2="130" class="u-constellation-line" />
-          <circle cx="820" cy="130" r="5" class="u-line-node-dot" />
+          <!-- Line to Project 2 (Smart Faculty Attendance): (820, 100) -->
+          <line x1="500" y1="320" x2="820" y2="100" class="u-constellation-line" />
+          <circle cx="820" cy="100" r="4.5" class="u-line-node-dot" />
 
-          <!-- Line to Node 3 (Projects): (500, 520) -->
-          <line x1="500" y1="320" x2="500" y2="520" class="u-constellation-line u-line-featured" />
-          <circle cx="500" cy="520" r="7" class="u-line-node-dot dot-featured" />
+          <!-- Line to Project 3 (Campus Copilot): (860, 320) -->
+          <line x1="500" y1="320" x2="860" y2="320" class="u-constellation-line" />
+          <circle cx="860" cy="320" r="4.5" class="u-line-node-dot" />
 
-          <!-- Line to Node 4 (Experience): (200, 480) -->
-          <line x1="500" y1="320" x2="200" y2="480" class="u-constellation-line" />
-          <circle cx="200" cy="480" r="5" class="u-line-node-dot" />
+          <!-- Line to Project 4 (Log Analyzer): (820, 540) -->
+          <line x1="500" y1="320" x2="820" y2="540" class="u-constellation-line" />
+          <circle cx="820" cy="540" r="4.5" class="u-line-node-dot" />
 
-          <!-- Line to Node 5 (Contact): (800, 480) -->
-          <line x1="500" y1="320" x2="800" y2="480" class="u-constellation-line" />
-          <circle cx="800" cy="480" r="5" class="u-line-node-dot" />
+          <!-- Line to Project 5 (Phish Guard): (180, 540) -->
+          <line x1="500" y1="320" x2="180" y2="540" class="u-constellation-line" />
+          <circle cx="180" cy="540" r="4.5" class="u-line-node-dot" />
+
+          <!-- Line to Project 6 (E-Platform): (140, 320) -->
+          <line x1="500" y1="320" x2="140" y2="320" class="u-constellation-line" />
+          <circle cx="140" cy="320" r="4.5" class="u-line-node-dot" />
         </svg>
 
-        <!-- Central Systems Engine Core -->
+        <!-- Central Systems Engine Core (Engineering Atlas Index) -->
         <div class="universe-central-core" id="universe-central-core">
           <div class="core-rings-svg-wrap">
             <svg viewBox="0 0 200 200" class="core-astrolabe-svg" width="200" height="200" aria-hidden="true">
@@ -581,72 +578,101 @@
               <!-- Orbital Ellipses -->
               <ellipse cx="100" cy="100" rx="90" ry="32" class="u-ring ring-ellipse-a"/>
               <ellipse cx="100" cy="100" rx="90" ry="32" class="u-ring ring-ellipse-b"/>
-              <!-- Glowing Multi-Layer Core Beacon -->
-              <circle cx="100" cy="100" r="22" class="u-core-aura"/>
-              <circle cx="100" cy="100" r="10" class="u-core-dot"/>
+              <!-- Core Marker -->
+              <circle cx="100" cy="100" r="20" class="u-core-aura"/>
+              <circle cx="100" cy="100" r="8" class="u-core-dot"/>
             </svg>
           </div>
           <div class="core-label-box">
-            <span class="core-hud-title">CENTRAL SYSTEMS</span>
-            <span class="core-hud-sub">PORTFOLIO HUB</span>
+            <span class="core-hud-title">Engineering Atlas</span>
+            <span class="core-hud-sub">Selected Works</span>
           </div>
         </div>
 
-        <!-- 5 Connected Orbital Destination Nodes -->
-        <!-- Destination 1: About Me -->
-        <a href="#about" class="universe-node node-about" data-dest="about" id="u-node-about">
+        <!-- 6 Orbital Project Nodes (Exact Required Order) -->
+        <!-- Project 1: TRACE-X -->
+        <div class="universe-node node-p1" data-slide="0" data-project="tracex" id="u-node-tracex" tabindex="0" role="button" aria-label="Project 1: TRACE-X">
           <div class="node-beacon"></div>
           <div class="node-card">
-            <span class="node-chap-tag">05 / PHILOSOPHY</span>
-            <h3 class="node-name">About Me</h3>
-            <p class="node-desc">Systems thinking, background & engineering ethos</p>
-            <span class="node-action">Enter Chapter →</span>
+            <span class="node-chap-tag">01 / CYBERCRIME INTELLIGENCE</span>
+            <h3 class="node-name">TRACE-X</h3>
+            <p class="node-desc">Predictive ATM cash-out hotspot forecasting &amp; XAI field dispatch dashboard.</p>
+            <div class="node-actions-row">
+              <button type="button" class="u-action-btn u-view-gallery" data-slide="0">View in Gallery →</button>
+              <button type="button" class="u-action-btn u-open-case" data-project="tracex">Case Study ↗</button>
+            </div>
           </div>
-        </a>
+        </div>
 
-        <!-- Destination 2: Skills & Technologies -->
-        <a href="#skills" class="universe-node node-skills" data-dest="skills" id="u-node-skills">
+        <!-- Project 2: Smart Faculty Attendance System -->
+        <div class="universe-node node-p2" data-slide="1" data-project="attendance" id="u-node-attendance" tabindex="0" role="button" aria-label="Project 2: Smart Faculty Attendance System">
           <div class="node-beacon"></div>
           <div class="node-card">
-            <span class="node-chap-tag">03 / COMPETENCIES</span>
-            <h3 class="node-name">Skills & Tech</h3>
-            <p class="node-desc">Systems, ML, Cybersecurity, Backend & Reactive Web</p>
-            <span class="node-action">Enter Chapter →</span>
+            <span class="node-chap-tag">02 / SYSTEMS &amp; GEOFENCING</span>
+            <h3 class="node-name">Smart Faculty Attendance</h3>
+            <p class="node-desc">VeriClass: Haversine GPS geofencing, photo proofing &amp; timetable OCR parser.</p>
+            <div class="node-actions-row">
+              <button type="button" class="u-action-btn u-view-gallery" data-slide="1">View in Gallery →</button>
+              <button type="button" class="u-action-btn u-open-case" data-project="attendance">Case Study ↗</button>
+            </div>
           </div>
-        </a>
+        </div>
 
-        <!-- Destination 3: Selected Projects (Horizontal Gallery) -->
-        <a href="#projects" class="universe-node node-projects node-featured" data-dest="projects" id="u-node-projects">
-          <div class="node-beacon beacon-featured"></div>
-          <div class="node-card card-featured">
-            <span class="node-chap-tag">01 / FEATURED GALLERY</span>
-            <h3 class="node-name">Selected Projects</h3>
-            <p class="node-desc">Horizontal showcase of 6 audited production architectures</p>
-            <span class="node-action">Launch Horizontal Gallery →</span>
-          </div>
-        </a>
-
-        <!-- Destination 4: Experience & Hackathons -->
-        <a href="#experience" class="universe-node node-experience" data-dest="experience" id="u-node-experience">
+        <!-- Project 3: Campus Copilot -->
+        <div class="universe-node node-p3" data-slide="2" data-project="copilot" id="u-node-copilot" tabindex="0" role="button" aria-label="Project 3: Campus Copilot">
           <div class="node-beacon"></div>
           <div class="node-card">
-            <span class="node-chap-tag">04 / TIMELINE</span>
-            <h3 class="node-name">Experience</h3>
-            <p class="node-desc">SIH '26 Finalist, Samsung Hackathon, Christ Univ CSE</p>
-            <span class="node-action">Enter Chapter →</span>
+            <span class="node-chap-tag">03 / CLASSICAL ALGORITHMS &amp; NLP</span>
+            <h3 class="node-name">Campus Copilot</h3>
+            <p class="node-desc">University assistant powered by 4 classical DSA implementations &amp; fuzzy intent engine.</p>
+            <div class="node-actions-row">
+              <button type="button" class="u-action-btn u-view-gallery" data-slide="2">View in Gallery →</button>
+              <button type="button" class="u-action-btn u-open-case" data-project="copilot">Case Study ↗</button>
+            </div>
           </div>
-        </a>
+        </div>
 
-        <!-- Destination 5: Contact & Inquiries -->
-        <a href="#contact" class="universe-node node-contact" data-dest="contact" id="u-node-contact">
+        <!-- Project 4: Log Analyzer -->
+        <div class="universe-node node-p4" data-slide="3" data-project="loganalyzer" id="u-node-loganalyzer" tabindex="0" role="button" aria-label="Project 4: Log Analyzer">
           <div class="node-beacon"></div>
           <div class="node-card">
-            <span class="node-chap-tag">06 / CONNECT</span>
-            <h3 class="node-name">Initiate Contact</h3>
-            <p class="node-desc">Direct email, LinkedIn, GitHub, and résumé download</p>
-            <span class="node-action">Enter Chapter →</span>
+            <span class="node-chap-tag">04 / AI OBSERVABILITY</span>
+            <h3 class="node-name">Log Analyzer</h3>
+            <p class="node-desc">Named-group regex parsing, TextBlob sentiment telemetry &amp; Gemini simulator.</p>
+            <div class="node-actions-row">
+              <button type="button" class="u-action-btn u-view-gallery" data-slide="3">View in Gallery →</button>
+              <button type="button" class="u-action-btn u-open-case" data-project="loganalyzer">Case Study ↗</button>
+            </div>
           </div>
-        </a>
+        </div>
+
+        <!-- Project 5: Phish Guard -->
+        <div class="universe-node node-p5" data-slide="4" data-project="phishguard" id="u-node-phishguard" tabindex="0" role="button" aria-label="Project 5: Phish Guard">
+          <div class="node-beacon"></div>
+          <div class="node-card">
+            <span class="node-chap-tag">05 / CYBERSECURITY &amp; ML</span>
+            <h3 class="node-name">Phish Guard</h3>
+            <p class="node-desc">10-feature Shannon entropy Random Forest classifier &amp; Google Safe Browsing pipeline.</p>
+            <div class="node-actions-row">
+              <button type="button" class="u-action-btn u-view-gallery" data-slide="4">View in Gallery →</button>
+              <button type="button" class="u-action-btn u-open-case" data-project="phishguard">Case Study ↗</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 6: E-Platform -->
+        <div class="universe-node node-p6" data-slide="5" data-project="eplatform" id="u-node-eplatform" tabindex="0" role="button" aria-label="Project 6: E-Platform">
+          <div class="node-beacon"></div>
+          <div class="node-card">
+            <span class="node-chap-tag">06 / REACTIVE WEB</span>
+            <h3 class="node-name">E-Platform</h3>
+            <p class="node-desc">Angular 17 standalone architecture with RxJS reactive state streams.</p>
+            <div class="node-actions-row">
+              <button type="button" class="u-action-btn u-view-gallery" data-slide="5">View in Gallery →</button>
+              <button type="button" class="u-action-btn u-open-case" data-project="eplatform">Case Study ↗</button>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -654,15 +680,15 @@
     <!-- Universe Bottom Fast-Jump Ribbon & Shortcuts -->
     <div class="universe-bottom-bar">
       <div class="universe-shortcuts-hint">
-        <span class="u-key">CLICK ANY NODE</span> TO NAVIGATE • <span class="u-key">ESC</span> TO RESUME
+        <span class="u-key">CLICK ANY NODE</span> TO NAVIGATE • <span class="u-key">[1-6]</span> FAST JUMP • <span class="u-key">ESC</span> TO RESUME
       </div>
-      <div class="universe-pills-row">
-        <a href="#projects" class="u-pill" data-dest="projects"><span class="p-num">01</span> Projects</a>
-        <a href="#case-studies" class="u-pill" data-dest="case-studies"><span class="p-num">02</span> Case Studies</a>
-        <a href="#skills" class="u-pill" data-dest="skills"><span class="p-num">03</span> Skills</a>
-        <a href="#experience" class="u-pill" data-dest="experience"><span class="p-num">04</span> Experience</a>
-        <a href="#about" class="u-pill" data-dest="about"><span class="p-num">05</span> About</a>
-        <a href="#contact" class="u-pill" data-dest="contact"><span class="p-num">06</span> Contact</a>
+      <div class="universe-pills-row" role="tablist" aria-label="Direct project quick jump">
+        <button type="button" class="u-pill active-universe-pill" data-slide="0"><span class="p-num">01</span> TRACE-X</button>
+        <button type="button" class="u-pill" data-slide="1"><span class="p-num">02</span> SFAS</button>
+        <button type="button" class="u-pill" data-slide="2"><span class="p-num">03</span> Copilot</button>
+        <button type="button" class="u-pill" data-slide="3"><span class="p-num">04</span> Log Analyzer</button>
+        <button type="button" class="u-pill" data-slide="4"><span class="p-num">05</span> Phish Guard</button>
+        <button type="button" class="u-pill" data-slide="5"><span class="p-num">06</span> E-Platform</button>
       </div>
     </div>
   </aside>
@@ -1631,7 +1657,7 @@
                   <!-- View 2: Authentic Extension & Classifier Video Walkthrough -->
                   <div class="preview-view-panel" id="phish-video">
                     <div class="preview-media-container video-container">
-                      <video class="project-inline-video" preload="none" playsinline muted loop poster="assets/images/phishguard_architecture.png" src="assets/videos/phishguard_demo.mp4"></video>
+                      <video class="project-inline-video" preload="none" playsinline muted loop poster="assets/images/phishguard_placeholder.svg" src="assets/videos/phishguard_demo.mp4"></video>
                       <div class="video-overlay-ctrls">
                         <button class="video-play-toggle-btn" type="button" aria-label="Play/Pause Phish Guard demo video">
                           <span class="video-play-icon">▶</span>
