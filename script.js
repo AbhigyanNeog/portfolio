@@ -195,6 +195,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       for (let i = 0; i < introMotes.length; i++) {
         const m = introMotes[i];
+
+        // In Scene D anticipation: particles gently converge toward screen center
+        if (laptopDisplay && laptopDisplay.classList.contains('anticipating')) {
+          const targetX = width / 2;
+          const targetY = height * 0.42; // slightly above vertical center to match laptop screen position
+          m.vx += (targetX - m.x) * 0.00018;
+          m.vy += (targetY - m.y) * 0.00018;
+        }
+
         m.x += m.vx;
         m.y += m.vy;
         m.phase += 0.015;
@@ -338,48 +347,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================================
-    // SCENE A (0.0s – 2.0s): Closed Laptop Reveal in 3/4 Studio Camera Angle
+    // SCENE A (0.0s – 2.2s): Closed Laptop Reveal in Studio with Gentle Push-In
     // =========================================================================
 
     // =========================================================================
-    // SCENE B (2.0s – 3.8s): Physical Lid Opens on Hinge & Camera Moves to Face
+    // SCENE B (2.2s – 4.0s): Physical Lid Opens on Hinge & Camera Faces Display
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopRig) {
         laptopRig.classList.remove('scene-closed');
         laptopRig.classList.add('scene-opened');
       }
-    }, 2000));
+    }, 2200));
 
     // =========================================================================
-    // SCENE C (3.8s – 5.4s): Screen Illuminates, World Map & Network Awakening
+    // SCENE C (4.0s – 5.8s): Screen Illuminates, Network Routes Draw Across Globe
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopDisplay) laptopDisplay.classList.add('illuminated');
       if (displayComp) displayComp.classList.add('active');
       if (studioBackdrop) studioBackdrop.classList.add('screen-lit');
-    }, 3800));
+    }, 4000));
 
     // =========================================================================
-    // SCENE C.2 (5.4s – 6.2s): Anticipation Glow & Particle Convergence to Center
+    // SCENE D (5.8s – 7.0s): Anticipation Glow, Inward Rays & Particle Convergence
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopDisplay) laptopDisplay.classList.add('anticipating');
-    }, 5400));
+    }, 5800));
 
     // =========================================================================
-    // SCENE D (6.2s – 7.2s): Camera Dives through Display -> Cobalt Tunnel -> Swiss Editorial
+    // SCENE E (7.0s – 8.0s): Camera Dives into Display Center -> Perspective Tunnel
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopRig) laptopRig.classList.add('diving');
-    }, 6200));
+    }, 7000));
 
     introTimers.push(setTimeout(() => {
       if (cobaltTunnel) cobaltTunnel.classList.add('active');
-    }, 6800));
+    }, 7500));
 
     // =========================================================================
-    // STAGE C (7.0s): Reveal Swiss Editorial Welcome Screen (Pauses Here)
+    // STAGE C (8.0s): Seamless Reveal of Swiss Editorial Welcome Screen
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (introWelcomeScreen) {
@@ -388,7 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (welcomeExploreBtn) {
         welcomeExploreBtn.focus();
       }
-    }, 7000));
+    }, 8000));
   }
 
   // Refresh behavior: Every full page refresh restarts the cinematic intro from its first frame.

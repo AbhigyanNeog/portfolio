@@ -3589,20 +3589,33 @@ code, pre {
   }
 }
 
-/* Scene A: Closed laptop reveal in realistic 3/4 front-side studio camera angle */
+/* Scene A: Closed laptop reveal in realistic 3/4 front-side studio camera angle with gentle push-in */
 .laptop-rig.scene-closed {
   transform: rotateX(16deg) rotateY(-18deg) rotateZ(0deg) translateY(20px) scale(calc(var(--laptop-scale) * 0.95));
+  animation: laptopRevealPush 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes laptopRevealPush {
+  0% {
+    transform: rotateX(17.5deg) rotateY(-21deg) rotateZ(0deg) translateY(26px) scale(calc(var(--laptop-scale) * 0.91));
+    opacity: 0.9;
+  }
+  100% {
+    transform: rotateX(15.5deg) rotateY(-17.5deg) rotateZ(0deg) translateY(18px) scale(calc(var(--laptop-scale) * 0.96));
+    opacity: 1;
+  }
 }
 
 /* Scene B & C: Lid opened & camera squarely facing display */
 .laptop-rig.scene-opened {
   transform: rotateX(4deg) rotateY(0deg) rotateZ(0deg) translateY(0px) scale(var(--laptop-scale));
+  transition: transform 2.0s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Scene D: Camera aligns perpendicular to screen and dives straight forward into display center */
+/* Scene E: Camera aligns directly perpendicular to screen center and dives straight into display */
 .laptop-rig.diving {
-  transform: rotateX(-12deg) rotateY(0deg) rotateZ(0deg) scale(calc(var(--laptop-scale) * 8.6)) translateY(calc(var(--laptop-scale) * 225px));
-  transition: transform 1.6s cubic-bezier(0.38, 0, 0.12, 1);
+  transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(calc(var(--laptop-scale) * 9.5)) translateY(calc(var(--laptop-scale) * 235px));
+  transition: transform 1.5s cubic-bezier(0.4, 0, 0.15, 1);
 }
 
 /* Grounding Shadow: Multi-tier contact, diffuse, and specular bounce */
@@ -3708,7 +3721,8 @@ code, pre {
   position: absolute;
   inset: 0;
   border-radius: 12px 12px 2px 2px;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), inset 1px 0 1px rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 0.45), inset 1px 0 1px rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, transparent 40%, rgba(85, 214, 255, 0.12) 100%);
   pointer-events: none;
 }
 
@@ -3807,7 +3821,7 @@ code, pre {
   border-color: rgba(85, 214, 255, 0.65);
 }
 
-/* Scene C.2: Anticipation State (Convergence & Radiant Screen Intensification) */
+/* Scene D: Anticipation State (Convergence & Radiant Screen Intensification) */
 .laptop-display.anticipating {
   box-shadow: 0 0 100px rgba(36, 73, 232, 0.85), 
               0 0 45px rgba(85, 214, 255, 0.8),
@@ -3824,21 +3838,22 @@ code, pre {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.3;
-  filter: brightness(0.7) contrast(1.15) saturate(1.1);
+  opacity: 0.22;
+  filter: brightness(0.65) contrast(1.1) saturate(1.05);
   z-index: 1;
   pointer-events: none;
-  transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1), filter 1.3s ease;
+  transform: translateZ(0);
+  transition: opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1), filter 1.6s ease;
 }
 
 .laptop-display.illuminated .laptop-screen-video {
-  opacity: 0.88;
-  filter: brightness(1.05) contrast(1.2) saturate(1.35);
+  opacity: 0.90;
+  filter: brightness(1.06) contrast(1.2) saturate(1.35);
 }
 
 .laptop-display.anticipating .laptop-screen-video {
-  opacity: 0.95;
-  filter: brightness(1.2) contrast(1.25) saturate(1.4);
+  opacity: 0.98;
+  filter: brightness(1.22) contrast(1.28) saturate(1.42);
 }
 
 .laptop-video-tint {
@@ -3856,13 +3871,13 @@ code, pre {
   z-index: 3;
   pointer-events: none;
   opacity: 0;
-  transform: scale(0.98);
-  transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s ease;
+  transform: scale(0.98) translateZ(3px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s ease;
 }
 
 .laptop-display.illuminated .screen-network-overlay {
   opacity: 1;
-  transform: scale(1);
+  transform: scale(1) translateZ(3px);
 }
 
 .network-arcs-svg {
@@ -3871,18 +3886,63 @@ code, pre {
   overflow: visible;
 }
 
+/* Progressive Network Path Drawing across Continents */
 .network-path {
   fill: none;
-  stroke: rgba(85, 214, 255, 0.42);
-  stroke-width: 1.2px;
-  stroke-dasharray: 4 3;
-  opacity: 0.8;
-  transition: stroke 0.6s ease, opacity 0.6s ease;
+  stroke: rgba(85, 214, 255, 0.55);
+  stroke-width: 1.3px;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  opacity: 0;
+  transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
 }
 
+.laptop-display.illuminated .network-path {
+  stroke-dashoffset: 0;
+  opacity: 0.85;
+}
+
+.laptop-display.illuminated .network-path.path-1 { transition-delay: 0.1s; }
+.laptop-display.illuminated .network-path.path-4 { transition-delay: 0.25s; }
+.laptop-display.illuminated .network-path.path-2 { transition-delay: 0.45s; }
+.laptop-display.illuminated .network-path.path-5 { transition-delay: 0.6s; }
+.laptop-display.illuminated .network-path.path-3 { transition-delay: 0.75s; }
+.laptop-display.illuminated .network-path.path-core-w { transition-delay: 0.9s; }
+.laptop-display.illuminated .network-path.path-core-e { transition-delay: 0.95s; }
+
 .laptop-display.anticipating .network-path {
-  stroke: rgba(85, 214, 255, 0.85);
+  stroke: #55D6FF;
   opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(85, 214, 255, 0.6));
+}
+
+/* Subtle Inward Convergence Rays (Scene D Anticipation) */
+.convergence-rays-group {
+  pointer-events: none;
+}
+
+.conv-ray {
+  stroke: rgba(85, 214, 255, 0.65);
+  stroke-width: 1.5px;
+  stroke-dasharray: 25 75;
+  stroke-dashoffset: 100;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.laptop-display.anticipating .conv-ray {
+  opacity: 0.85;
+  animation: convRayTravel 1.0s linear infinite;
+}
+
+.conv-ray.ray-1 { animation-delay: 0s; }
+.conv-ray.ray-2 { animation-delay: 0.25s; }
+.conv-ray.ray-3 { animation-delay: 0.5s; }
+.conv-ray.ray-4 { animation-delay: 0.75s; }
+
+@keyframes convRayTravel {
+  0% { stroke-dashoffset: 100; }
+  100% { stroke-dashoffset: 0; }
 }
 
 /* Animated Traveling Light Pulses Moving along Arcs */
@@ -4124,40 +4184,6 @@ code, pre {
   letter-spacing: 0.04em;
 }
 
-.comp-telemetry-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.25rem 0.65rem;
-  background: rgba(6, 12, 28, 0.65);
-  border: 1px solid rgba(85, 214, 255, 0.35);
-  border-radius: 999px;
-  margin-top: 0.65rem;
-  backdrop-filter: blur(4px);
-}
-
-.comp-telemetry-badge .tele-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #55D6FF;
-  box-shadow: 0 0 6px #55D6FF;
-  animation: telePulse 1.4s ease-in-out infinite;
-}
-
-@keyframes telePulse {
-  0%, 100% { opacity: 0.4; transform: scale(0.85); }
-  50% { opacity: 1; transform: scale(1.2); }
-}
-
-.comp-telemetry-badge .tele-text {
-  font-family: var(--font-mono, 'JetBrains Mono', monospace);
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: rgba(220, 235, 255, 0.9);
-}
-
 /* Hinge Cylinder - Exact shared pivot connecting base rear and lid bottom at y=200px */
 .laptop-hinge {
   position: absolute;
@@ -4220,15 +4246,21 @@ code, pre {
   position: absolute;
   inset: 0;
   border-radius: 8px;
-  background: radial-gradient(ellipse at 50% 0%, rgba(85, 214, 255, 0.18) 0%, rgba(36, 73, 232, 0.08) 50%, transparent 80%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(85, 214, 255, 0.22) 0%, rgba(36, 73, 232, 0.10) 50%, transparent 80%);
   opacity: 0;
-  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.8s ease;
   pointer-events: none;
 }
 
 .laptop-display.illuminated ~ * .kb-screen-glow,
 .laptop-rig.scene-opened .kb-screen-glow {
+  opacity: 0.85;
+}
+
+.laptop-display.anticipating ~ * .kb-screen-glow,
+.laptop-rig.scene-opened .laptop-display.anticipating ~ * .kb-screen-glow {
   opacity: 1;
+  background: radial-gradient(ellipse at 50% 0%, rgba(85, 214, 255, 0.34) 0%, rgba(36, 73, 232, 0.16) 50%, transparent 85%);
 }
 
 .kb-row {

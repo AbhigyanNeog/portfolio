@@ -141,14 +141,14 @@
                       </filter>
                     </defs>
 
-                    <!-- Persistent Great-Circle Network Paths -->
-                    <path class="network-path path-1" d="M 230,230 Q 360,110 500,200" filter="url(#arcGlow)"/>
-                    <path class="network-path path-2" d="M 500,200 Q 600,140 680,310" filter="url(#arcGlow)"/>
-                    <path class="network-path path-3" d="M 680,310 Q 760,260 830,240" filter="url(#arcGlow)"/>
-                    <path class="network-path path-4" d="M 230,230 Q 380,380 500,300" filter="url(#arcGlow)"/>
-                    <path class="network-path path-5" d="M 500,300 Q 610,340 680,310" filter="url(#arcGlow)"/>
-                    <path class="network-path path-core-w" d="M 120,300 L 500,300"/>
-                    <path class="network-path path-core-e" d="M 880,300 L 500,300"/>
+                    <!-- Persistent Great-Circle Network Paths (Progressively Drawn across Continents) -->
+                    <path class="network-path path-1" d="M 230,230 Q 360,110 500,200" filter="url(#arcGlow)" pathLength="100"/>
+                    <path class="network-path path-2" d="M 500,200 Q 600,140 680,310" filter="url(#arcGlow)" pathLength="100"/>
+                    <path class="network-path path-3" d="M 680,310 Q 760,260 830,240" filter="url(#arcGlow)" pathLength="100"/>
+                    <path class="network-path path-4" d="M 230,230 Q 380,380 500,300" filter="url(#arcGlow)" pathLength="100"/>
+                    <path class="network-path path-5" d="M 500,300 Q 610,340 680,310" filter="url(#arcGlow)" pathLength="100"/>
+                    <path class="network-path path-core-w" d="M 120,300 L 500,300" pathLength="100"/>
+                    <path class="network-path path-core-e" d="M 880,300 L 500,300" pathLength="100"/>
 
                     <!-- Animated Traveling Light Pulses Moving Along Curves -->
                     <path class="traveler-pulse pulse-1" d="M 230,230 Q 360,110 500,200"/>
@@ -158,6 +158,14 @@
                     <path class="traveler-pulse pulse-5" d="M 500,300 Q 610,340 680,310"/>
                     <path class="traveler-pulse pulse-core-w" d="M 120,300 L 500,300"/>
                     <path class="traveler-pulse pulse-core-e" d="M 880,300 L 500,300"/>
+
+                    <!-- Subtle Radial Convergence Rays toward Center Core (Scene D Anticipation) -->
+                    <g class="convergence-rays-group" filter="url(#arcGlow)">
+                      <line x1="180" y1="120" x2="460" y2="280" class="conv-ray ray-1" pathLength="100"/>
+                      <line x1="820" y1="140" x2="540" y2="280" class="conv-ray ray-2" pathLength="100"/>
+                      <line x1="200" y1="480" x2="460" y2="320" class="conv-ray ray-3" pathLength="100"/>
+                      <line x1="800" y1="460" x2="540" y2="320" class="conv-ray ray-4" pathLength="100"/>
+                    </g>
 
                     <!-- Global Tech & Research Nodes -->
                     <!-- San Francisco (SFO) -->
@@ -201,7 +209,7 @@
                 <!-- Layer 4: Screen Horizon Perspective & Optical Vignette -->
                 <div class="screen-depth-sheen" aria-hidden="true"></div>
 
-                <!-- Layer 5: Refined Computational Identity (Transparent, Non-Obscuring) -->
+                <!-- Layer 5: Refined Computational Identity (Natural, Non-Obscuring) -->
                 <div class="display-computational" id="display-computational">
                   <div class="comp-monogram-ring">
                     <svg class="comp-ring-svg" viewBox="0 0 120 120" aria-hidden="true">
@@ -214,10 +222,6 @@
                   <div class="comp-typography">
                     <span class="comp-name">Abhigyan Neog</span>
                     <span class="comp-role">Computer Science &amp; Systems Engineering</span>
-                  </div>
-                  <div class="comp-telemetry-badge">
-                    <span class="tele-dot"></span>
-                    <span class="tele-text">GLOBAL INTELLIGENCE NETWORK · ACTIVE</span>
                   </div>
                 </div>
               </div>
