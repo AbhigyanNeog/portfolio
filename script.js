@@ -101,10 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof window.goToGallerySlide === 'function' && slideIndex !== undefined) {
           window.goToGallerySlide(slideIndex);
         }
-        if (targetEl) {
-          targetEl.scrollIntoView({ behavior: 'smooth' });
-        } else if (projSection) {
+        if (projSection) {
           projSection.scrollIntoView({ behavior: 'smooth' });
+        } else if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
         }
         return;
       }
@@ -1158,6 +1158,11 @@ export const routes: Routes = [
     drawerBackdrop.classList.add('active');
     drawerBackdrop.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+
+    // Accessible focus management: focus close button
+    setTimeout(() => {
+      if (drawerCloseBtn) drawerCloseBtn.focus();
+    }, 60);
 
     // Update URL hash without jumping
     history.replaceState(null, '', `#case-study-${projectId}`);
