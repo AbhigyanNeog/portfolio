@@ -3738,42 +3738,53 @@ code, pre {
   }
 }
 
-/* Scene A: Laptop Arrival from Studio Darkness (0s – 1.5s) */
+/* Scene A: Laptop Side-Angle Arrival from Studio Darkness (0s – 1.8s) */
 .laptop-rig.scene-arriving {
-  transform: rotateX(18.5deg) rotateY(-24deg) rotateZ(0deg) translateY(42px) scale(calc(var(--laptop-scale) * 0.74));
-  opacity: 0.92;
-  filter: brightness(0.4) contrast(1.1);
-  animation: laptopArrival 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform: translateX(70vw) translateY(55px) translateZ(-120px) rotateX(22deg) rotateY(-36deg) rotateZ(-2deg) scale(calc(var(--laptop-scale) * 0.72));
+  opacity: 0;
+  filter: brightness(0.15) contrast(1.15) blur(3px);
+  animation: laptopSideArrival 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes laptopArrival {
+@keyframes laptopSideArrival {
   0% {
-    transform: rotateX(18.5deg) rotateY(-24deg) rotateZ(0deg) translateY(42px) scale(calc(var(--laptop-scale) * 0.74));
-    opacity: 0.92;
-    filter: brightness(0.4) contrast(1.1);
+    transform: translateX(70vw) translateY(55px) translateZ(-120px) rotateX(22deg) rotateY(-36deg) rotateZ(-2deg) scale(calc(var(--laptop-scale) * 0.72));
+    opacity: 0;
+    filter: brightness(0.15) contrast(1.15) blur(3px);
   }
-  60% {
+  20% {
+    opacity: 0.75;
+    filter: brightness(0.42) contrast(1.12) blur(2px);
+  }
+  65% {
     opacity: 1;
-    filter: brightness(0.85);
+    filter: brightness(0.9) contrast(1.05) blur(0.5px);
   }
   100% {
-    transform: rotateX(15.5deg) rotateY(-17.5deg) rotateZ(0deg) translateY(18px) scale(calc(var(--laptop-scale) * 0.96));
+    transform: translateX(0px) translateY(18px) translateZ(0px) rotateX(16deg) rotateY(-20deg) rotateZ(0deg) scale(calc(var(--laptop-scale) * 0.96));
     opacity: 1;
-    filter: brightness(1);
+    filter: brightness(1) contrast(1) blur(0px);
   }
 }
 
-/* Settled Closed Laptop State (3/4 Studio Angle) */
+/* Settled Closed Laptop State (3/4 Studio Angle: 1.8s – 2.1s) */
 .laptop-rig.scene-closed {
-  transform: rotateX(15.5deg) rotateY(-17.5deg) rotateZ(0deg) translateY(18px) scale(calc(var(--laptop-scale) * 0.96));
+  transform: translateX(0px) translateY(18px) translateZ(0px) rotateX(16deg) rotateY(-20deg) rotateZ(0deg) scale(calc(var(--laptop-scale) * 0.96));
   opacity: 1;
   filter: brightness(1);
 }
 
-/* Scene B & C: Lid opened & camera squarely facing display */
+/* Scene B1: Lid Opens Cinematically in 3/4 Studio Angle (2.1s – 3.6s) */
+.laptop-rig.scene-opening {
+  transform: translateX(0px) translateY(18px) translateZ(0px) rotateX(16deg) rotateY(-20deg) rotateZ(0deg) scale(calc(var(--laptop-scale) * 0.96));
+  opacity: 1;
+  filter: brightness(1);
+}
+
+/* Scene B2: Camera pans smoothly straight-on to face display (3.6s – 4.2s) */
 .laptop-rig.scene-opened {
-  transform: rotateX(4deg) rotateY(0deg) rotateZ(0deg) translateY(0px) scale(var(--laptop-scale));
-  transition: transform 2.0s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateX(0px) translateY(0px) translateZ(0px) rotateX(4deg) rotateY(0deg) rotateZ(0deg) scale(var(--laptop-scale));
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Scene E: Camera aligns directly perpendicular to screen center and dives straight into display */
@@ -3797,17 +3808,27 @@ code, pre {
 }
 
 .laptop-rig.scene-arriving .laptop-floor-shadow {
-  animation: shadowArrivalGround 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: shadowSideArrival 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes shadowArrivalGround {
+@keyframes shadowSideArrival {
   0% {
-    opacity: 0.25;
-    transform: rotateX(65deg) scale(0.72);
+    opacity: 0;
+    transform: rotateX(65deg) scale(0.6);
+    filter: blur(24px);
+  }
+  25% {
+    opacity: 0.35;
+    filter: blur(16px);
+  }
+  65% {
+    opacity: 0.85;
+    filter: blur(8px);
   }
   100% {
     opacity: 1;
     transform: rotateX(65deg) scale(1);
+    filter: blur(5px);
   }
 }
 
@@ -3843,6 +3864,7 @@ code, pre {
   transition: opacity 0.8s ease;
 }
 
+.laptop-rig.scene-opening .shadow-specular-bounce,
 .laptop-rig.scene-opened .shadow-specular-bounce {
   opacity: 0.9;
 }
@@ -3856,7 +3878,7 @@ code, pre {
   height: 390px;
   transform-origin: 50% 100%;
   transform-style: preserve-3d;
-  transition: transform 2.2s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
   border-radius: 12px 12px 2px 2px;
   z-index: 10;
@@ -3866,6 +3888,12 @@ code, pre {
 .laptop-rig.scene-closed .laptop-lid,
 .laptop-rig.scene-arriving .laptop-lid {
   transform: rotateX(-115deg);
+}
+
+/* When opening in 3/4 angle: lid rotates backward around hinge */
+.laptop-rig.scene-opening .laptop-lid {
+  transform: rotateX(12deg);
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* When open: lid rotates backward around hinge to natural upright ~102deg open viewing angle */
@@ -3889,6 +3917,11 @@ code, pre {
   z-index: 12;
   transition: opacity 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
   overflow: hidden;
+}
+
+.laptop-rig.scene-opening .lid-shell-outer {
+  opacity: 0;
+  transition: opacity 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s;
 }
 
 .laptop-rig.scene-opened .lid-shell-outer,
@@ -5433,11 +5466,7 @@ code, pre {
   }
 
   .laptop-rig {
-    transform: scale(0.62);
-  }
-
-  .laptop-rig.diving {
-    transform: scale(5.8) translate3d(0, -4px, 0);
+    --laptop-scale: 0.58;
   }
 
   .welcome-telemetry-hud {
@@ -6186,8 +6215,8 @@ html {
 
 .plate-media-wrap {
   position: relative;
-  background: #EAE6DC;
-  aspect-ratio: 16 / 10;
+  background: #000000;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
 }
 
@@ -6196,6 +6225,7 @@ html {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
   transition: transform 0.4s ease;
 }
@@ -6206,32 +6236,60 @@ html {
 }
 
 .plate-caption-box {
-  padding: 1.25rem 1.4rem;
+  padding: 1.15rem 1.35rem 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 0.5rem;
+}
+
+.plate-caption-tagline {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #E45436;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .plate-caption-title {
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 1.12rem;
   font-weight: 700;
   color: #191919;
+  line-height: 1.25;
 }
 
 .plate-caption-desc {
   font-family: var(--font-body);
-  font-size: 0.85rem;
-  line-height: 1.55;
+  font-size: 0.84rem;
+  line-height: 1.5;
   color: #5D5C57;
+}
+
+.plate-tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+}
+
+.plate-pill {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #2449E8;
+  background: rgba(36, 73, 232, 0.06);
+  border: 1px solid rgba(36, 73, 232, 0.18);
+  padding: 2px 7px;
+  border-radius: 4px;
 }
 
 .plate-action-links {
   display: flex;
   align-items: center;
   gap: 1.2rem;
-  margin-top: 0.4rem;
-  padding-top: 0.85rem;
+  margin-top: 0.35rem;
+  padding-top: 0.75rem;
   border-top: 1px solid #D2CEC4;
 }
 

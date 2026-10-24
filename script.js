@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (immediate) {
       introEl.classList.add('hidden');
       introEl.classList.remove('fade-out');
-      if (laptopRig) laptopRig.classList.remove('diving', 'scene-opened', 'scene-closed', 'scene-arriving');
+      if (laptopRig) laptopRig.classList.remove('diving', 'scene-opened', 'scene-closed', 'scene-arriving', 'scene-opening');
       if (laptopDisplay) laptopDisplay.classList.remove('illuminated', 'anticipating');
       if (cobaltTunnel) cobaltTunnel.classList.remove('active');
       executeDestination();
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         introEl.classList.add('hidden');
         introEl.classList.remove('fade-out');
-        if (laptopRig) laptopRig.classList.remove('diving', 'scene-opened', 'scene-closed', 'scene-arriving');
+        if (laptopRig) laptopRig.classList.remove('diving', 'scene-opened', 'scene-closed', 'scene-arriving', 'scene-opening');
         if (laptopDisplay) laptopDisplay.classList.remove('illuminated', 'anticipating');
         if (cobaltTunnel) cobaltTunnel.classList.remove('active');
         executeDestination();
@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
       introWelcomeScreen.classList.remove('active');
     }
     if (laptopRig) {
-      laptopRig.classList.remove('scene-opened', 'diving', 'scene-closed');
+      laptopRig.classList.remove('scene-opened', 'diving', 'scene-closed', 'scene-opening');
       laptopRig.classList.add('scene-arriving');
       laptopRig.style.transition = '';
       laptopRig.style.animationPlayState = '';
@@ -317,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (freezeStage) {
       if (freezeStage === 'arriving') {
         if (laptopRig) {
-          laptopRig.classList.remove('scene-closed', 'scene-opened', 'diving');
+          laptopRig.classList.remove('scene-closed', 'scene-opening', 'scene-opened', 'diving');
           laptopRig.classList.add('scene-arriving');
           laptopRig.style.animationPlayState = 'paused';
         }
@@ -325,26 +325,41 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (freezeStage === 'closed') {
         if (laptopRig) {
-          laptopRig.classList.remove('scene-arriving', 'scene-opened', 'diving');
+          laptopRig.classList.remove('scene-arriving', 'scene-opening', 'scene-opened', 'diving');
           laptopRig.classList.add('scene-closed');
+        }
+        return;
+      }
+      if (freezeStage === 'opening') {
+        if (laptopRig) {
+          laptopRig.classList.remove('scene-arriving', 'scene-closed', 'scene-opened', 'diving');
+          laptopRig.classList.add('scene-opening');
         }
         return;
       }
       if (freezeStage === 'halfway') {
         if (laptopRig) {
-          laptopRig.classList.remove('scene-arriving', 'scene-closed');
-          laptopRig.classList.add('scene-opened');
+          laptopRig.classList.remove('scene-arriving', 'scene-closed', 'scene-opened');
+          laptopRig.classList.add('scene-opening');
           laptopRig.style.transition = 'none';
         }
         if (lidEl) {
           lidEl.style.transition = 'none';
-          lidEl.style.transform = 'rotateX(-35deg)';
+          lidEl.style.transform = 'rotateX(-50deg)';
+        }
+        return;
+      }
+      if (freezeStage === 'opened') {
+        if (laptopRig) {
+          laptopRig.classList.remove('scene-arriving', 'scene-closed', 'scene-opening');
+          laptopRig.classList.add('scene-opened');
+          laptopRig.style.transition = 'none';
         }
         return;
       }
       if (freezeStage === 'enter') {
         if (laptopRig) {
-          laptopRig.classList.remove('scene-arriving', 'scene-closed');
+          laptopRig.classList.remove('scene-arriving', 'scene-closed', 'scene-opening');
           laptopRig.classList.add('scene-opened');
           laptopRig.style.transition = 'none';
         }
@@ -353,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (freezeStage === 'pulse') {
         if (laptopRig) {
-          laptopRig.classList.remove('scene-arriving', 'scene-closed');
+          laptopRig.classList.remove('scene-arriving', 'scene-closed', 'scene-opening');
           laptopRig.classList.add('scene-opened');
           laptopRig.style.transition = 'none';
         }
@@ -362,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (freezeStage === 'open') {
         if (laptopRig) {
-          laptopRig.classList.remove('scene-arriving', 'scene-closed');
+          laptopRig.classList.remove('scene-arriving', 'scene-closed', 'scene-opening');
           laptopRig.classList.add('scene-opened');
           laptopRig.style.transition = 'none';
         }
@@ -373,7 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (freezeStage === 'anticipation') {
         if (laptopRig) {
-          laptopRig.classList.remove('scene-arriving', 'scene-closed');
+          laptopRig.classList.remove('scene-arriving', 'scene-closed', 'scene-opening');
           laptopRig.classList.add('scene-opened');
           laptopRig.style.transition = 'none';
         }
@@ -401,39 +416,55 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================================
-    // SCENE A (0.0s – 1.5s): Laptop Arrival from Studio Darkness & Grounding
-    // =========================================================================
-
-    // =========================================================================
-    // SCENE B (1.5s – 3.8s): Physical Lid Opens on Hinge & Camera Faces Display
+    // SCENE A (0.0s – 1.8s): Laptop Side-Angle Arrival from Studio Darkness & Grounding
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopRig) {
-        laptopRig.classList.remove('scene-arriving', 'scene-closed');
-        laptopRig.classList.add('scene-opened');
+        laptopRig.classList.remove('scene-arriving');
+        laptopRig.classList.add('scene-closed');
       }
-    }, 1500));
+    }, 1800));
 
     // =========================================================================
-    // SCENE C (3.8s – 4.6s): Automatic Enter-Key Press & Light Pulse to Display
+    // SCENE B1 (2.1s – 3.6s): Physical Lid Opens on Hinge in 3/4 Studio View
+    // =========================================================================
+    introTimers.push(setTimeout(() => {
+      if (laptopRig) {
+        laptopRig.classList.remove('scene-closed');
+        laptopRig.classList.add('scene-opening');
+      }
+    }, 2100));
+
+    // =========================================================================
+    // SCENE B2 (3.6s – 4.2s): Camera Glides Smoothly to Face Display Center
+    // =========================================================================
+    introTimers.push(setTimeout(() => {
+      if (laptopRig) {
+        laptopRig.classList.remove('scene-opening');
+        laptopRig.classList.add('scene-opened');
+      }
+    }, 3600));
+
+    // =========================================================================
+    // SCENE C (4.2s – 4.8s): Automatic Enter-Key Press & Light Pulse to Display
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (kbEnterKey) kbEnterKey.classList.add('pressed');
-    }, 3800));
+    }, 4200));
 
     introTimers.push(setTimeout(() => {
       if (kbEnterKey) kbEnterKey.classList.remove('pressed');
       if (kbTravelPulse) kbTravelPulse.classList.add('traveling');
-    }, 4050));
+    }, 4450));
 
     // =========================================================================
-    // SCENE E (4.5s – 5.8s): Screen Power-Up, Network Routes, Display Illumination
+    // SCENE E (4.8s – 5.8s): Screen Power-Up, Network Routes, Display Illumination
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopDisplay) laptopDisplay.classList.add('illuminated');
       if (displayComp) displayComp.classList.add('active');
       if (studioBackdrop) studioBackdrop.classList.add('screen-lit');
-    }, 4500));
+    }, 4800));
 
     // =========================================================================
     // SCENE D (5.8s – 6.8s): Anticipation Glow, Inward Rays & Particle Convergence
@@ -1151,7 +1182,7 @@ def calculate_distance(lat1, lon1, lat2, lon2):
             <tr>
               <td><strong>Verified Implementation</strong></td>
               <td>Document processing and syllabus cleaning (Units 1–5); ChatML instruction tuning dataset preparation; Qwen3-8B 4-bit NF4 quantized loading test harness with VRAM allocation telemetry; local QLoRA training script with 8 GB VRAM stability constraints; offline evaluation benchmark script (<code>evaluate_accuracy.py</code>) assessing academic accuracy and concept coverage.</td>
-              <td>Implemented in local repository (<code>E:\\LLM_LMS_PROJECT</code>); adapter trained and evaluated locally against 15 academic benchmark questions.</td>
+              <td>Implemented in local repository (<code>LLM_LMS_PROJECT</code>); adapter trained and evaluated locally against 15 academic benchmark questions.</td>
             </tr>
             <tr>
               <td><strong>In Progress / Planned</strong></td>
