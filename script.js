@@ -552,8 +552,8 @@ document.addEventListener('DOMContentLoaded', () => {
       caseStudy: 'loganalyzer',
       order: 6,
       title: 'Log Analyzer',
-      tag: 'Infrastructure & Analytics',
-      desc: 'High-throughput server log parsing engine, anomaly detector, and traffic analytics.',
+      tag: 'Log Analytics & NLP',
+      desc: 'A Python-based web application that parses log data, categorizes entries, visualizes patterns, and provides text-analysis capabilities.',
       image: 'assets/images/log_analyzer_hourly.png',
       alt: 'Log Analyzer Hourly Metrics Interface',
       isPlaceholder: false
@@ -563,8 +563,8 @@ document.addEventListener('DOMContentLoaded', () => {
       caseStudy: 'phishguard',
       order: 7,
       title: 'Phish Guard',
-      tag: 'Cybersecurity Heuristics',
-      desc: 'Real-time URL heuristic analysis, SSL certificate inspection, and threat gateway.',
+      tag: 'Machine Learning Security',
+      desc: 'A phishing-detection project combining lexical URL analysis, machine learning, and browser-extension functionality, with later development exploring external safety checks and LLM-assisted analysis.',
       image: 'assets/images/phishguard_placeholder.svg',
       alt: 'Phish Guard Heuristic Inspection Engine (Screenshot Pending)',
       isPlaceholder: true
@@ -575,7 +575,7 @@ document.addEventListener('DOMContentLoaded', () => {
       order: 8,
       title: 'E-Platform',
       tag: 'Reactive E-Commerce',
-      desc: 'High-concurrency digital store with dynamic inventory, filtering, and instant checkout.',
+      desc: 'An Angular-based e-commerce interface featuring product browsing, shopping-cart state management, and a simulated checkout workflow.',
       image: 'assets/images/gadgetpro_preview.png',
       alt: 'GadgetPro E-Platform Interface',
       isPlaceholder: false
@@ -1264,21 +1264,21 @@ def calculate_distance(lat1, lon1, lat2, lon2):
 
     loganalyzer: {
       number: 'CASE STUDY 06 / 08',
-      badge: 'AI OBSERVABILITY',
+      badge: 'LOG ANALYTICS & TEXT ANALYSIS',
       title: 'Log Analyzer',
-      subtitle: 'AI Interaction Telemetry, Sentiment NLP Pipeline & Gemini Chat Simulator',
+      subtitle: 'Python Log Parsing, Pattern Visualization & Text-Analysis Web Application',
       content: `
-        <h4 class="drawer-section-heading">1. The Observability Challenge in AI Systems</h4>
+        <h4 class="drawer-section-heading">1. Project Overview & Identity Clarification</h4>
         <p class="drawer-p">
-          As enterprise applications integrate Large Language Models, engineering teams lack observability into prompt volumes, user sentiment shifts, repetitive prompt injection, and conversational churn.
+          Log Analyzer is a Python-based web application that parses log data, categorizes entries, visualizes patterns, and provides text-analysis capabilities.
         </p>
         <p class="drawer-p">
-          <strong>Identity Clarification:</strong> Formally verified in the audit as <code>log_analyzer_tool</code>. It is focused specifically on AI prompt streams, sentiment extraction, and LLM simulation, completely distinct from generic syslog/SIEM systems.
+          <strong>Identity & Scope Clarification:</strong> Formally verified in repository <code>log_analyzer_tool</code>. This project focuses on log parsing, text analysis, and interaction simulation; it is not SentinelLog, and makes no claim of enterprise SIEM functionality or production security monitoring.
         </p>
 
-        <h4 class="drawer-section-heading">2. Named-Group Regex Parsing Pipeline</h4>
+        <h4 class="drawer-section-heading">2. Log Parsing & Regular Expressions Pipeline</h4>
         <p class="drawer-p">
-          Unstructured log files are transformed into typed Pandas DataFrames via <code>src/parser.py</code> using compiled regular expressions with named capture groups:
+          Unstructured log data is transformed into typed Pandas DataFrames via <code>src/parser.py</code> using compiled regular expressions with named capture groups:
         </p>
         <div class="drawer-code-block">
 log_pattern = re.compile(
@@ -1289,24 +1289,42 @@ log_pattern = re.compile(
 )
         </div>
         <p class="drawer-p">
-          This extracts timestamps (converted to Pandas DatetimeIndex), usernames, raw prompt bodies, and topical categories with zero data loss.
+          This extracts timestamps (converted to Pandas DatetimeIndex), usernames, prompt strings, and topical categories, enabling structured querying and pattern identification.
         </p>
 
-        <h4 class="drawer-section-heading">3. Linguistic Sentiment & Anomaly Heuristics</h4>
+        <h4 class="drawer-section-heading">3. Analytical Visualizations & Sentiment Analysis</h4>
         <p class="drawer-p">
-          The processing pipeline enriches each record using NLTK and TextBlob (<code>src/nlp.py</code>):
+          The processing pipeline enriches each record using NLTK and TextBlob (<code>src/nlp.py</code>) and generates visual summaries:
         </p>
         <ul class="drawer-p" style="padding-left: 1.25rem;">
-          <li><strong>Polarity & Subjectivity:</strong> Classifies prompts into Positive (> 0.1), Negative (< -0.1), or Neutral.</li>
-          <li><strong>Noun-Phrase Extraction:</strong> Surfaces top recurring prompt keywords.</li>
-          <li><strong>Spam Detection Heuristic:</strong> Flags repeated prompt bursts (≥ 2 identical submissions) to detect automated spamming.</li>
-          <li><strong>AI Dependency Index:</strong> Calculates ratio of prompt volume to active unique users over sliding hourly windows.</li>
+          <li><strong>Polarity & Subjectivity Scoring:</strong> Evaluates prompt text sentiment, classifying entries into Positive (> 0.1), Negative (< -0.1), or Neutral.</li>
+          <li><strong>Noun-Phrase Extraction:</strong> Identifies recurring key terminology across logged user entries.</li>
+          <li><strong>Spam Detection Heuristic:</strong> Flags burst submissions (≥ 2 identical prompts) to highlight repetitive inputs.</li>
+          <li><strong>Analytical Visual Summaries:</strong> Chart.js dashboards visualize hourly prompt volume, sentiment distributions, and category breakdowns.</li>
         </ul>
 
-        <h4 class="drawer-section-heading">4. Dual-State Gemini AI Simulator</h4>
+        <h4 class="drawer-section-heading">4. Session Simulation & Gemini-Based Assistance</h4>
         <p class="drawer-p">
-          The Flask backend integrates Google Generative AI (<code>google.generativeai</code>). It stores user session history in a global key-value memory store (<code>chat_sessions[username_apikey]</code>) and executes a secondary asynchronous Gemini call to auto-categorize user prompts strictly into predefined business domains.
+          The Flask backend integrates the Google Gemini SDK (<code>google.generativeai</code>) for interactive testing:
         </p>
+        <ul class="drawer-p" style="padding-left: 1.25rem;">
+          <li><strong>Session-Activity Simulation:</strong> Retains multi-turn conversation memory in a key-value store (<code>chat_sessions[username_apikey]</code>) to simulate user dialogue streams.</li>
+          <li><strong>LLM-Assisted Categorization:</strong> Leverages Gemini to classify incoming prompts into predefined topic domains when heuristic rules are inconclusive.</li>
+        </ul>
+
+        <h4 class="drawer-section-heading">5. Technology Stack & Repository</h4>
+        <table class="drawer-metrics-table">
+          <thead>
+            <tr><th>Component</th><th>Technology Stack</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Backend & Parsing</td><td>Python, Flask, Pandas, Regular Expressions</td></tr>
+            <tr><td>Text & Sentiment Analysis</td><td>TextBlob, NLTK</td></tr>
+            <tr><td>Visualizations</td><td>Chart.js</td></tr>
+            <tr><td>AI Assistance</td><td>Google Gemini SDK</td></tr>
+            <tr><td>Repository</td><td><a href="https://github.com/AbhigyanNeog/log_analyzer_tool" target="_blank" rel="noopener noreferrer" style="color: var(--color-electric-blue);">AbhigyanNeog/log_analyzer_tool ↗</a></td></tr>
+          </tbody>
+        </table>
       `
     },
 
@@ -1314,19 +1332,22 @@ log_pattern = re.compile(
       number: 'CASE STUDY 07 / 08',
       badge: 'MACHINE LEARNING SECURITY',
       title: 'Phish Guard',
-      subtitle: '10-Feature Structural ML Classifier & Hybrid Cloud Threat Intelligence',
+      subtitle: 'Lexical URL Analysis, Random Forest Classification & Multi-Stage Exploration',
       content: `
-        <h4 class="drawer-section-heading">1. Threat Landscape & Engineering Goals</h4>
+        <h4 class="drawer-section-heading">1. Threat Problem & Development Phases</h4>
         <p class="drawer-p">
-          Phishing websites increasingly evade static blacklists by registering ephemeral domains, using automated domain generation algorithms (DGAs), or disguising credential theft portals under IPv4 hostnames and high-entropy subdomains.
+          Phishing websites frequently disguise credential-theft pages using newly registered domains, domain-generation algorithms (DGAs), or raw IPv4 hostnames designed to evade static blacklists.
         </p>
         <p class="drawer-p">
-          <strong>The Dual-Phase Architecture:</strong> Phish Guard was built in two distinct phases: Phase 1 engineered a local, client-side Machine Learning model deployed via a Chrome Extension; Phase 2 complemented it with cloud-based threat intelligence.
+          <strong>Project Scope:</strong> Phish Guard is a phishing-detection project combining lexical URL analysis, machine learning, and browser-extension functionality, with later development exploring external safety checks and LLM-assisted analysis.
+        </p>
+        <p class="drawer-p">
+          <strong>Development Phase Distinction:</strong> The project developed across two distinct rounds: an original client-side Machine Learning prototype with a browser extension, and later exploratory development testing external threat intelligence and LLM analysis. These iterations reflect progressive research rather than a single production deployment.
         </p>
 
-        <h4 class="drawer-section-heading">2. Phase 1: 10 Engineered Features & Shannon Entropy</h4>
+        <h4 class="drawer-section-heading">2. Original ML Prototype: Lexical Analysis & Shannon Entropy</h4>
         <p class="drawer-p">
-          Rather than treating the URL as a raw bag of words, <code>train_model.py</code> extracts 10 structural and lexical features. Crucially, it formulates <strong>Shannon Informational Entropy</strong> to measure the character randomness of domain strings:
+          In the initial prototype, <code>train_model.py</code> extracts 10 structural and lexical URL features, including <strong>Shannon Informational Entropy</strong> to measure character randomness:
         </p>
         <div class="drawer-code-block">
 def shannon_entropy(s: str) -> float:
@@ -1336,53 +1357,74 @@ def shannon_entropy(s: str) -> float:
     return -sum(p * math.log(p, 2) for p in probs)
         </div>
         <p class="drawer-p">
-          <strong>The 10 Extracted Features:</strong>
+          <strong>Extracted Features & Classification:</strong>
         </p>
         <table class="drawer-metrics-table">
           <thead>
-            <tr><th>Feature</th><th>Rationale</th></tr>
+            <tr><th>Feature</th><th>Heuristic / Rationale</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>entropy_url</code></td><td>Measures character randomness to expose DGA and obfuscated strings</td></tr>
-            <tr><td><code>has_ip_host</code></td><td>Regex checks whether host is an IPv4 address (common in malicious bypasses)</td></tr>
-            <tr><td><code>num_at</code></td><td>Presence of '@' used in URL credential confusion tricks</td></tr>
-            <tr><td><code>num_hyphens</code></td><td>High hyphen frequency indicates domain brand impersonation</td></tr>
-            <tr><td><code>num_dots</code></td><td>Detects multi-tier subdomain chaining</td></tr>
-            <tr><td><code>url_len / host_len / path_len</code></td><td>Phishing URLs tend to be substantially longer than benign URLs</td></tr>
+            <tr><td><code>entropy_url</code></td><td>Measures character randomness to identify DGA domains and obfuscated tokens</td></tr>
+            <tr><td><code>has_ip_host</code></td><td>Detects raw IPv4 hostnames used to bypass domain reputation checks</td></tr>
+            <tr><td><code>num_at</code></td><td>Detects '@' symbols used in URL credential confusion tricks</td></tr>
+            <tr><td><code>num_hyphens</code></td><td>Flags high hyphen frequency common in brand-impersonation URLs</td></tr>
+            <tr><td><code>num_dots</code></td><td>Identifies excessive multi-level subdomain chaining</td></tr>
+            <tr><td><code>url_len / host_len / path_len</code></td><td>Captures abnormally long URL structures typical of phishing landing pages</td></tr>
             <tr><td><code>uses_https</code></td><td>Verifies encrypted transport protocol</td></tr>
-            <tr><td><code>num_digits</code></td><td>Counts suspicious numerical digits in hostname and path</td></tr>
+            <tr><td><code>num_digits</code></td><td>Counts numerical digit density in hostname and path segments</td></tr>
           </tbody>
         </table>
-
-        <h4 class="drawer-section-heading">3. Phase 2: Hybrid Cloud Intelligence Engine</h4>
         <p class="drawer-p">
-          The secondary Node.js backend (<code>server.js</code>) bridges real-time threat intelligence:
+          Features are trained on a Scikit-Learn <strong>Random Forest</strong> classifier and serialized with Joblib for local model inference.
+        </p>
+
+        <h4 class="drawer-section-heading">3. Browser-Extension Functionality</h4>
+        <p class="drawer-p">
+          The prototype includes a browser-extension interface (located in <code>1st round/extension/</code>) that inspects active tab URLs and queries the local prediction service to display risk scores and security badges directly to the user.
+        </p>
+
+        <h4 class="drawer-section-heading">4. Later Development: External Safety Checks & LLM Analysis</h4>
+        <p class="drawer-p">
+          A secondary exploratory Node.js service (located in <code>2nd round/server.js</code>) investigates multi-tier external safety checks:
         </p>
         <ul class="drawer-p" style="padding-left: 1.25rem;">
-          <li><strong>Known IOC Pattern Matching:</strong> Static lookups of typosquatted domains and urgency triggers ("verify immediately", "account suspended").</li>
-          <li><strong>Google Safe Browsing API v4:</strong> Querying global malware threat lists.</li>
-          <li><strong>Google Gemini 2.5 Flash:</strong> Semantic evaluation of linguistic deception and social engineering patterns.</li>
+          <li><strong>Google Safe Browsing API v4:</strong> Querying global malware and social-engineering threat registries.</li>
+          <li><strong>Gemini API Integration:</strong> Exploring LLM-assisted semantic analysis of page content and linguistic deception cues.</li>
         </ul>
+
+        <h4 class="drawer-section-heading">5. Technology Stack & Repository</h4>
+        <table class="drawer-metrics-table">
+          <thead>
+            <tr><th>Component</th><th>Technology Stack</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ML Prototype</td><td>Python, scikit-learn, Random Forest, Shannon Entropy</td></tr>
+            <tr><td>Client Interface</td><td>Browser Extension</td></tr>
+            <tr><td>Later Exploratory Development</td><td>Node.js, Google Safe Browsing API, Gemini API</td></tr>
+            <tr><td>Development Status</td><td>Dual-phase research build (ML prototype + cloud exploration)</td></tr>
+            <tr><td>Repository</td><td><a href="https://github.com/AbhigyanNeog/PhishGuard" target="_blank" rel="noopener noreferrer" style="color: var(--color-electric-blue);">AbhigyanNeog/PhishGuard ↗</a></td></tr>
+          </tbody>
+        </table>
       `
     },
 
     eplatform: {
       number: 'CASE STUDY 08 / 08',
-      badge: 'FRONTEND ARCHITECTURE',
+      badge: 'REACTIVE E-COMMERCE & CLIENT STATE',
       title: 'E-Platform',
-      subtitle: 'High-Performance E-Commerce Application with Angular 17 Standalone Architecture',
+      subtitle: 'Angular 17 Standalone Architecture with RxJS Reactive Streams',
       content: `
-        <h4 class="drawer-section-heading">1. Technical Objective & Constraints</h4>
+        <h4 class="drawer-section-heading">1. Project Scope & Architecture Goals</h4>
         <p class="drawer-p">
-          Modern single-page applications often suffer from complex state synchronization between product catalogs, shopping carts, and multi-step checkout funnels.
+          E-Platform is an Angular-based e-commerce interface featuring product browsing, shopping-cart state management, and a simulated checkout workflow.
         </p>
         <p class="drawer-p">
-          <strong>The Objective:</strong> Architect a zero-backend consumer electronics storefront that maintains full state resilience, reactive cart subscriptions, and order persistence entirely in the client using Angular 17 and RxJS.
+          <strong>Simulated Checkout Scope:</strong> The platform is hosted as a client-side web application on GitHub Pages. The checkout pipeline is fully simulated on the client without external payment-gateway integration or live payment processing.
         </p>
 
-        <h4 class="drawer-section-heading">2. Angular 17 Standalone Component Architecture</h4>
+        <h4 class="drawer-section-heading">2. Standalone Components & Lazy Loading</h4>
         <p class="drawer-p">
-          E-Platform rejects legacy Angular <code>NgModule</code> hierarchies in favor of modern standalone components and functional routing in <code>app.routes.ts</code>:
+          Built using modern Angular 17 standalone components and functional routing in <code>app.routes.ts</code>, removing NgModule boilerplate:
         </p>
         <div class="drawer-code-block">
 export const routes: Routes = [
@@ -1394,30 +1436,42 @@ export const routes: Routes = [
 ];
         </div>
         <p class="drawer-p">
-          This achieves optimal route-level code splitting, loading only the necessary JavaScript bundle for the active viewport.
+          This structure provides route-level code splitting, loading only the necessary bundles for product browsing, cart views, and checkout phases.
         </p>
 
-        <h4 class="drawer-section-heading">3. Reactive State Streams via RxJS</h4>
+        <h4 class="drawer-section-heading">3. Reactive State Management via BehaviorSubject</h4>
         <p class="drawer-p">
-          State management is decoupled into two primary injectable services:
+          Client state is organized through reactive RxJS streams in dedicated services:
         </p>
         <ul class="drawer-p" style="padding-left: 1.25rem;">
-          <li><code>CartService</code>: Uses <code>BehaviorSubject</code> to broadcast cart items, quantities, and subtotal recalculations. Automatically synchronizes mutations with <code>localStorage</code>.</li>
-          <li><code>CheckoutService</code>: Drives a 4-step wizard (Shipping, Billing, Payment, Review) using an observable <code>currentStep$</code> stream.</li>
+          <li><code>CartService</code>: Uses <code>BehaviorSubject</code> to broadcast cart items, quantities, and subtotal calculations across components, with automatic LocalStorage synchronization.</li>
+          <li><code>CheckoutService</code>: Manages checkout wizard navigation via an observable <code>currentStep$</code> stream.</li>
         </ul>
 
-        <h4 class="drawer-section-heading">4. Simulated Order Fulfillment Pipeline</h4>
+        <h4 class="drawer-section-heading">4. Simulated Checkout Flow</h4>
         <p class="drawer-p">
-          The <code>CheckoutService.createOrder()</code> method executes business rules before confirming an order:
+          The checkout flow executes client-side business logic to simulate order processing:
         </p>
         <ul class="drawer-p" style="padding-left: 1.25rem;">
-          <li><strong>Tiered Shipping:</strong> Free shipping threshold calculated for carts over $200; standard ($9.99), express ($19.99), and overnight ($29.99) fee curves.</li>
-          <li><strong>Dynamic Tax & Promo Codes:</strong> 8% sales tax calculation, with real-time discount deduction for valid codes (<code>SAVE10</code>, <code>SAVE20</code>, <code>WELCOME</code>).</li>
-          <li><strong>Order Persistence:</strong> Generates a unique <code>GP-</code> prefixed order ID, commits the record to local storage, and clears sensitive checkout forms.</li>
+          <li><strong>Tiered Shipping Calculations:</strong> Evaluates cart value for free shipping thresholds ($200+) alongside standard, express, and overnight rates.</li>
+          <li><strong>Tax & Promo Code Validation:</strong> Calculates dynamic 8% tax and applies discount deductions for promo codes (<code>SAVE10</code>, <code>SAVE20</code>).</li>
+          <li><strong>Simulated Order Generation:</strong> Generates a unique <code>GP-</code> prefixed confirmation ID and commits order details to client-side storage.</li>
         </ul>
-        <p class="drawer-p">
-          <strong>Production Deployment:</strong> Hosted and live at <a href="https://abhigyanneog.github.io/e-platform/" target="_blank" rel="noopener noreferrer" style="color: var(--color-cobalt); font-weight: 600;">abhigyanneog.github.io/e-platform/</a>.
-        </p>
+
+        <h4 class="drawer-section-heading">5. Technology Stack, Live Demo & Repository</h4>
+        <table class="drawer-metrics-table">
+          <thead>
+            <tr><th>Component</th><th>Technology Stack</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Framework</td><td>Angular 17</td></tr>
+            <tr><td>Language & State</td><td>TypeScript, RxJS (BehaviorSubject)</td></tr>
+            <tr><td>Styling</td><td>Bootstrap 5</td></tr>
+            <tr><td>Features</td><td>Product Catalog, Cart State, Standalone Components, Simulated Checkout</td></tr>
+            <tr><td>Live Demo</td><td><a href="https://abhigyanneog.github.io/e-platform/" target="_blank" rel="noopener noreferrer" style="color: var(--color-electric-blue);">abhigyanneog.github.io/e-platform/ ↗</a></td></tr>
+            <tr><td>Repository</td><td><a href="https://github.com/AbhigyanNeog/e-platform" target="_blank" rel="noopener noreferrer" style="color: var(--color-electric-blue);">AbhigyanNeog/e-platform ↗</a></td></tr>
+          </tbody>
+        </table>
       `
     }
   };
