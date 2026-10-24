@@ -1883,312 +1883,6 @@ export const routes: Routes = [
     });
   });
   // =========================================================================
-  // PHASE 9: STAGE C — 3D INTERACTIVE ENGINEERING UNIVERSE HUB
-  // =========================================================================
-  const universeOverlay = document.getElementById('engineering-universe');
-  const universeCloseBtn = document.getElementById('universe-close-btn');
-  const universeNavBtn = document.getElementById('universe-nav-btn');
-  const inlineUniverseBtn = document.getElementById('inline-universe-btn');
-  const universeNodes = document.querySelectorAll('.universe-node, .u-pill');
-  const universeCanvas = document.getElementById('universe-particle-canvas');
-  const universeRig3D = document.getElementById('universe-rig-3d');
-  const universeStage = document.getElementById('universe-spatial-stage');
-  let universeParticleEngine = null;
-
-  function initUniverseParticles() {
-    if (!universeCanvas) return null;
-    const ctx = universeCanvas.getContext('2d');
-    if (!ctx) return null;
-
-    let animId = null;
-    const particles = [];
-    const PARTICLE_COUNT = 38;
-    const mouse = { x: -9999, y: -9999, targetTiltX: 0, targetTiltY: 0, currentTiltX: 0, currentTiltY: 0 };
-
-    function resize() {
-      if (!universeOverlay) return;
-      universeCanvas.width = universeOverlay.clientWidth || window.innerWidth;
-      universeCanvas.height = universeOverlay.clientHeight || window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    // Swiss Editorial Constellation Palette: Cobalt, Muted Slate, Hairline Neutral, Vermilion Accent
-    const SWISS_PARTICLE_COLORS = [
-      'rgba(36, 73, 232, ',   // Cobalt #2449E8
-      'rgba(93, 92, 87, ',    // Muted Slate #5D5C57
-      'rgba(210, 206, 196, ', // Hairline Neutral #D2CEC4
-      'rgba(228, 84, 54, '    // Vermilion #E45436
-    ];
-
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      particles.push({
-        x: Math.random() * (universeCanvas.width || 1000),
-        y: Math.random() * (universeCanvas.height || 700),
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        radius: Math.random() * 1.6 + 1.1,
-        alpha: Math.random() * 0.45 + 0.3,
-        color: SWISS_PARTICLE_COLORS[Math.floor(Math.random() * SWISS_PARTICLE_COLORS.length)]
-      });
-    }
-
-    if (universeStage) {
-      universeStage.addEventListener('mousemove', (e) => {
-        const rect = universeStage.getBoundingClientRect();
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
-
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const normX = (e.clientX - rect.left - centerX) / (centerX || 1);
-        const normY = (e.clientY - rect.top - centerY) / (centerY || 1);
-        mouse.targetTiltY = normX * 4; // subtle yaw
-        mouse.targetTiltX = -normY * 3; // subtle pitch
-      });
-
-      universeStage.addEventListener('mouseleave', () => {
-        mouse.x = -9999;
-        mouse.y = -9999;
-        mouse.targetTiltX = 0;
-        mouse.targetTiltY = 0;
-      });
-    }
-
-    function loop() {
-      if (!universeOverlay || !universeOverlay.classList.contains('active')) {
-        animId = null;
-        return;
-      }
-
-      ctx.clearRect(0, 0, universeCanvas.width, universeCanvas.height);
-      const w = universeCanvas.width;
-      const h = universeCanvas.height;
-
-      // Subtle mouse tilt on architectural universe rig
-      if (universeRig3D && !prefersReducedMotion) {
-        mouse.currentTiltX += (mouse.targetTiltX - mouse.currentTiltX) * 0.08;
-        mouse.currentTiltY += (mouse.targetTiltY - mouse.currentTiltY) * 0.08;
-        universeRig3D.style.transform = `rotateX(${mouse.currentTiltX}deg) rotateY(${mouse.currentTiltY}deg)`;
-      }
-
-      // Update & render particles
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x < 0) p.x = w;
-        else if (p.x > w) p.x = 0;
-        if (p.y < 0) p.y = h;
-        else if (p.y > h) p.y = 0;
-
-        // Subtle mouse gravitational reaction
-        const dx = mouse.x - p.x;
-        const dy = mouse.y - p.y;
-        const dist = Math.hypot(dx, dy);
-        if (dist < 130 && dist > 0) {
-          const force = (130 - dist) / 130 * 0.06;
-          p.x -= (dx / dist) * force * 10;
-          p.y -= (dy / dist) * force * 10;
-        }
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `${p.color}${p.alpha})`;
-        ctx.fill();
-
-        // Architectural constellation lines in warm hairline neutral
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dist2 = Math.hypot(p.x - p2.x, p.y - p2.y);
-          if (dist2 < 95) {
-            const lineAlpha = (1 - dist2 / 95) * 0.28;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(210, 206, 196, ${lineAlpha})`;
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-          }
-        }
-      }
-
-      animId = requestAnimationFrame(loop);
-    }
-
-    return {
-      start() {
-        if (!animId) {
-          resize();
-          animId = requestAnimationFrame(loop);
-        }
-      },
-      stop() {
-        if (animId) {
-          cancelAnimationFrame(animId);
-          animId = null;
-        }
-        if (universeRig3D) {
-          universeRig3D.style.transform = '';
-        }
-      }
-    };
-  }
-
-  universeParticleEngine = initUniverseParticles();
-
-  function highlightUniverseActiveProject(index) {
-    const uNodes = document.querySelectorAll('.universe-node');
-    uNodes.forEach(node => {
-      const idxAttr = node.getAttribute('data-slide') || node.getAttribute('data-project-idx');
-      const idx = parseInt(idxAttr, 10);
-      node.classList.toggle('active-universe-node', idx === index);
-      node.setAttribute('aria-selected', idx === index ? 'true' : 'false');
-    });
-
-    const uPills = document.querySelectorAll('.u-pill');
-    uPills.forEach(pill => {
-      const idxAttr = pill.getAttribute('data-slide') || pill.getAttribute('data-project-idx');
-      const idx = parseInt(idxAttr, 10);
-      pill.classList.toggle('active-universe-pill', idx === index);
-      pill.setAttribute('aria-selected', idx === index ? 'true' : 'false');
-    });
-  }
-
-  function openUniverseHub() {
-    if (!universeOverlay) return;
-    universeOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    if (universeParticleEngine) universeParticleEngine.start();
-    highlightUniverseActiveProject(currentProjectSlide);
-    const activeNode = universeOverlay.querySelector(`.universe-node[data-slide="${currentProjectSlide}"]`) ||
-                       universeOverlay.querySelector(`.universe-node[data-project-idx="${currentProjectSlide}"]`) ||
-                       universeOverlay.querySelector('.universe-node');
-    if (activeNode) {
-      setTimeout(() => activeNode.focus(), 60);
-    }
-  }
-
-  function closeUniverseHub() {
-    if (!universeOverlay) return;
-    universeOverlay.classList.remove('active');
-    document.body.style.overflow = '';
-    if (universeParticleEngine) universeParticleEngine.stop();
-  }
-
-  if (universeNavBtn) {
-    universeNavBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openUniverseHub();
-    });
-  }
-
-  if (inlineUniverseBtn) {
-    inlineUniverseBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      openUniverseHub();
-    });
-  }
-
-  if (universeCloseBtn) {
-    universeCloseBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      closeUniverseHub();
-    });
-  }
-
-  // Unified Node & Pill Navigation for Swiss Editorial Atlas
-  universeNodes.forEach(node => {
-    node.addEventListener('click', (e) => {
-      // 1. Direct Case Study Open Button
-      const caseBtn = e.target.closest('.u-open-case');
-      if (caseBtn) {
-        e.preventDefault();
-        e.stopPropagation();
-        const caseId = caseBtn.getAttribute('data-project') || caseBtn.getAttribute('data-case');
-        closeUniverseHub();
-        setTimeout(() => {
-          if (caseId && typeof openCaseStudy === 'function') {
-            openCaseStudy(caseId);
-          }
-        }, 120);
-        return;
-      }
-
-      // 2. Project Slide Target (Node Card, Gallery Action Link, or Quick-Jump Pill)
-      const galleryBtn = e.target.closest('.u-view-gallery');
-      const slideIdxAttr = (galleryBtn ? (galleryBtn.getAttribute('data-slide') || galleryBtn.getAttribute('data-project-idx')) : null) ||
-                           node.getAttribute('data-slide') ||
-                           node.getAttribute('data-project-idx');
-      if (slideIdxAttr !== null && slideIdxAttr !== '') {
-        const slideIdx = parseInt(slideIdxAttr, 10);
-        if (!isNaN(slideIdx)) {
-          e.preventDefault();
-          updateGalleryUI(slideIdx);
-          highlightUniverseActiveProject(slideIdx);
-          closeUniverseHub();
-          setTimeout(() => {
-            const projectsSection = document.getElementById('projects');
-            if (projectsSection) {
-              projectsSection.scrollIntoView({ behavior: 'smooth' });
-            }
-          }, 120);
-          return;
-        }
-      }
-
-      // 3. Fallback Hash Link
-      const targetHash = node.getAttribute('href') || (node.getAttribute('data-dest') ? `#${node.getAttribute('data-dest')}` : null);
-      if (targetHash && targetHash.startsWith('#')) {
-        e.preventDefault();
-        closeUniverseHub();
-        setTimeout(() => {
-          const targetEl = document.querySelector(targetHash);
-          if (targetEl) {
-            targetEl.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 150);
-      }
-    });
-  });
-
-  // Global Keydown for Universe: 'U' to open/toggle, 'Escape' to close, '1'-'6' to jump
-  document.addEventListener('keydown', (e) => {
-    if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
-
-    if (universeOverlay && universeOverlay.classList.contains('active')) {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        closeUniverseHub();
-        return;
-      }
-
-      // Keys 1 through 8 jump to corresponding projects
-      const num = parseInt(e.key, 10);
-      if (!isNaN(num) && num >= 1 && num <= 8) {
-        e.preventDefault();
-        const targetIdx = num - 1;
-        updateGalleryUI(targetIdx);
-        highlightUniverseActiveProject(targetIdx);
-        closeUniverseHub();
-        setTimeout(() => {
-          const projectsSection = document.getElementById('projects');
-          if (projectsSection) {
-            projectsSection.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 120);
-        return;
-      }
-    } else if ((e.key === 'u' || e.key === 'U') && !introActive) {
-      const isCaseStudyOpen = drawerBackdrop && drawerBackdrop.classList.contains('active');
-      if (!isCaseStudyOpen) {
-        openUniverseHub();
-      }
-    }
-  });
-
-  // =========================================================================
   // PHASE 9: STAGE E — HORIZONTAL PROJECT GALLERY & CONTROLS
   // =========================================================================
   const galleryTrack = document.getElementById('gallery-track');
@@ -2199,8 +1893,19 @@ export const routes: Routes = [
   const galleryProgressFill = document.getElementById('gallery-progress-fill');
   const galleryPills = document.querySelectorAll('.gallery-pill');
   const allProjectArticles = galleryTrack ? galleryTrack.querySelectorAll('.project-card') : [];
-  const TOTAL_PROJECTS = allProjectArticles.length || 6;
+  const TOTAL_PROJECTS = allProjectArticles.length || 8;
   let currentProjectSlide = 0;
+
+  function syncGalleryViewportHeight() {
+    if (!galleryViewport || !allProjectArticles.length) return;
+    const activeCard = allProjectArticles[currentProjectSlide];
+    if (activeCard) {
+      const cardHeight = activeCard.offsetHeight;
+      if (cardHeight > 0) {
+        galleryViewport.style.height = `${cardHeight}px`;
+      }
+    }
+  }
 
   function updateGalleryUI(index) {
     currentProjectSlide = Math.max(0, Math.min(index, TOTAL_PROJECTS - 1));
@@ -2208,6 +1913,8 @@ export const routes: Routes = [
     if (galleryTrack) {
       galleryTrack.style.transform = `translateX(-${currentProjectSlide * 100}%)`;
     }
+
+    syncGalleryViewportHeight();
 
     if (galleryCounterCurr) {
       galleryCounterCurr.textContent = String(currentProjectSlide + 1).padStart(2, '0');
@@ -2226,8 +1933,6 @@ export const routes: Routes = [
         pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
       }
     });
-
-    highlightUniverseActiveProject(currentProjectSlide);
 
     if (galleryPrevBtn) {
       galleryPrevBtn.disabled = currentProjectSlide === 0;
@@ -2317,7 +2022,6 @@ export const routes: Routes = [
   document.addEventListener('keydown', (e) => {
     if (!galleryViewport) return;
     if (introActive) return;
-    if (universeOverlay && universeOverlay.classList.contains('active')) return;
     if (drawerBackdrop && drawerBackdrop.classList.contains('active')) return;
 
     const rect = galleryViewport.getBoundingClientRect();
@@ -2385,8 +2089,12 @@ export const routes: Routes = [
     }, { passive: true });
   }
 
-  // Initial gallery position
+  // Initial gallery position & viewport height synchronization
   updateGalleryUI(0);
+  window.addEventListener('resize', syncGalleryViewportHeight);
+  window.addEventListener('load', syncGalleryViewportHeight);
+  setTimeout(syncGalleryViewportHeight, 150);
+  setTimeout(syncGalleryViewportHeight, 500);
 
 });
 

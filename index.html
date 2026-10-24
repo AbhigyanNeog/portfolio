@@ -693,207 +693,6 @@
     </div>
   </aside>
 
-  <!-- =================================================================== -->
-  <!-- STAGE C: INTERACTIVE 3D ENGINEERING UNIVERSE HUB -->
-  <!-- =================================================================== -->
-  <aside class="engineering-universe-overlay" id="engineering-universe" role="dialog" aria-modal="true"
-    aria-label="3D Engineering Universe & Project Atlas">
-    <!-- Spatial 3D Ambient Background -->
-    <div class="universe-bg-fx" aria-hidden="true">
-      <div class="universe-starfield"></div>
-      <div class="universe-grid-plane"></div>
-      <div class="universe-ambient-glow"></div>
-      <canvas id="universe-particle-canvas" class="universe-particle-canvas" aria-hidden="true"></canvas>
-    </div>
-
-    <!-- Universe Top Controls Bar -->
-    <div class="universe-top-bar">
-      <div class="universe-meta-badge">
-        <span class="universe-beacon-dot"></span>
-        <span class="universe-meta-title">Engineering Atlas</span>
-        <span class="universe-meta-sep">•</span>
-        <span class="universe-meta-coords">3D PROJECT UNIVERSE (6 WORKS)</span>
-      </div>
-      <button class="universe-close-btn" id="universe-close-btn" type="button" aria-label="Close 3D Universe Hub">
-        <span>Resume Reading</span>
-        <span class="universe-close-icon">×</span>
-      </button>
-    </div>
-
-    <!-- Central Interactive 3D Constellation Scene -->
-    <div class="universe-spatial-stage" id="universe-spatial-stage">
-      <div class="universe-rig-3d" id="universe-rig-3d">
-
-        <!-- SVG Constellation Vector Network: Lines connecting Core to all 6 Project Nodes -->
-        <svg class="universe-constellation-svg" viewBox="0 0 1000 640" preserveAspectRatio="xMidYMid meet"
-          aria-hidden="true">
-          <defs>
-            <linearGradient id="u-line-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#2449E8" stop-opacity="0.6" />
-              <stop offset="100%" stop-color="#D2CEC4" stop-opacity="0.3" />
-            </linearGradient>
-          </defs>
-
-          <!-- Constellation Orbit Rings -->
-          <ellipse cx="500" cy="320" rx="360" ry="220" class="u-orbit-circle" />
-          <circle cx="500" cy="320" r="140" class="u-orbit-circle-inner" />
-
-          <!-- Connection Lines from Central Hub (500, 320) to 6 Project Nodes -->
-          <!-- Line to Project 1 (TRACE-X): (180, 100) -->
-          <line x1="500" y1="320" x2="180" y2="100" class="u-constellation-line" />
-          <circle cx="180" cy="100" r="4.5" class="u-line-node-dot dot-featured" />
-
-          <!-- Line to Project 2 (Smart Faculty Attendance): (820, 100) -->
-          <line x1="500" y1="320" x2="820" y2="100" class="u-constellation-line" />
-          <circle cx="820" cy="100" r="4.5" class="u-line-node-dot" />
-
-          <!-- Line to Project 3 (Campus Copilot): (860, 320) -->
-          <line x1="500" y1="320" x2="860" y2="320" class="u-constellation-line" />
-          <circle cx="860" cy="320" r="4.5" class="u-line-node-dot" />
-
-          <!-- Line to Project 4 (Log Analyzer): (820, 540) -->
-          <line x1="500" y1="320" x2="820" y2="540" class="u-constellation-line" />
-          <circle cx="820" cy="540" r="4.5" class="u-line-node-dot" />
-
-          <!-- Line to Project 5 (Phish Guard): (180, 540) -->
-          <line x1="500" y1="320" x2="180" y2="540" class="u-constellation-line" />
-          <circle cx="180" cy="540" r="4.5" class="u-line-node-dot" />
-
-          <!-- Line to Project 6 (E-Platform): (140, 320) -->
-          <line x1="500" y1="320" x2="140" y2="320" class="u-constellation-line" />
-          <circle cx="140" cy="320" r="4.5" class="u-line-node-dot" />
-        </svg>
-
-        <!-- Central Systems Engine Core (Engineering Atlas Index) -->
-        <div class="universe-central-core" id="universe-central-core">
-          <div class="core-rings-svg-wrap">
-            <svg viewBox="0 0 200 200" class="core-astrolabe-svg" width="200" height="200" aria-hidden="true">
-              <!-- Celestial Compass / Degree Rings -->
-              <circle cx="100" cy="100" r="92" class="u-ring ring-outer" stroke-dasharray="6 4" />
-              <circle cx="100" cy="100" r="74" class="u-ring ring-mid" />
-              <circle cx="100" cy="100" r="52" class="u-ring ring-inner" stroke-dasharray="3 3" />
-              <!-- Orbital Ellipses -->
-              <ellipse cx="100" cy="100" rx="90" ry="32" class="u-ring ring-ellipse-a" />
-              <ellipse cx="100" cy="100" rx="90" ry="32" class="u-ring ring-ellipse-b" />
-              <!-- Core Marker -->
-              <circle cx="100" cy="100" r="20" class="u-core-aura" />
-              <circle cx="100" cy="100" r="8" class="u-core-dot" />
-            </svg>
-          </div>
-          <div class="core-label-box">
-            <span class="core-hud-title">Engineering Atlas</span>
-                  <!-- 6 Orbital Project Nodes (Exact Required Order) -->
-        <!-- Project 1: VeriClass — Faculty Attendance Management System -->
-        <div class="universe-node node-p1" data-slide="0" data-project="attendance" id="u-node-attendance" tabindex="0"
-          role="button" aria-label="Project 1: VeriClass — Faculty Attendance Management System">
-          <div class="node-beacon"></div>
-          <div class="node-card">
-            <span class="node-chap-tag">01 / SYSTEMS &amp; VERIFICATION</span>
-            <h3 class="node-name">VeriClass</h3>
-            <p class="node-desc">Location verification, classroom photo capture &amp; timetable management.</p>
-            <div class="node-actions-row">
-              <button type="button" class="u-action-btn u-view-gallery" data-slide="0">View in Gallery →</button>
-              <button type="button" class="u-action-btn u-open-case" data-project="attendance">Case Study ↗</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 2: Campus Copilot -->
-        <div class="universe-node node-p2" data-slide="1" data-project="copilot" id="u-node-copilot" tabindex="0"
-          role="button" aria-label="Project 2: Campus Copilot">
-          <div class="node-beacon"></div>
-          <div class="node-card">
-            <span class="node-chap-tag">02 / ALGORITHMS &amp; VISUALIZATION</span>
-            <h3 class="node-name">Campus Copilot</h3>
-            <p class="node-desc">Hackathon app using algorithms &amp; data visualization for campus workflows.</p>
-            <div class="node-actions-row">
-              <button type="button" class="u-action-btn u-view-gallery" data-slide="1">View in Gallery →</button>
-              <button type="button" class="u-action-btn u-open-case" data-project="copilot">Case Study ↗</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 3: NEXORA — Hierarchical AI Research Prototype -->
-        <div class="universe-node node-p3" data-slide="2" data-project="nexora" id="u-node-nexora" tabindex="0"
-          role="button" aria-label="Project 3: NEXORA — Hierarchical AI Research Prototype">
-          <div class="node-beacon"></div>
-          <div class="node-card">
-            <span class="node-chap-tag">03 / MODULAR AI ARCHITECTURE</span>
-            <h3 class="node-name">NEXORA</h3>
-            <p class="node-desc">Modular AI system processing source data, events, alerts, recommendations &amp; state.</p>
-            <div class="node-actions-row">
-              <button type="button" class="u-action-btn u-view-gallery" data-slide="2">View in Gallery →</button>
-              <button type="button" class="u-action-btn u-open-case" data-project="nexora">Case Study ↗</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 4: LLM Educational Assistant -->
-        <div class="universe-node node-p4" data-slide="3" data-project="llmassistant" id="u-node-llmassistant"
-          tabindex="0" role="button" aria-label="Project 4: LLM Educational Assistant">
-          <div class="node-beacon"></div>
-          <div class="node-card">
-            <span class="node-chap-tag">04 / EDUCATIONAL AI &amp; RAG</span>
-            <h3 class="node-name">LLM Assistant</h3>
-            <p class="node-desc">Course-grounded AI assistant exploring document processing, QLoRA &amp; RAG.</p>
-            <div class="node-actions-row">
-              <button type="button" class="u-action-btn u-view-gallery" data-slide="3">View in Gallery →</button>
-              <button type="button" class="u-action-btn u-open-case" data-project="llmassistant">Case Study ↗</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 5: TRACE-X — Transaction Risk & Analytics for Cybercrime Enforcement -->
-        <div class="universe-node node-p5" data-slide="4" data-project="tracex" id="u-node-tracex" tabindex="0"
-          role="button" aria-label="Project 5: TRACE-X — Transaction Risk & Analytics for Cybercrime Enforcement">
-          <div class="node-beacon"></div>
-          <div class="node-card">
-            <span class="node-chap-tag">05 / CYBERCRIME ANALYTICS</span>
-            <h3 class="node-name">TRACE-X</h3>
-            <p class="node-desc">Cybercrime analytics platform for transaction-risk analysis &amp; investigative prioritization.</p>
-            <div class="node-actions-row">
-              <button type="button" class="u-action-btn u-view-gallery" data-slide="4">View in Gallery →</button>
-              <button type="button" class="u-action-btn u-open-case" data-project="tracex">Case Study ↗</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 6: Log Analyzer -->
-        <div class="universe-node node-p6" data-slide="5" data-project="loganalyzer" id="u-node-loganalyzer" tabindex="0"
-          role="button" aria-label="Project 6: Log Analyzer">
-          <div class="node-beacon"></div>
-          <div class="node-card">
-            <span class="node-chap-tag">06 / LOG ANALYTICS &amp; NLP</span>
-            <h3 class="node-name">Log Analyzer</h3>
-            <p class="node-desc">Python log parsing web application for categorization, pattern visualization &amp; text analysis.</p>
-            <div class="node-actions-row">
-              <button type="button" class="u-action-btn u-view-gallery" data-slide="5">View in Gallery →</button>
-              <button type="button" class="u-action-btn u-open-case" data-project="loganalyzer">Case Study ↗</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Universe Bottom Fast-Jump Ribbon & Shortcuts -->
-    <div class="universe-bottom-bar">
-      <div class="universe-shortcuts-hint">
-        <span class="u-key">CLICK ANY NODE</span> TO NAVIGATE • <span class="u-key">[1-8]</span> FAST JUMP • <span
-          class="u-key">ESC</span> TO RESUME
-      </div>
-      <div class="universe-pills-row" role="tablist" aria-label="Direct project quick jump">
-        <button type="button" class="u-pill active-universe-pill" data-slide="0"><span class="p-num">01</span> VeriClass</button>
-        <button type="button" class="u-pill" data-slide="1"><span class="p-num">02</span> Copilot</button>
-        <button type="button" class="u-pill" data-slide="2"><span class="p-num">03</span> NEXORA</button>
-        <button type="button" class="u-pill" data-slide="3"><span class="p-num">04</span> LLM Assistant</button>
-        <button type="button" class="u-pill" data-slide="4"><span class="p-num">05</span> TRACE-X</button>
-        <button type="button" class="u-pill" data-slide="5"><span class="p-num">06</span> Log Analyzer</button>
-        <button type="button" class="u-pill" data-slide="6"><span class="p-num">07</span> Phish Guard</button>
-        <button type="button" class="u-pill" data-slide="7"><span class="p-num">08</span> E-Platform</button>
-      </div>
-    </div>
-  </aside>
 
   <!-- Top Scroll Progress Bar -->
   <div class="scroll-progress-bar" id="scroll-progress" aria-hidden="true"></div>
@@ -923,11 +722,9 @@
         <a href="certifications.html" class="btn btn-secondary btn-sm magnetic-target" id="header-cert-btn">
           Certifications ↗
         </a>
-        <button class="universe-nav-btn magnetic-target" id="universe-nav-btn" type="button"
-          aria-label="Open 3D Universe">
-          <span class="universe-btn-icon">⎋</span>
-          <span class="universe-btn-text">3D Universe</span>
-        </button>
+        <a href="#projects" class="btn btn-secondary btn-sm magnetic-target" id="header-projects-btn">
+          Projects ↓
+        </a>
         <a href="assets/resume/Abhigyan_Neog_Resume.pdf" class="btn btn-secondary btn-sm magnetic-target"
           id="header-resume-btn" download="Abhigyan_Neog_Resume.pdf" target="_blank" rel="noopener noreferrer">
           <svg class="btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2274,11 +2071,10 @@
             </div>
           </div>
 
-          <!-- Bottom Navigation Guidance Cue & Universe Launcher -->
+          <!-- Bottom Navigation Guidance Cue -->
           <div class="gallery-bottom-hint">
             <span class="hint-key">← ARROW KEYS →</span> OR <span class="hint-key">SWIPE HORIZONTALLY</span> TO BROWSE •
-            <button class="btn-return-universe inline-universe-btn" id="inline-universe-btn" type="button">⎋ Open 3D
-              Universe</button>
+            <a href="#case-studies" class="hint-link">Deep Dives &amp; Case Studies ↓</a>
           </div>
         </div>
       </div>
