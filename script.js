@@ -92,6 +92,11 @@ document.addEventListener('DOMContentLoaded', () => {
       laptopScreenVideo.pause();
     }
 
+    const featuredPlateVideo = document.querySelector('.plate-video');
+    if (featuredPlateVideo && featuredPlateVideo.paused) {
+      featuredPlateVideo.play().catch(() => {});
+    }
+
     const executeDestination = () => {
       if (targetId) {
         const targetEl = document.getElementById(targetId);
