@@ -5324,6 +5324,7 @@ code, pre {
 }
 
 .intro-skip-btn {
+  display: none !important;
   background: rgba(16, 23, 42, 0.85);
   border: 1px solid rgba(85, 214, 255, 0.35);
   border-radius: 999px;
