@@ -3353,6 +3353,27 @@ code, pre {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+
+  .nav-list {
+    gap: 1rem;
+  }
+
+  .nav-link {
+    font-size: 0.78rem;
+  }
+
+  .header-actions {
+    gap: 0.45rem;
+  }
+
+  .header-actions .btn {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  #header-projects-btn {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
@@ -3437,6 +3458,16 @@ code, pre {
 
   .editorial-divider {
     margin-bottom: 1.75rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .brand-role {
+    display: none;
+  }
+
+  #header-cert-btn {
+    display: none;
   }
 }
 
