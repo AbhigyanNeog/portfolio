@@ -5797,6 +5797,8 @@ code, pre {
   min-width: 0;
   max-width: 100%;
   box-sizing: border-box;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .gallery-bottom-hint {

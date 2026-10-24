@@ -1905,8 +1905,9 @@ export const routes: Routes = [
     if (!galleryViewport || !allProjectArticles.length) return;
     const activeCard = allProjectArticles[currentProjectSlide];
     if (activeCard) {
+      allProjectArticles.forEach(c => c.classList.add('revealed'));
       const cardHeight = activeCard.offsetHeight;
-      if (cardHeight > 0) {
+      if (cardHeight > 100) {
         galleryViewport.style.height = `${cardHeight}px`;
       }
     }
@@ -1919,7 +1920,9 @@ export const routes: Routes = [
       galleryTrack.style.transform = `translateX(-${currentProjectSlide * 100}%)`;
     }
 
+    allProjectArticles.forEach(c => c.classList.add('revealed'));
     syncGalleryViewportHeight();
+    requestAnimationFrame(() => syncGalleryViewportHeight());
 
     if (galleryCounterCurr) {
       galleryCounterCurr.textContent = String(currentProjectSlide + 1).padStart(2, '0');
