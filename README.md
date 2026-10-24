@@ -112,6 +112,24 @@ npx serve .
 
 ---
 
+---
+
+## ✏️ Content Editing Guide (Modular Data Stores)
+
+All user-editable text, project descriptions, technologies, links, and case studies have been separated into dedicated content stores in the [`data/`](file:///e:/portfolio/data) folder. You can update your content easily without modifying complex interaction scripts or layout styling:
+
+| Content Area | Data File Location | Description & How to Edit |
+| :--- | :--- | :--- |
+| **Projects & Case Studies** | [`data/projects.js`](file:///e:/portfolio/data/projects.js) | Edit `PROJECTS_DATA` for titles, summaries, tags, repo links, and demo URLs. Edit `CASE_STUDIES` for the deep-dive drawer analysis. Edit `WELCOME_REEL_PROJECTS` for the laptop opening teaser reel. |
+| **About & Bio** | [`data/about.js`](file:///e:/portfolio/data/about.js) | Edit `headline`, `paragraphs`, `education`, and `statistics` for your bio, personal philosophy, and university status. |
+| **Technical Skills** | [`data/skills.js`](file:///e:/portfolio/data/skills.js) | Edit `SKILLS_DATA` across the 5 categories (Languages, Frontend, Backend, ML/NLP, and Security & Forensics). |
+| **Experience & Timeline** | [`data/experience.js`](file:///e:/portfolio/data/experience.js) | Edit `EXPERIENCE_DATA` to add or modify internships (e.g. Samsung Innovation Campus), hackathons (SIH '24), and degrees. |
+| **Certifications** | [`data/certifications.js`](file:///e:/portfolio/data/certifications.js) | Edit `featured` (Azure AI Fundamentals AI-900), `specializedCourses`, `securitySimulations`, and `systemsProgramming`. |
+| **Contact & Socials** | [`data/contact.js`](file:///e:/portfolio/data/contact.js) | Edit `email`, social handles (`github`, `linkedin`), location, and inquiry dropdown options. |
+| **Curriculum Vitae (PDF)** | [`assets/resume/resume.pdf`](file:///e:/portfolio/assets/resume/resume.pdf) | Drop in or overwrite `resume.pdf` in `assets/resume/`. All download links automatically serve this file. |
+
+---
+
 ## 📁 Repository Structure
 
 ```
@@ -119,16 +137,24 @@ npx serve .
 ├── _backups/              # Local migration backups (ignored by Git)
 ├── assets/
 │   ├── images/            # Project previews, diagrams, badges, and posters
-│   ├── resume/            # Current curriculum vitae (PDF)
+│   ├── resume/            # Current curriculum vitae (PDF) — resume.pdf
 │   └── videos/            # Feature demonstrations & project video feeds
-├── videos/                # Featured hero looping video clips
+├── data/                  # Modular content stores (Effortless editing)
+│   ├── about.js           # Bio, personal narrative, education & stats
+│   ├── certifications.js  # Azure AI Fundamentals & coursework credentials
+│   ├── contact.js         # Email, verified profiles & inquiry options
+│   ├── experience.js      # Internships, hackathons & academic timeline
+│   ├── projects.js        # 8 Projects metadata, welcome reel & deep-dive case studies
+│   └── skills.js          # Categorized technical competencies & tools
+├── videos/                # Featured hero looping video clips (215500_medium.mp4)
 ├── .gitignore             # Comprehensive VCS exclusion rules
+├── .nojekyll              # Disables Jekyll processing on GitHub Pages
 ├── certifications.html    # Dedicated certifications and professional training page
 ├── favicon.ico            # Standalone site icon
 ├── favicon.svg            # Vector site favicon
 ├── index.html             # Primary portfolio document & project case studies
 ├── README.md              # Documentation, specifications, and deployment guide
-├── script.js              # Core UI orchestration, drawer data, and event handlers
+├── script.js              # Core UI orchestration, motion physics, and event handlers
 └── styles.css             # Unified Swiss Editorial design system
 ```
 
