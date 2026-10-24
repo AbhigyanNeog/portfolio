@@ -541,8 +541,8 @@ document.addEventListener('DOMContentLoaded', () => {
       caseStudy: 'tracex',
       order: 5,
       title: 'TRACE-X — Transaction Risk & Analytics for Cybercrime Enforcement',
-      tag: 'Cybercrime Intelligence',
-      desc: 'Predictive cash-withdrawal interception dashboard & spatial forecasting.',
+      tag: 'Cybercrime Analytics',
+      desc: 'A cybercrime analytics platform designed to support transaction-risk analysis, investigative prioritization, and visual exploration of suspicious activity.',
       image: 'assets/images/tracex_hero.png',
       alt: 'TRACE-X Command Center Interface',
       isPlaceholder: false
@@ -1179,55 +1179,84 @@ def calculate_distance(lat1, lon1, lat2, lon2):
 
     tracex: {
       number: 'CASE STUDY 05 / 08',
-      badge: 'CYBERCRIME INTELLIGENCE',
+      badge: 'CYBERCRIME ANALYTICS & TRANSACTION RISK',
       title: 'TRACE-X — Transaction Risk & Analytics for Cybercrime Enforcement',
-      subtitle: 'Predictive Cybercrime Intelligence & Mule Cash-Withdrawal Interception Dashboard',
+      subtitle: 'Predict. Prioritize. Prevent.',
       content: `
-        <h4 class="drawer-section-heading">1. Operational Problem & Context</h4>
+        <h4 class="drawer-section-heading">1. Operational Problem & Platform Scope</h4>
         <p class="drawer-p">
-          Financial cybercrime syndicates in India funnel stolen victim funds through complex, multi-layered "mule account" networks. These illicit funds are systematically withdrawn as physical currency at ATMs and retail branches before victims report the fraud or banking compliance teams can freeze the accounts. Law enforcement agencies traditionally respond reactively hours or days after cash is siphoned.
+          Financial cybercrime schemes funnel illicit funds across multi-layered mule account networks, attempting rapid cash extractions before victims can register formal complaints or banking compliance teams can intervene.
         </p>
         <p class="drawer-p">
-          <strong>The Objective:</strong> Develop an operational command dashboard enabling cybercrime intelligence units to ingest complaints, run predictive spatial heuristics, visualize high-risk cash-out hotspots, and dispatch intervention teams within the critical 30-to-90-minute operational window.
-        </p>
-
-        <h4 class="drawer-section-heading">2. Architecture & Implementation Decisions</h4>
-        <p class="drawer-p">
-          TRACE-X is engineered with a high-throughput, decoupled architecture. The frontend was developed in React 19, TypeScript, and Vite with zero runtime CSS overhead.
-        </p>
-        <div class="drawer-code-block">
-[Citizen Incident Ingestion] 
-       ↓ 
-[Complaint Registry & Parsing] 
-       ↓ 
-[Predictive ATM Hotspot Clustering Engine] 
-       ↓ 
-[Explainable AI (XAI) Risk Scorer] 
-       ↓ 
-[Leaflet Geospatial Map + Dispatch Intervention Unit]
-        </div>
-        <p class="drawer-p">
-          <strong>Frontend Architecture:</strong> Structured across 11 synchronized views managed via React Context API (<code>AppContext.tsx</code>). Implements Leaflet interactive geospatial clustering, custom SVG markers for flagged banking nodes, and Recharts for temporal telemetry.
+          <strong>Platform Scope:</strong> TRACE-X is a cybercrime analytics platform designed to support transaction-risk analysis, investigative prioritization, and visual exploration of suspicious activity.
         </p>
         <p class="drawer-p">
-          <strong>Backend Architecture:</strong> An independent Express 5 & Prisma TypeScript backend located in the repository provides 34 role-based permissions (Admin, Investigator, Analyst, Officer), rotating JWT authentication with Argon2 password hashing, and real-time Socket.io notification feeds.
+          <strong>Demonstration Status:</strong> The platform is an engineering prototype evaluated on synthetic demonstration datasets to model end-to-end investigative workflows without exposing real-world financial records or classified operational data.
         </p>
 
-        <h4 class="drawer-section-heading">3. Explainable AI (XAI) & Transparency</h4>
+        <h4 class="drawer-section-heading">2. Frontend Analytics & Map Visualizations</h4>
         <p class="drawer-p">
-          A fundamental requirement for law enforcement tooling is evidentiary defensibility. TRACE-X embeds an Explainable AI panel (<code>XAIExplanation.tsx</code>) and <code>RiskScoreGauge.tsx</code> that decomposes risk scores into concrete, transparent factors: recurring mule withdrawal proximity (42%), complaint volume spike (31%), and off-hours timing heuristics (27%).
+          The user interface is engineered with React, TypeScript, and Vite, organizing operational data across 11 synchronized views managed via a centralized React Context (<code>AppContext.tsx</code>):
         </p>
+        <ul class="drawer-p" style="padding-left: 1.25rem;">
+          <li><strong>Geospatial Map Exploration:</strong> Interactive mapping powered by Leaflet (<code>InteractiveMap.tsx</code>) featuring custom cluster markers, terminal risk heatmaps, and spatial hotspot filtering.</li>
+          <li><strong>Telemetry & Analytics:</strong> Temporal transaction volume trends and investigative charts rendered with Recharts across <code>HistoricalAnalyticsView.tsx</code> and <code>PredictionAnalysisView.tsx</code>.</li>
+          <li><strong>Investigative Platform Views:</strong> Operational modules for Command Center tracking, Alerts & Intervention, High-Risk Locations, Investigation Cases, Audit Trails, and System Health.</li>
+        </ul>
 
-        <h4 class="drawer-section-heading">4. Current Implementation Status & Verification</h4>
+        <h4 class="drawer-section-heading">3. Transaction-Risk Analysis & Investigative Workflows</h4>
+        <p class="drawer-p">
+          The platform integrates decision-support tooling to help analysts triage and prioritize suspicious incidents:
+        </p>
+        <ul class="drawer-p" style="padding-left: 1.25rem;">
+          <li><strong>Mule Network Tracking:</strong> Multi-hop transaction visualization mapping transfer layers from initial victim complaints through intermediate mule accounts to suspected withdrawal clusters.</li>
+          <li><strong>Explainable AI (XAI) Risk Factors:</strong> Evidentiary factor decomposition in <code>XAIExplanation.tsx</code> and <code>RiskScoreGauge.tsx</code> detailing transaction velocity spikes, geospatial proximity, and account dormancy indicators.</li>
+          <li><strong>Investigative Interventions:</strong> Modal workflows for generating operational alerts, assigning field teams, recording resolution notes, and exporting Section 65B-compliant audit trail records.</li>
+        </ul>
+
+        <h4 class="drawer-section-heading">4. Architecture & Implementation Status Audit</h4>
+        <p class="drawer-p">
+          To maintain technical rigor, current implementation progress is distinguished across frontend, backend, and integration subsystems:
+        </p>
         <table class="drawer-metrics-table">
           <thead>
-            <tr><th>Component</th><th>Technology</th><th>Verified Status</th></tr>
+            <tr><th>Subsystem</th><th>Technologies</th><th>Implementation & Verification Status</th></tr>
           </thead>
           <tbody>
-            <tr><td>Frontend Dashboard</td><td>React 19, TS, Vite, Leaflet</td><td>Complete (Operating on in-memory mock services)</td></tr>
-            <tr><td>Backend API</td><td>Node.js, Express 5, Prisma</td><td>Complete & independently verified</td></tr>
-            <tr><td>Test Coverage</td><td>Vitest</td><td>59 passing unit tests + 77 live integration scenarios</td></tr>
-            <tr><td>Live Integration</td><td>Axios / Socket.io</td><td>Decoupled; live API hookup pending</td></tr>
+            <tr>
+              <td><strong>Frontend Dashboard</strong></td>
+              <td>React, TypeScript, Vite, Leaflet, Recharts</td>
+              <td><strong>Implemented:</strong> 11 operational views, interactive Leaflet maps, XAI gauges, and modals operating locally via modular in-memory mock services (<code>src/services/</code>, <code>src/data/</code>).</td>
+            </tr>
+            <tr>
+              <td><strong>Backend APIs & DB</strong></td>
+              <td>Express, Prisma, PostgreSQL</td>
+              <td><strong>Architected / Decoupled:</strong> Backend architecture designed with role-based access control (RBAC), rate limiting, and relational schema modeling; decoupled from the active frontend prototype repository.</td>
+            </tr>
+            <tr>
+              <td><strong>Live Integration</strong></td>
+              <td>HTTP REST / WebSockets</td>
+              <td><strong>In Progress:</strong> Frontend currently operates on client-side mock services; direct HTTP/WebSocket integration with live backend endpoints is pending.</td>
+            </tr>
+            <tr>
+              <td><strong>Data & Deployment</strong></td>
+              <td>Synthetic Datasets</td>
+              <td><strong>Prototype Only:</strong> Evaluated using synthetic demonstration data; not deployed in production law enforcement environments.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="drawer-section-heading">5. Technology Stack & Repository</h4>
+        <table class="drawer-metrics-table">
+          <thead>
+            <tr><th>Component</th><th>Technology Stack</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frontend Framework</td><td>React, TypeScript, Vite</td></tr>
+            <tr><td>Mapping & Data Visualization</td><td>Leaflet, Recharts</td></tr>
+            <tr><td>Backend API & Database (Decoupled)</td><td>Express, Prisma, PostgreSQL</td></tr>
+            <tr><td>Access Control & Security Model</td><td>Role-Based Access Control (RBAC), Rate Limiting</td></tr>
+            <tr><td>Repository</td><td><a href="https://github.com/AbhigyanNeog/SIH-2026_Fraud-detection" target="_blank" rel="noopener noreferrer" style="color: var(--color-electric-blue);">AbhigyanNeog/SIH-2026_Fraud-detection ↗</a></td></tr>
           </tbody>
         </table>
       `
