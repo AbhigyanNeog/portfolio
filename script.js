@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (immediate) {
       introEl.classList.add('hidden');
       introEl.classList.remove('fade-out');
-      if (laptopRig) laptopRig.classList.remove('diving', 'scene-opened', 'scene-closed', 'scene-arriving', 'scene-opening');
+      if (laptopRig) laptopRig.classList.remove('diving', 'scene-opened', 'scene-closed', 'scene-opening');
       if (laptopDisplay) laptopDisplay.classList.remove('illuminated', 'anticipating');
       if (cobaltTunnel) cobaltTunnel.classList.remove('active');
       executeDestination();
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         introEl.classList.add('hidden');
         introEl.classList.remove('fade-out');
-        if (laptopRig) laptopRig.classList.remove('diving', 'scene-opened', 'scene-closed', 'scene-arriving', 'scene-opening');
+        if (laptopRig) laptopRig.classList.remove('diving', 'scene-opened', 'scene-closed', 'scene-opening');
         if (laptopDisplay) laptopDisplay.classList.remove('illuminated', 'anticipating');
         if (cobaltTunnel) cobaltTunnel.classList.remove('active');
         executeDestination();
@@ -256,21 +256,28 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
     document.body.style.overflow = 'hidden';
 
-    // Reset all intro elements to initial frame state (Scene A: Laptop Arrival from Studio Darkness)
+    // Reset all intro elements to initial frame state: 3/4 grounded studio view (NO arrival from right)
     introEl.classList.remove('hidden', 'fade-out');
     if (introWelcomeScreen) {
       introWelcomeScreen.classList.remove('active');
     }
     if (laptopRig) {
-      laptopRig.classList.remove('scene-opened', 'diving', 'scene-closed', 'scene-opening');
-      laptopRig.classList.add('scene-arriving');
+      laptopRig.classList.remove('scene-opened', 'scene-opening', 'diving');
       laptopRig.style.transition = '';
       laptopRig.style.animationPlayState = '';
+      // Force layout reflow before setting initial closed state
+      void laptopRig.offsetWidth;
+      laptopRig.classList.add('scene-closed');
     }
     const lidEl = document.getElementById('laptop-lid');
     if (lidEl) {
       lidEl.style.transition = '';
       lidEl.style.transform = '';
+    }
+    const hingeEl = document.getElementById('laptop-hinge');
+    if (hingeEl) {
+      hingeEl.style.transition = '';
+      hingeEl.style.transform = '';
     }
     if (kbEnterKey) kbEnterKey.classList.remove('pressed');
     if (kbTravelPulse) kbTravelPulse.classList.remove('traveling');
@@ -315,52 +322,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const freezeStage = urlParams.get('freeze');
     if (freezeStage) {
-      if (freezeStage === 'arriving') {
-        if (laptopRig) {
-          laptopRig.classList.remove('scene-closed', 'scene-opening', 'scene-opened', 'diving');
-          laptopRig.classList.add('scene-arriving');
-          laptopRig.style.animationPlayState = 'paused';
-        }
-        return;
-      }
       if (freezeStage === 'closed') {
         if (laptopRig) {
-          laptopRig.classList.remove('scene-arriving', 'scene-opening', 'scene-opened', 'diving');
-          laptopRig.classList.add('scene-closed');
-        }
-        return;
-      }
-      if (freezeStage === 'opening') {
-        if (laptopRig) {
-          laptopRig.classList.remove('scene-arriving', 'scene-closed', 'scene-opened', 'diving');
-          laptopRig.classList.add('scene-opening');
-        }
-        return;
-      }
-      if (freezeStage === 'halfway') {
-        if (laptopRig) {
-          laptopRig.classList.remove('scene-arriving', 'scene-closed', 'scene-opened');
-          laptopRig.classList.add('scene-opening');
+          laptopRig.className = 'laptop-rig scene-closed';
           laptopRig.style.transition = 'none';
         }
-        if (lidEl) {
-          lidEl.style.transition = 'none';
-          lidEl.style.transform = 'rotateX(-50deg)';
+        return;
+      }
+      if (freezeStage === 'opening' || freezeStage === 'halfway') {
+        if (laptopRig) {
+          laptopRig.className = 'laptop-rig scene-opening';
+          laptopRig.style.transition = 'none';
         }
         return;
       }
       if (freezeStage === 'opened') {
         if (laptopRig) {
-          laptopRig.classList.remove('scene-arriving', 'scene-closed', 'scene-opening');
-          laptopRig.classList.add('scene-opened');
+          laptopRig.className = 'laptop-rig scene-opened';
           laptopRig.style.transition = 'none';
         }
         return;
       }
       if (freezeStage === 'enter') {
         if (laptopRig) {
-          laptopRig.classList.remove('scene-arriving', 'scene-closed', 'scene-opening');
-          laptopRig.classList.add('scene-opened');
+          laptopRig.className = 'laptop-rig scene-opened';
           laptopRig.style.transition = 'none';
         }
         if (kbEnterKey) kbEnterKey.classList.add('pressed');
@@ -368,17 +353,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (freezeStage === 'pulse') {
         if (laptopRig) {
-          laptopRig.classList.remove('scene-arriving', 'scene-closed', 'scene-opening');
-          laptopRig.classList.add('scene-opened');
+          laptopRig.className = 'laptop-rig scene-opened';
           laptopRig.style.transition = 'none';
         }
         if (kbTravelPulse) kbTravelPulse.classList.add('traveling');
         return;
       }
-      if (freezeStage === 'open') {
+      if (freezeStage === 'open' || freezeStage === 'illuminated') {
         if (laptopRig) {
-          laptopRig.classList.remove('scene-arriving', 'scene-closed', 'scene-opening');
-          laptopRig.classList.add('scene-opened');
+          laptopRig.className = 'laptop-rig scene-opened';
           laptopRig.style.transition = 'none';
         }
         if (laptopDisplay) laptopDisplay.classList.add('illuminated');
@@ -388,8 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (freezeStage === 'anticipation') {
         if (laptopRig) {
-          laptopRig.classList.remove('scene-arriving', 'scene-closed', 'scene-opening');
-          laptopRig.classList.add('scene-opened');
+          laptopRig.className = 'laptop-rig scene-opened';
           laptopRig.style.transition = 'none';
         }
         if (laptopDisplay) laptopDisplay.classList.add('illuminated', 'anticipating');
@@ -416,76 +398,67 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================================
-    // SCENE A (0.0s – 1.8s): Laptop Side-Angle Arrival from Studio Darkness & Grounding
-    // =========================================================================
-    introTimers.push(setTimeout(() => {
-      if (laptopRig) {
-        laptopRig.classList.remove('scene-arriving');
-        laptopRig.classList.add('scene-closed');
-      }
-    }, 1800));
-
-    // =========================================================================
-    // SCENE B1 (2.1s – 3.6s): Physical Lid Opens on Hinge in 3/4 Studio View
+    // SCENE 1 (0.2s – 1.6s): Physical Lid Opens on Hinge in 3/4 Studio View
+    // Starts directly in place at 3/4 studio angle (NO arrival from right side)
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopRig) {
         laptopRig.classList.remove('scene-closed');
         laptopRig.classList.add('scene-opening');
       }
-    }, 2100));
+    }, 200));
 
     // =========================================================================
-    // SCENE B2 (3.6s – 4.2s): Camera Glides Smoothly to Face Display Center
+    // SCENE 2 (1.7s – 2.3s): Camera Glides Smoothly to Face Display Center
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopRig) {
         laptopRig.classList.remove('scene-opening');
         laptopRig.classList.add('scene-opened');
       }
-    }, 3600));
+    }, 1700));
 
     // =========================================================================
-    // SCENE C (4.2s – 4.8s): Automatic Enter-Key Press & Light Pulse to Display
+    // SCENE 3 (2.4s – 3.0s): Automatic Enter-Key Press & Light Pulse to Display
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (kbEnterKey) kbEnterKey.classList.add('pressed');
-    }, 4200));
+    }, 2400));
 
     introTimers.push(setTimeout(() => {
       if (kbEnterKey) kbEnterKey.classList.remove('pressed');
       if (kbTravelPulse) kbTravelPulse.classList.add('traveling');
-    }, 4450));
+    }, 2650));
 
     // =========================================================================
-    // SCENE E (4.8s – 5.8s): Screen Power-Up, Network Routes, Display Illumination
+    // SCENE 4 (3.2s – 4.4s): Screen Illumination, Computational Identity & Ambient Pulse
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopDisplay) laptopDisplay.classList.add('illuminated');
       if (displayComp) displayComp.classList.add('active');
       if (studioBackdrop) studioBackdrop.classList.add('screen-lit');
-    }, 4800));
+    }, 3200));
 
     // =========================================================================
-    // SCENE D (5.8s – 6.8s): Anticipation Glow, Inward Rays & Particle Convergence
+    // SCENE 5 (4.4s – 5.6s): Anticipation Glow, Inward Rays & Particle Convergence
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopDisplay) laptopDisplay.classList.add('anticipating');
-    }, 5800));
+    }, 4400));
 
     // =========================================================================
-    // SCENE F (6.8s – 8.0s): Camera Dives into Display Center -> Perspective Tunnel
+    // SCENE 6 (5.6s – 6.8s): Camera Dives into Display Center -> Perspective Cobalt Tunnel
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (laptopRig) laptopRig.classList.add('diving');
-    }, 6800));
+    }, 5600));
 
     introTimers.push(setTimeout(() => {
       if (cobaltTunnel) cobaltTunnel.classList.add('active');
-    }, 7400));
+    }, 6200));
 
     // =========================================================================
-    // STAGE C (8.0s): Seamless Reveal of Swiss Editorial Welcome Screen
+    // STAGE 7 (6.8s): Seamless Reveal of Swiss Editorial Welcome Screen
     // =========================================================================
     introTimers.push(setTimeout(() => {
       if (introWelcomeScreen) {
@@ -494,7 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (welcomeExploreBtn) {
         welcomeExploreBtn.focus();
       }
-    }, 8000));
+    }, 6800));
   }
 
   // Refresh behavior: Every full page refresh restarts the cinematic intro from its first frame.

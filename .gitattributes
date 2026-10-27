@@ -1,0 +1,16 @@
+# Set default behavior to automatically normalize line endings to LF
+* text=auto eol=lf
+
+# Explicitly declare binary files that must not be modified by Git
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg text eol=lf
+*.pdf binary
+*.mp4 binary
+*.webm binary
+*.woff binary
+*.woff2 binary
+*.ttf binary

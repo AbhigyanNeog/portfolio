@@ -136,6 +136,7 @@ All user-editable text, project descriptions, technologies, links, and case stud
 ├── .backup_recovery/      # Local emergency recovery snapshots (ignored by Git)
 ├── _backups/              # Local migration backups (ignored by Git)
 ├── assets/
+│   ├── certificates/      # Verified proctored credentials & coursework PDFs
 │   ├── images/            # Project previews, diagrams, badges, and posters
 │   ├── resume/            # Current curriculum vitae (PDF) — resume.pdf
 │   └── videos/            # Feature demonstrations & project video feeds
@@ -147,15 +148,18 @@ All user-editable text, project descriptions, technologies, links, and case stud
 │   ├── projects.js        # 8 Projects metadata, welcome reel & deep-dive case studies
 │   └── skills.js          # Categorized technical competencies & tools
 ├── videos/                # Featured hero looping video clips (215500_medium.mp4)
+├── .gitattributes        # Cross-platform line ending and binary normalization
 ├── .gitignore             # Comprehensive VCS exclusion rules
 ├── .nojekyll              # Disables Jekyll processing on GitHub Pages
+├── 404.html               # Custom Swiss Editorial 404 error page
 ├── certifications.html    # Dedicated certifications and professional training page
 ├── favicon.ico            # Standalone site icon
 ├── favicon.svg            # Vector site favicon
 ├── index.html             # Primary portfolio document & project case studies
 ├── README.md              # Documentation, specifications, and deployment guide
 ├── script.js              # Core UI orchestration, motion physics, and event handlers
-└── styles.css             # Unified Swiss Editorial design system
+├── styles.css             # Unified Swiss Editorial design system
+└── vercel.json            # Vercel deployment configuration & security headers
 ```
 
 ---

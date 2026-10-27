@@ -30,7 +30,7 @@
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232449E8'/><text x='16' y='21' font-family='monospace' font-size='14' font-weight='bold' text-anchor='middle' fill='%23FFFFFF'>AN</text></svg>">
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2.6">
 </head>
 
 <body>
@@ -127,35 +127,172 @@
         </div>
 
         <!-- Laptop Base Assembly (Deck, Keyboard Well, Trackpad & Chamfer) -->
+        <!-- Laptop Base Assembly (Physical 3D Unibody Block with Chamfered Edges and Ports) -->
         <div class="laptop-base" id="laptop-base">
+          <!-- 3D Extrusion Side & Front Walls for Physical Unibody Realism -->
+          <div class="base-wall-front">
+            <div class="front-lip-highlight"></div>
+            <div class="laptop-notch"></div>
+            <div class="laptop-seam-glow"></div>
+          </div>
+          <div class="base-wall-left">
+            <div class="side-port port-magsafe"></div>
+            <div class="side-port port-usbc"></div>
+            <div class="side-port port-usbc"></div>
+          </div>
+          <div class="base-wall-right">
+            <div class="side-port port-hdmi"></div>
+            <div class="side-port port-usbc"></div>
+            <div class="side-port port-audio"></div>
+          </div>
+          <div class="base-wall-rear">
+            <div class="rear-exhaust-fins"></div>
+          </div>
+          <div class="base-bottom-plate">
+            <div class="rubber-foot foot-fl"></div>
+            <div class="rubber-foot foot-fr"></div>
+            <div class="rubber-foot foot-rl"></div>
+            <div class="rubber-foot foot-rr"></div>
+          </div>
+
+          <!-- Top Deck Surface -->
+          <div class="base-rear-shelf">
+            <div class="base-hinge-pocket pocket-left"></div>
+            <div class="base-rear-vent"></div>
+            <div class="base-hinge-pocket pocket-right"></div>
+          </div>
           <div class="base-deck">
+            <div class="base-speaker-grill base-speaker-left"></div>
             <div class="keyboard-well">
               <div class="kb-screen-glow" id="kb-screen-glow"></div>
               <div class="kb-travel-pulse" id="kb-travel-pulse"></div>
-              <div class="kb-row kb-r1"></div>
-              <div class="kb-row kb-r2"></div>
-              <div class="kb-row kb-r3">
-                <div class="kb-r3-keys-left"></div>
+              <!-- Real Chiclet Key Rows with Individual Key Geometry -->
+              <div class="kb-row kb-r-fn">
+                <span class="kb-key k-fn">esc</span>
+                <span class="kb-key k-fn">F1</span>
+                <span class="kb-key k-fn">F2</span>
+                <span class="kb-key k-fn">F3</span>
+                <span class="kb-key k-fn">F4</span>
+                <span class="kb-key k-fn">F5</span>
+                <span class="kb-key k-fn">F6</span>
+                <span class="kb-key k-fn">F7</span>
+                <span class="kb-key k-fn">F8</span>
+                <span class="kb-key k-fn">F9</span>
+                <span class="kb-key k-fn">F10</span>
+                <span class="kb-key k-fn">F11</span>
+                <span class="kb-key k-fn">F12</span>
+                <span class="kb-key k-fn k-touchid"></span>
+              </div>
+              <div class="kb-row kb-r-num">
+                <span class="kb-key k-norm">~</span>
+                <span class="kb-key k-norm">1</span>
+                <span class="kb-key k-norm">2</span>
+                <span class="kb-key k-norm">3</span>
+                <span class="kb-key k-norm">4</span>
+                <span class="kb-key k-norm">5</span>
+                <span class="kb-key k-norm">6</span>
+                <span class="kb-key k-norm">7</span>
+                <span class="kb-key k-norm">8</span>
+                <span class="kb-key k-norm">9</span>
+                <span class="kb-key k-norm">0</span>
+                <span class="kb-key k-norm">-</span>
+                <span class="kb-key k-norm">=</span>
+                <span class="kb-key k-backspace">delete</span>
+              </div>
+              <div class="kb-row kb-r-qwerty">
+                <span class="kb-key k-tab">tab</span>
+                <span class="kb-key k-norm">Q</span>
+                <span class="kb-key k-norm">W</span>
+                <span class="kb-key k-norm">E</span>
+                <span class="kb-key k-norm">R</span>
+                <span class="kb-key k-norm">T</span>
+                <span class="kb-key k-norm">Y</span>
+                <span class="kb-key k-norm">U</span>
+                <span class="kb-key k-norm">I</span>
+                <span class="kb-key k-norm">O</span>
+                <span class="kb-key k-norm">P</span>
+                <span class="kb-key k-norm">[</span>
+                <span class="kb-key k-norm">]</span>
+                <span class="kb-key k-norm">\</span>
+              </div>
+              <div class="kb-row kb-r-home">
+                <span class="kb-key k-caps">caps</span>
+                <span class="kb-key k-norm">A</span>
+                <span class="kb-key k-norm">S</span>
+                <span class="kb-key k-norm">D</span>
+                <span class="kb-key k-norm">F</span>
+                <span class="kb-key k-norm">G</span>
+                <span class="kb-key k-norm">H</span>
+                <span class="kb-key k-norm">J</span>
+                <span class="kb-key k-norm">K</span>
+                <span class="kb-key k-norm">L</span>
+                <span class="kb-key k-norm">;</span>
+                <span class="kb-key k-norm">'</span>
                 <div class="kb-enter-key" id="kb-enter-key" aria-hidden="true">
                   <span class="enter-glyph">↵</span>
                   <div class="enter-key-glow"></div>
                 </div>
               </div>
-              <div class="kb-row kb-r4"></div>
-              <div class="kb-row kb-r5"></div>
+              <div class="kb-row kb-r-shift">
+                <span class="kb-key k-lshift">shift</span>
+                <span class="kb-key k-norm">Z</span>
+                <span class="kb-key k-norm">X</span>
+                <span class="kb-key k-norm">C</span>
+                <span class="kb-key k-norm">V</span>
+                <span class="kb-key k-norm">B</span>
+                <span class="kb-key k-norm">N</span>
+                <span class="kb-key k-norm">M</span>
+                <span class="kb-key k-norm">,</span>
+                <span class="kb-key k-norm">.</span>
+                <span class="kb-key k-norm">/</span>
+                <span class="kb-key k-rshift">shift</span>
+              </div>
+              <div class="kb-row kb-r-mod">
+                <span class="kb-key k-mod">fn</span>
+                <span class="kb-key k-mod">ctrl</span>
+                <span class="kb-key k-mod">opt</span>
+                <span class="kb-key k-cmd">cmd</span>
+                <span class="kb-key k-spacebar"></span>
+                <span class="kb-key k-cmd">cmd</span>
+                <span class="kb-key k-mod">opt</span>
+                <span class="kb-key k-arrow">◄</span>
+                <div class="kb-arrows-stacked">
+                  <span class="kb-key k-arrow-half">▲</span>
+                  <span class="kb-key k-arrow-half">▼</span>
+                </div>
+                <span class="kb-key k-arrow">►</span>
+              </div>
             </div>
-            <div class="trackpad"></div>
-          </div>
-          <div class="base-front-edge">
-            <div class="laptop-notch"></div>
+            <div class="base-speaker-grill base-speaker-right"></div>
+            <div class="trackpad">
+              <div class="trackpad-divider"></div>
+            </div>
           </div>
         </div>
 
-        <!-- Laptop Hinge Joint Pivot Cylinder -->
-        <div class="laptop-hinge" id="laptop-hinge"></div>
+        <!-- Laptop Integrated Cylindrical Hinge Barrel Assembly -->
+        <div class="laptop-hinge" id="laptop-hinge">
+          <div class="hinge-barrel-main">
+            <span class="hinge-barrel-reflection"></span>
+            <div class="hinge-barrel-cap cap-left"></div>
+            <div class="hinge-barrel-cap cap-right"></div>
+          </div>
+          <div class="dual-hinge hinge-left">
+            <div class="hinge-knuckle"><span class="hinge-pin"></span></div>
+          </div>
+          <div class="dual-hinge hinge-right">
+            <div class="hinge-knuckle"><span class="hinge-pin"></span></div>
+          </div>
+        </div>
 
-        <!-- Screen Assembly (Lid) with Outer Metallic Shell and Inner Screen Assembly -->
+        <!-- Screen Assembly (Lid) with 3D Extruded Edges, Outer Metallic Shell, and Inner Display Panel -->
         <div class="laptop-lid" id="laptop-lid">
+          <!-- 3D Extruded Lid Walls for Physical Depth -->
+          <div class="lid-wall-top"></div>
+          <div class="lid-wall-left"></div>
+          <div class="lid-wall-right"></div>
+          <div class="lid-wall-bottom"></div>
+
           <!-- Outer Metallic Shell (Visible when laptop is closed) -->
           <div class="lid-shell-outer">
             <div class="lid-logo-monogram">
@@ -708,6 +845,7 @@
           <li><a href="#about" class="nav-link magnetic-target" data-nav="about">About</a></li>
           <li><a href="#skills" class="nav-link magnetic-target" data-nav="skills">Skills</a></li>
           <li><a href="#experience" class="nav-link magnetic-target" data-nav="experience">Experience</a></li>
+          <li><a href="#certifications" class="nav-link magnetic-target" data-nav="certifications">Certifications</a></li>
           <li><a href="#contact" class="nav-link magnetic-target" data-nav="contact">Contact</a></li>
         </ul>
       </nav>
@@ -747,6 +885,7 @@
         <li><a href="#about" class="mobile-link">About</a></li>
         <li><a href="#skills" class="mobile-link">Skills</a></li>
         <li><a href="#experience" class="mobile-link">Experience</a></li>
+        <li><a href="#certifications" class="mobile-link">Certifications</a></li>
         <li><a href="#contact" class="mobile-link">Contact</a></li>
       </ul>
       <div class="mobile-menu-footer">
@@ -806,34 +945,8 @@
           <!-- Right Column: Featured Project Visual Plate -->
           <div class="hero-showcase-column" data-reveal="fade-up" data-delay="150">
             <div class="hero-featured-plate">
-              <div class="plate-top-bar">
-                <span class="plate-tag-num">Featured Work</span>
-                <span class="plate-tag-sep">/</span>
-                <span class="plate-tag-name">TRACE-X</span>
-                <span class="plate-sih-badge">SIH '24 Finalist</span>
-              </div>
-
               <div class="plate-media-wrap">
                 <video class="plate-image plate-video" src="videos/215500_medium.mp4" autoplay loop muted playsinline preload="auto" aria-label="TRACE-X Platform Video Preview"></video>
-              </div>
-
-              <div class="plate-caption-box">
-                <div class="plate-caption-tagline">Predict. Prioritize. Prevent.</div>
-                <h3 class="plate-caption-title">TRACE-X: Fraud & Mule Network Intelligence</h3>
-                <p class="plate-caption-desc">
-                  Full-stack cybercrime investigation engine built to map multi-hop transaction siphon chains, identify high-risk mule accounts, and deliver actionable intelligence to law enforcement teams.
-                </p>
-                <div class="plate-tech-pills">
-                  <span class="plate-pill">Mule Tracking</span>
-                  <span class="plate-pill">Geospatial Risk Maps</span>
-                  <span class="plate-pill">XAI Scoring Gauges</span>
-                  <span class="plate-pill">React & TypeScript</span>
-                </div>
-                <div class="plate-action-links">
-                  <a href="#projects" class="plate-action-primary magnetic-target">View in Work section →</a>
-                  <button class="plate-action-secondary open-case-study magnetic-target" data-project="tracex"
-                    type="button">Read case study</button>
-                </div>
               </div>
             </div>
           </div>
@@ -2096,6 +2209,13 @@
 
           <div class="case-study-quick-card open-case-study magnetic-target" data-project="attendance" tabindex="0"
             role="button" aria-label="Open VeriClass Case Study" data-reveal="fade-up" data-delay="50">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="quick-card-num">01</div>
             <div class="quick-card-category">INSTITUTIONAL SYSTEMS</div>
             <h3 class="quick-card-title">VeriClass — Faculty Attendance Management System</h3>
@@ -2105,6 +2225,13 @@
 
           <div class="case-study-quick-card open-case-study magnetic-target" data-project="copilot" tabindex="0"
             role="button" aria-label="Open Campus Copilot Case Study" data-reveal="fade-up" data-delay="100">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="quick-card-num">02</div>
             <div class="quick-card-category">ALGORITHMS &amp; VISUALIZATION</div>
             <h3 class="quick-card-title">Campus Copilot</h3>
@@ -2114,6 +2241,13 @@
 
           <div class="case-study-quick-card open-case-study magnetic-target" data-project="nexora" tabindex="0"
             role="button" aria-label="Open NEXORA Case Study" data-reveal="fade-up" data-delay="150">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="quick-card-num">03</div>
             <div class="quick-card-category">MODULAR AI ARCHITECTURE</div>
             <h3 class="quick-card-title">NEXORA — Hierarchical AI Research Prototype</h3>
@@ -2123,6 +2257,13 @@
 
           <div class="case-study-quick-card open-case-study magnetic-target" data-project="llmassistant" tabindex="0"
             role="button" aria-label="Open LLM Educational Assistant Case Study" data-reveal="fade-up" data-delay="200">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="quick-card-num">04</div>
             <div class="quick-card-category">EDUCATIONAL AI &amp; RETRIEVAL</div>
             <h3 class="quick-card-title">LLM Educational Assistant</h3>
@@ -2132,6 +2273,13 @@
 
           <div class="case-study-quick-card open-case-study magnetic-target" data-project="tracex" tabindex="0"
             role="button" aria-label="Open TRACE-X Case Study" data-reveal="fade-up" data-delay="250">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="quick-card-num">05</div>
             <div class="quick-card-category">CYBERCRIME ANALYTICS</div>
             <h3 class="quick-card-title">TRACE-X — Transaction Risk &amp; Analytics for Cybercrime Enforcement</h3>
@@ -2141,6 +2289,13 @@
 
           <div class="case-study-quick-card open-case-study magnetic-target" data-project="loganalyzer" tabindex="0"
             role="button" aria-label="Open Log Analyzer Case Study" data-reveal="fade-up" data-delay="300">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="quick-card-num">06</div>
             <div class="quick-card-category">LOG ANALYTICS &amp; TEXT ANALYSIS</div>
             <h3 class="quick-card-title">Log Analyzer</h3>
@@ -2150,6 +2305,13 @@
 
           <div class="case-study-quick-card open-case-study magnetic-target" data-project="phishguard" tabindex="0"
             role="button" aria-label="Open Phish Guard Case Study" data-reveal="fade-up" data-delay="350">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="quick-card-num">07</div>
             <div class="quick-card-category">MACHINE LEARNING SECURITY</div>
             <h3 class="quick-card-title">Phish Guard</h3>
@@ -2159,6 +2321,13 @@
 
           <div class="case-study-quick-card open-case-study magnetic-target" data-project="eplatform" tabindex="0"
             role="button" aria-label="Open E-Platform Case Study" data-reveal="fade-up" data-delay="400">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="quick-card-num">08</div>
             <div class="quick-card-category">REACTIVE E-COMMERCE</div>
             <h3 class="quick-card-title">E-Platform</h3>
@@ -2236,6 +2405,13 @@
         <div class="skills-editorial-grid">
 
           <div class="skill-category-card" data-reveal="fade-up" data-delay="50">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="skill-cat-header">
               <span class="skill-cat-num">01</span>
               <h3 class="skill-cat-title">Core Programming Languages</h3>
@@ -2257,6 +2433,13 @@
           </div>
 
           <div class="skill-category-card" data-reveal="fade-up" data-delay="100">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="skill-cat-header">
               <span class="skill-cat-num">02</span>
               <h3 class="skill-cat-title">Frontend & Reactive Frameworks</h3>
@@ -2278,6 +2461,13 @@
           </div>
 
           <div class="skill-category-card" data-reveal="fade-up" data-delay="150">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="skill-cat-header">
               <span class="skill-cat-num">03</span>
               <h3 class="skill-cat-title">Backend, APIs & Databases</h3>
@@ -2299,6 +2489,13 @@
           </div>
 
           <div class="skill-category-card" data-reveal="fade-up" data-delay="200">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="skill-cat-header">
               <span class="skill-cat-num">04</span>
               <h3 class="skill-cat-title">Machine Learning & NLP</h3>
@@ -2320,6 +2517,13 @@
           </div>
 
           <div class="skill-category-card" data-reveal="fade-up" data-delay="250">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="skill-cat-header">
               <span class="skill-cat-num">05</span>
               <h3 class="skill-cat-title">Security & Digital Forensics</h3>
@@ -2364,6 +2568,13 @@
         <div class="timeline-container">
 
           <div class="timeline-entry" data-reveal="fade-up" data-delay="50">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="timeline-meta">
               <span class="timeline-date">2024 – PRESENT</span>
               <span class="timeline-badge badge-citrus">UNDERGRADUATE</span>
@@ -2380,6 +2591,13 @@
           </div>
 
           <div class="timeline-entry" data-reveal="fade-up" data-delay="75">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="timeline-meta">
               <span class="timeline-date">7 APR 2026 – 7 MAY 2026</span>
               <span class="timeline-badge badge-citrus">INTERNSHIP</span>
@@ -2394,6 +2612,13 @@
           </div>
 
           <div class="timeline-entry" data-reveal="fade-up" data-delay="100">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="timeline-meta">
               <span class="timeline-date">2026</span>
               <span class="timeline-badge badge-coral">HACKATHON COMPETITION</span>
@@ -2410,6 +2635,13 @@
           </div>
 
           <div class="timeline-entry" data-reveal="fade-up" data-delay="150">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="timeline-meta">
               <span class="timeline-date">2026</span>
               <span class="timeline-badge badge-cobalt">INTENSIVE HACKATHON</span>
@@ -2424,6 +2656,13 @@
           </div>
 
           <div class="timeline-entry" data-reveal="fade-up" data-delay="200">
+            <div class="card-hanging-fixture" aria-hidden="true">
+              <div class="hang-track"></div>
+              <div class="hang-wire hang-wire-left"><span class="hang-stud"></span></div>
+              <div class="hang-wire hang-wire-right"><span class="hang-stud"></span></div>
+              <div class="hang-pin hang-pin-left"><span class="hang-pin-core"></span></div>
+              <div class="hang-pin hang-pin-right"><span class="hang-pin-core"></span></div>
+            </div>
             <div class="timeline-meta">
               <span class="timeline-date">2026</span>
               <span class="timeline-badge badge-citrus">OPEN-SOURCE DEPLOYMENT</span>
@@ -2440,7 +2679,7 @@
 
         </div>
 
-        <!-- Link to Dedicated Certifications Page -->
+        <!-- Link to Dedicated Certifications Repository -->
         <div class="experience-cert-banner" data-reveal="fade-up" data-delay="250"
           style="margin-top: 2.5rem; padding: 1.5rem; background-color: var(--color-surface); border: 1px solid var(--border-hairline); border-left: 3px solid var(--color-cobalt); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
           <div>
@@ -2449,9 +2688,219 @@
             <p style="font-size: 0.88rem; color: var(--color-text-muted); margin: 0;">Explore Microsoft Azure AI Fundamentals, NPTEL LLMs, Deloitte Cyber Job Simulation, and completed technical courses.</p>
           </div>
           <a href="certifications.html" class="btn btn-secondary btn-sm magnetic-target">
-            <span>View Certifications Page</span>
+            <span>Explore All 16 Credentials</span>
             <span aria-hidden="true">→</span>
           </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- SECTION 05B: VERIFIED CERTIFICATIONS & CREDENTIALS SPOTLIGHT -->
+    <!-- ================================================================= -->
+    <section class="section-certifications-spotlight" id="certifications">
+      <div class="container">
+        <div class="editorial-divider" aria-hidden="true"></div>
+
+        <div class="section-heading-editorial" data-reveal="fade-up">
+          <div class="section-num-tag">Certifications</div>
+          <h2 class="section-title">Verified Technical Credentials</h2>
+          <p class="section-sub">
+            Global proctored examinations, foundational Large Language Model coursework, distributed NoSQL architectures,
+            and enterprise cybersecurity simulations.
+          </p>
+        </div>
+
+        <!-- Telemetry Stats Strip -->
+        <div class="cert-telemetry-bar" data-reveal="fade-up" data-delay="50">
+          <div class="cert-telemetry-pill">
+            <span class="cert-telemetry-val"><span class="accent-num">16</span> Verified</span>
+            <span class="cert-telemetry-lbl">Technical Credentials</span>
+          </div>
+          <div class="cert-telemetry-pill">
+            <span class="cert-telemetry-val"><span class="accent-num">98.3%</span> Score</span>
+            <span class="cert-telemetry-lbl">Microsoft Azure AI Proctored</span>
+          </div>
+          <div class="cert-telemetry-pill">
+            <span class="cert-telemetry-val"><span class="accent-num">Elite</span> Grade</span>
+            <span class="cert-telemetry-lbl">NPTEL IIT Madras (LLMs)</span>
+          </div>
+          <div class="cert-telemetry-pill">
+            <span class="cert-telemetry-val"><span class="accent-num">100%</span> Modules</span>
+            <span class="cert-telemetry-lbl">Oracle Academy Java Mastery</span>
+          </div>
+        </div>
+
+        <!-- 4 Flagship Spotlight Cards -->
+        <div class="cert-spotlight-grid" data-reveal="fade-up" data-delay="100">
+          
+          <!-- 1. Microsoft Azure AI -->
+          <article class="cert-card">
+            <div class="cert-card-media" data-cert-id="azure-ai-fundamentals" tabindex="0" role="button" aria-label="Inspect Microsoft Azure AI Fundamentals credential">
+              <img src="assets/certificates/MICROSOFT/ms_azure_certificate_preview.png" alt="Microsoft Azure AI Fundamentals Score Report" class="cert-card-thumb" loading="lazy" />
+              <div class="cert-card-media-overlay">
+                <span class="cert-card-inspect-tag">Inspect 🔍</span>
+                <span class="cert-card-date-badge">SEP 2026</span>
+              </div>
+            </div>
+            <div class="cert-card-body">
+              <div class="cert-card-header">
+                <span class="cert-card-cat">Global Cloud AI</span>
+                <span class="cert-card-num">★</span>
+              </div>
+              <h3 class="cert-card-title">Microsoft Azure AI Fundamentals</h3>
+              <div class="cert-card-issuer">Microsoft · Certiport / Pearson VUE</div>
+              <p class="cert-card-desc">
+                Proctored examination validating machine learning, cognitive services, computer vision, NLP, and enterprise Azure AI Foundry solution deployments.
+              </p>
+              <div class="cert-card-score-row">
+                <span class="cert-card-score-dot"></span>
+                <span>Score: 983 / 1000 (Pass · 98.3%)</span>
+              </div>
+              <div class="cert-card-skills">
+                <span class="cert-skill-chip">Azure AI Foundry</span>
+                <span class="cert-skill-chip">Cognitive Vision</span>
+                <span class="cert-skill-chip">NLP APIs</span>
+              </div>
+              <div class="cert-card-footer">
+                <button type="button" class="cert-btn-inspect" data-cert-id="azure-ai-fundamentals">
+                  <span>Inspect Certificate →</span>
+                </button>
+                <a href="certifications.html#flagship-certification" class="cert-btn-verify">Full Details ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2. NPTEL IIT Madras LLMs -->
+          <article class="cert-card">
+            <div class="cert-card-media" data-cert-id="nptel-llm" tabindex="0" role="button" aria-label="Inspect NPTEL LLM credential">
+              <img src="assets/certificates/swayam/nptel_llm_preview.png" alt="NPTEL LLM Certificate Plate" class="cert-card-thumb" loading="lazy" />
+              <div class="cert-card-media-overlay">
+                <span class="cert-card-inspect-tag">Inspect 🔍</span>
+                <span class="cert-card-date-badge">OCT 2025</span>
+              </div>
+            </div>
+            <div class="cert-card-body">
+              <div class="cert-card-header">
+                <span class="cert-card-cat">Deep Learning &amp; NLP</span>
+                <span class="cert-card-num">01</span>
+              </div>
+              <h3 class="cert-card-title">Large Language Models (LLMs)</h3>
+              <div class="cert-card-issuer">NPTEL · SWAYAM (IIT Madras)</div>
+              <p class="cert-card-desc">
+                12-week advanced academic certification covering transformer mathematics, multi-head self-attention, BPE tokenization, and model fine-tuning.
+              </p>
+              <div class="cert-card-score-row">
+                <span class="cert-card-score-dot"></span>
+                <span>Elite Grade · 64% Proctored Score</span>
+              </div>
+              <div class="cert-card-skills">
+                <span class="cert-skill-chip">Transformer Arch</span>
+                <span class="cert-skill-chip">Attention</span>
+                <span class="cert-skill-chip">BPE Tokenizer</span>
+              </div>
+              <div class="cert-card-footer">
+                <button type="button" class="cert-btn-inspect" data-cert-id="nptel-llm">
+                  <span>Inspect Certificate →</span>
+                </button>
+                <a href="assets/certificates/swayam/nptel_llm.pdf" target="_blank" rel="noopener noreferrer" class="cert-btn-verify">View PDF ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3. Deloitte Cyber Job Simulation -->
+          <article class="cert-card">
+            <div class="cert-card-media" data-cert-id="deloitte-cyber" tabindex="0" role="button" aria-label="Inspect Deloitte Cyber Simulation credential">
+              <img src="assets/certificates/Deloitte/deloitte_cyber_security_preview.png" alt="Deloitte Cyber Security Simulation Plate" class="cert-card-thumb" loading="lazy" />
+              <div class="cert-card-media-overlay">
+                <span class="cert-card-inspect-tag">Inspect 🔍</span>
+                <span class="cert-card-date-badge">OCT 2025</span>
+              </div>
+            </div>
+            <div class="cert-card-body">
+              <div class="cert-card-header">
+                <span class="cert-card-cat">Cybersecurity &amp; Advisory</span>
+                <span class="cert-card-num">03</span>
+              </div>
+              <h3 class="cert-card-title">Deloitte Cyber Job Simulation</h3>
+              <div class="cert-card-issuer">Deloitte (via Forage)</div>
+              <p class="cert-card-desc">
+                Hands-on enterprise cyber defense simulation: client infrastructure threat assessment, log forensics, vulnerability analysis, and incident briefings.
+              </p>
+              <div class="cert-card-score-row">
+                <span class="cert-card-score-dot"></span>
+                <span>Enterprise Consulting Simulation</span>
+              </div>
+              <div class="cert-card-skills">
+                <span class="cert-skill-chip">Threat Triage</span>
+                <span class="cert-skill-chip">Log Forensics</span>
+                <span class="cert-skill-chip">Security Controls</span>
+              </div>
+              <div class="cert-card-footer">
+                <button type="button" class="cert-btn-inspect" data-cert-id="deloitte-cyber">
+                  <span>Inspect Certificate →</span>
+                </button>
+                <a href="assets/certificates/Deloitte/deloitte_cyber_security.pdf" target="_blank" rel="noopener noreferrer" class="cert-btn-verify">View PDF ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4. Oracle Academy Java Programming -->
+          <article class="cert-card">
+            <div class="cert-card-media" data-cert-id="oracle-java-programming" tabindex="0" role="button" aria-label="Inspect Oracle Java Programming credential">
+              <img src="assets/certificates/Oracle_JAVA/java_programming_preview.png" alt="Oracle Java Programming Award of Completion Plate" class="cert-card-thumb" loading="lazy" />
+              <div class="cert-card-media-overlay">
+                <span class="cert-card-inspect-tag">Inspect 🔍</span>
+                <span class="cert-card-date-badge">JAN 2026</span>
+              </div>
+            </div>
+            <div class="cert-card-body">
+              <div class="cert-card-header">
+                <span class="cert-card-cat">Enterprise Java &amp; Systems</span>
+                <span class="cert-card-num">04</span>
+              </div>
+              <h3 class="cert-card-title">Oracle Java Programming</h3>
+              <div class="cert-card-issuer">Oracle Academy</div>
+              <p class="cert-card-desc">
+                Enterprise OOP software design, Collections framework, Generics, JDBC database pipelines, and JVM runtime internals (Bytecode, ClassLoaders, Memory).
+              </p>
+              <div class="cert-card-score-row">
+                <span class="cert-card-score-dot"></span>
+                <span>100% Score Across All Course Units</span>
+              </div>
+              <div class="cert-card-skills">
+                <span class="cert-skill-chip">OOP Design</span>
+                <span class="cert-skill-chip">JVM Internals</span>
+                <span class="cert-skill-chip">JDBC &amp; Generics</span>
+              </div>
+              <div class="cert-card-footer">
+                <button type="button" class="cert-btn-inspect" data-cert-id="oracle-java-programming">
+                  <span>Inspect Certificate →</span>
+                </button>
+                <a href="assets/certificates/Oracle_JAVA/java_programming.pdf" target="_blank" rel="noopener noreferrer" class="cert-btn-verify">View PDF ↗</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Call to Action Banner to Explore Full 16-Credential Directory -->
+        <div class="cert-return-banner" data-reveal="fade-up" style="margin-top: 1rem;">
+          <div>
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-cobalt); font-weight: 600;">Full Technical Accreditations Directory</span>
+            <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin: 0.35rem 0 0.25rem; color: var(--color-text-main);">
+              Explore All 16 Verified Credentials &amp; Transcripts
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--color-text-muted); margin: 0; max-width: 620px;">
+              Includes Google Cloud Generative AI, Samsung Innovation Campus Internship Letter, MongoDB NoSQL Distributed Database Certification, and low-level C Systems Programming.
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="certifications.html" class="btn btn-primary btn-sm magnetic-target">
+              <span>View All 16 Credentials (Interactive Gallery) →</span>
+            </a>
+          </div>
         </div>
 
       </div>
@@ -2638,6 +3087,67 @@
     </div>
   </div>
 
+  <!-- CINEMATIC LIGHTBOX MODAL (CERTIFICATES) -->
+  <div class="cert-modal-backdrop" id="cert-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="cert-modal-dialog">
+      
+      <!-- Document Stage (Left) -->
+      <div class="cert-modal-stage">
+        <div class="cert-modal-doc-wrap">
+          <img src="" alt="Certificate Document Preview" class="cert-modal-doc-img" id="modal-doc-img" />
+        </div>
+        
+        <!-- Navigation Controls -->
+        <div class="cert-modal-nav-controls">
+          <button class="cert-modal-nav-btn" id="modal-prev-btn" aria-label="Previous Certificate">← Prev</button>
+          <span class="cert-modal-nav-indicator" id="modal-indicator">1 / 16</span>
+          <button class="cert-modal-nav-btn" id="modal-next-btn" aria-label="Next Certificate">Next →</button>
+        </div>
+      </div>
+
+      <!-- Details Drawer (Right) -->
+      <div class="cert-modal-drawer">
+        <div class="cert-modal-top-row">
+          <span class="cert-modal-badge" id="modal-category">GLOBAL ACCREDITATION</span>
+          <button class="cert-modal-close-btn" id="modal-close-btn" aria-label="Close Certificate Modal">✕</button>
+        </div>
+
+        <h3 class="cert-modal-title" id="modal-title">Certificate Title</h3>
+        <div class="cert-modal-issuer" id="modal-issuer">Issuing Body</div>
+
+        <p class="cert-modal-desc" id="modal-desc">
+          Technical description of syllabus and engineering competencies covered.
+        </p>
+
+        <!-- Dynamic Metrics Table -->
+        <table class="cert-modal-metrics-table" id="modal-metrics-table">
+          <tbody>
+            <!-- Populated via JS -->
+          </tbody>
+        </table>
+
+        <!-- Skills Chips Box -->
+        <div class="cert-modal-skills-box">
+          <div class="cert-modal-skills-title">Core Competencies &amp; Technologies:</div>
+          <div class="cert-card-skills" id="modal-skills-container">
+            <!-- Chips populated via JS -->
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="cert-modal-actions-row">
+          <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" id="modal-pdf-btn">
+            <span>Open Official PDF ↗</span>
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" id="modal-verify-btn">
+            <span>Verify Credential Online ↗</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Toast Notification -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -2646,11 +3156,158 @@
   <script src="data/about.js"></script>
   <script src="data/skills.js"></script>
   <script src="data/experience.js"></script>
-  <script src="data/certifications.js"></script>
+  <script src="data/certifications.js?v=20261027b"></script>
   <script src="data/contact.js"></script>
 
   <!-- Core Portfolio Motion & Interaction Engine -->
   <script src="script.js"></script>
+
+  <!-- Certificate Modal Controller for Home Page -->
+  <script>
+    (function () {
+      if (typeof window.CERTIFICATIONS_DATA === 'undefined') return;
+
+      const data = window.CERTIFICATIONS_DATA;
+      const credentialsList = Array.isArray(data.credentials) ? data.credentials : [];
+      const allItems = data.featured ? [data.featured, ...credentialsList] : credentialsList;
+
+      const modal = document.getElementById('cert-modal');
+      const modalImg = document.getElementById('modal-doc-img');
+      const modalTitle = document.getElementById('modal-title');
+      const modalIssuer = document.getElementById('modal-issuer');
+      const modalCategory = document.getElementById('modal-category');
+      const modalDesc = document.getElementById('modal-desc');
+      const modalMetricsTable = document.getElementById('modal-metrics-table');
+      const modalSkillsContainer = document.getElementById('modal-skills-container');
+      const modalPdfBtn = document.getElementById('modal-pdf-btn');
+      const modalVerifyBtn = document.getElementById('modal-verify-btn');
+      const modalIndicator = document.getElementById('modal-indicator');
+      const modalCloseBtn = document.getElementById('modal-close-btn');
+      const modalPrevBtn = document.getElementById('modal-prev-btn');
+      const modalNextBtn = document.getElementById('modal-next-btn');
+
+      let currentModalIndex = 0;
+
+      function openModal(certId) {
+        let index = allItems.findIndex(item => item.id === certId);
+        if (index === -1) index = 0;
+        showModalCert(index);
+        if (modal) {
+          modal.classList.add('open');
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      function closeModal() {
+        if (!modal) return;
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      function showModalCert(index) {
+        if (index < 0) index = allItems.length - 1;
+        if (index >= allItems.length) index = 0;
+        currentModalIndex = index;
+
+        const cert = allItems[index];
+        if (!cert) return;
+
+        if (modalImg) {
+          modalImg.src = cert.previewImage;
+          modalImg.alt = `${cert.title} Certificate Document`;
+        }
+
+        if (modalTitle) modalTitle.textContent = cert.title;
+        if (modalIssuer) modalIssuer.textContent = cert.issuer;
+        if (modalCategory) modalCategory.textContent = cert.categoryLabel || cert.badgeStatus || 'VERIFIED CREDENTIAL';
+        if (modalDesc) modalDesc.textContent = cert.description;
+
+        if (modalMetricsTable) {
+          const tbody = modalMetricsTable.querySelector('tbody') || modalMetricsTable;
+          tbody.innerHTML = '';
+          const metricsList = cert.metrics || [];
+          if (metricsList.length === 0) {
+            if (cert.date) metricsList.push({ label: 'Date Earned', value: cert.date });
+            if (cert.status) metricsList.push({ label: 'Credential Status', value: cert.status });
+            if (cert.score) metricsList.push({ label: 'Score / Evaluation', value: cert.score });
+            if (cert.credentialId) metricsList.push({ label: 'Credential ID', value: cert.credentialId });
+          }
+          metricsList.forEach(m => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<th>${m.label}</th><td>${m.value}</td>`;
+            tbody.appendChild(tr);
+          });
+        }
+
+        if (modalSkillsContainer) {
+          modalSkillsContainer.innerHTML = '';
+          (cert.skills || []).forEach(skill => {
+            const chip = document.createElement('span');
+            chip.className = 'cert-skill-chip';
+            chip.textContent = skill;
+            modalSkillsContainer.appendChild(chip);
+          });
+        }
+
+        if (modalPdfBtn) {
+          if (cert.pdfPath) {
+            modalPdfBtn.href = cert.pdfPath;
+            modalPdfBtn.style.display = 'inline-flex';
+          } else {
+            modalPdfBtn.style.display = 'none';
+          }
+        }
+
+        if (modalVerifyBtn) {
+          if (cert.verificationUrl) {
+            modalVerifyBtn.href = cert.verificationUrl;
+            modalVerifyBtn.style.display = 'inline-flex';
+          } else {
+            modalVerifyBtn.style.display = 'none';
+          }
+        }
+
+        if (modalIndicator) {
+          modalIndicator.textContent = `${index + 1} / ${allItems.length}`;
+        }
+      }
+
+      // Attach click events on certificate triggers
+      document.querySelectorAll('.section-certifications-spotlight .cert-btn-inspect, .section-certifications-spotlight .cert-card-media').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const id = el.getAttribute('data-cert-id') || el.closest('[data-cert-id]')?.getAttribute('data-cert-id');
+          if (id) openModal(id);
+        });
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const id = el.getAttribute('data-cert-id') || el.closest('[data-cert-id]')?.getAttribute('data-cert-id');
+            if (id) openModal(id);
+          }
+        });
+      });
+
+      if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+      if (modalPrevBtn) modalPrevBtn.addEventListener('click', () => showModalCert(currentModalIndex - 1));
+      if (modalNextBtn) modalNextBtn.addEventListener('click', () => showModalCert(currentModalIndex + 1));
+
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal();
+        });
+      }
+
+      window.addEventListener('keydown', (e) => {
+        if (!modal || !modal.classList.contains('open')) return;
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowLeft') showModalCert(currentModalIndex - 1);
+        if (e.key === 'ArrowRight') showModalCert(currentModalIndex + 1);
+      });
+    })();
+  </script>
 </body>
 
 </html>
