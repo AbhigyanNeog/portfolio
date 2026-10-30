@@ -75,6 +75,9 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
@@ -87,6 +90,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
   position: relative;
 }
 
@@ -3390,21 +3395,211 @@ code, pre {
     display: flex;
   }
 
+  /* Project Card Container & Layout */
   .project-card {
     padding: 1.35rem 1.15rem;
+    max-width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .project-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .card-meta-left,
+  .card-meta-right {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+    max-width: 100%;
+  }
+
+  .project-badge,
+  .project-status {
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    font-size: 0.65rem;
+    line-height: 1.3;
+    max-width: 100%;
   }
 
   .project-title {
-    font-size: 1.65rem;
+    font-size: clamp(1.25rem, 5.2vw, 1.6rem);
+    line-height: 1.2;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    margin-bottom: 0.35rem;
   }
 
   .project-subtitle {
-    font-size: 0.9rem;
-    line-height: 1.45;
+    font-size: clamp(0.82rem, 3.6vw, 0.92rem);
+    line-height: 1.4;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    margin-bottom: 1rem;
   }
 
+  .project-description {
+    font-size: clamp(0.82rem, 3.4vw, 0.9rem);
+    line-height: 1.55;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    margin-bottom: 1.15rem;
+  }
+
+  /* Individual Role & Team Context Callout */
+  .individual-role-callout {
+    padding: 0.75rem 0.85rem;
+    margin-bottom: 1.25rem;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .role-badge {
+    font-size: 0.65rem;
+    word-break: break-word;
+  }
+
+  .role-desc {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Highlights Box */
+  .project-highlights-box {
+    padding: 0.85rem 0.75rem;
+    margin-bottom: 1.25rem;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .highlights-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+    word-break: break-word;
+  }
+
+  .highlights-list li {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    padding-left: 1rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .project-tags {
+    gap: 0.35rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .tag {
+    font-size: 0.68rem;
+    padding: 0.15rem 0.45rem;
+    word-break: break-word;
+    max-width: 100%;
+  }
+
+  .project-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.65rem;
+  }
+
+  .project-actions .btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .project-preview-tabs {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.35rem 0.5rem;
+  }
+
+  .preview-tab-btn {
+    font-size: 0.68rem;
+    padding: 0.28rem 0.6rem;
+  }
+
+  .preview-frame {
+    border-radius: 4px;
+    max-width: 100%;
+  }
+
+  .preview-browser-bar {
+    padding: 0.4rem 0.65rem;
+    gap: 0.35rem;
+  }
+
+  .preview-frame-title {
+    font-size: 0.68rem;
+    max-width: calc(100% - 35px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .project-inline-video {
+    height: 220px;
+  }
+
+  .project-bg-number {
+    font-size: clamp(3.5rem, 13vw, 5.5rem);
+    top: -0.8rem;
+    right: 0.8rem;
+  }
+
+  /* Grid Layouts & Case Studies */
   .case-study-cards-grid {
     grid-template-columns: 1fr;
+  }
+
+  .quick-card-title {
+    font-size: clamp(1.15rem, 4.5vw, 1.35rem);
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .quick-card-excerpt {
+    font-size: 0.82rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .quick-card-link {
+    font-size: 0.72rem;
+    flex-wrap: wrap;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Skills & Experience */
+  .skill-list li {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .skill-name {
+    word-break: break-word;
+    font-size: 0.88rem;
+  }
+
+  .skill-context {
+    word-break: break-word;
+    font-size: 0.72rem;
   }
 
   .timeline-entry {
@@ -3413,20 +3608,106 @@ code, pre {
     padding: 1.5rem;
   }
 
+  .timeline-title {
+    font-size: clamp(1.1rem, 4.2vw, 1.3rem);
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .timeline-desc {
+    font-size: 0.85rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Contact Section */
   .contact-editorial-box {
     padding: 1.75rem;
+  }
+
+  .channel-val.email-link {
+    font-size: clamp(0.92rem, 4.2vw, 1.25rem);
+    word-break: break-all;
+    overflow-wrap: anywhere;
+  }
+
+  .channel-val {
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   .editorial-form {
     padding: 1.25rem;
   }
 
-  .drawer-body {
-    padding: 1.5rem 1.25rem;
-  }
-
+  /* Case Study Slide-out Drawer */
   .case-study-drawer {
     max-width: 100%;
+    width: 100%;
+  }
+
+  .drawer-header {
+    padding: 1.15rem 1rem;
+  }
+
+  .drawer-body {
+    padding: 1.35rem 1rem;
+  }
+
+  .drawer-footer {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+  }
+
+  .drawer-footer .btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .drawer-title-large {
+    font-size: clamp(1.3rem, 5.5vw, 1.75rem);
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .drawer-sub-large {
+    font-size: clamp(0.85rem, 3.8vw, 0.98rem);
+    word-break: break-word;
+    overflow-wrap: break-word;
+    margin-bottom: 1.25rem;
+  }
+
+  .drawer-section-heading {
+    font-size: 1.05rem;
+    margin-top: 1.5rem;
+    word-break: break-word;
+  }
+
+  .drawer-p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .drawer-code-block {
+    font-size: 0.72rem;
+    padding: 0.75rem 0.65rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .drawer-metrics-table {
+    font-size: 0.75rem;
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
   }
 
   .hero-title {
@@ -3468,6 +3749,123 @@ code, pre {
 
   #header-cert-btn {
     display: none;
+  }
+
+  .plate-top-bar {
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    padding: 0.6rem 0.85rem;
+  }
+
+  .plate-sih-badge {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-pad-y: 3.5rem;
+    --section-pad-x: 1rem;
+  }
+
+  .header-inner {
+    height: 3.75rem;
+  }
+
+  .brand-name {
+    font-size: 1.05rem;
+  }
+
+  #header-resume-btn {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.6rem;
+    gap: 0.35rem;
+  }
+
+  #header-resume-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .project-card {
+    padding: 1.15rem 0.9rem;
+  }
+
+  .case-study-quick-card {
+    padding: 1.35rem 1rem !important;
+  }
+
+  .skill-category-card {
+    padding: 1.35rem 1rem !important;
+  }
+
+  .timeline-entry {
+    padding: 1.35rem 1rem !important;
+  }
+
+  .contact-editorial-box {
+    padding: 1.35rem 1rem;
+  }
+
+  .editorial-form {
+    padding: 1rem 0.85rem;
+  }
+
+  .form-input,
+  .form-textarea,
+  .form-select {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.88rem;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .cert-flagship-card {
+    padding: 1.35rem 1rem;
+  }
+
+  .cert-modal-stage {
+    padding: 1rem 0.75rem;
+  }
+
+  .cert-modal-drawer {
+    padding: 1.25rem 0.85rem;
+  }
+}
+
+@media (max-width: 375px) {
+  :root {
+    --section-pad-x: 0.85rem;
+  }
+
+  .project-card {
+    padding: 1rem 0.75rem;
+  }
+
+  .case-study-quick-card {
+    padding: 1.15rem 0.8rem !important;
+  }
+
+  .skill-category-card {
+    padding: 1.15rem 0.8rem !important;
+  }
+
+  .timeline-entry {
+    padding: 1.15rem 0.8rem !important;
+  }
+
+  .plate-top-bar {
+    padding: 0.5rem 0.65rem;
+    font-size: 0.64rem;
+  }
+
+  .plate-tag-name {
+    font-size: 0.64rem;
+  }
+
+  #header-resume-btn {
+    font-size: 0.68rem;
+    padding: 0.3rem 0.5rem;
   }
 }
 
@@ -3586,9 +3984,25 @@ code, pre {
 
 @media (max-width: 768px) {
   .studio-orbital-backdrop {
-    width: 440px;
-    height: 440px;
-    top: 42%;
+    width: min(84vw, 350px);
+    height: min(84vw, 350px);
+    top: 43%;
+  }
+}
+
+@media (max-width: 430px) {
+  .studio-orbital-backdrop {
+    width: min(82vw, 300px);
+    height: min(82vw, 300px);
+    top: 43%;
+  }
+}
+
+@media (max-width: 375px) {
+  .studio-orbital-backdrop {
+    width: min(80vw, 260px);
+    height: min(80vw, 260px);
+    top: 43%;
   }
 }
 
@@ -3763,8 +4177,46 @@ code, pre {
 }
 
 @media (max-width: 768px) {
+  .intro-viewport-3d {
+    perspective: 1100px;
+    overflow: hidden;
+    max-width: 100vw;
+  }
   .laptop-rig {
-    --laptop-scale: 0.54;
+    --laptop-scale: 0.52;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-viewport-3d {
+    perspective: 1050px;
+  }
+  .laptop-rig {
+    --laptop-scale: 0.44;
+  }
+}
+
+@media (max-width: 430px) {
+  .laptop-rig {
+    --laptop-scale: 0.40;
+  }
+}
+
+@media (max-width: 390px) {
+  .laptop-rig {
+    --laptop-scale: 0.36;
+  }
+}
+
+@media (max-width: 360px) {
+  .laptop-rig {
+    --laptop-scale: 0.33;
+  }
+}
+
+@media (max-height: 600px) and (max-width: 768px) {
+  .laptop-rig {
+    --laptop-scale: 0.30;
   }
 }
 
@@ -5886,8 +6338,8 @@ code, pre {
   }
 
   .intro-controls {
-    top: 1rem;
-    right: 1rem;
+    top: max(1rem, env(safe-area-inset-top));
+    right: max(1rem, env(safe-area-inset-right));
   }
 
   .intro-skip-btn {
@@ -5895,9 +6347,6 @@ code, pre {
     font-size: 0.7rem;
   }
 
-  .laptop-rig {
-    --laptop-scale: 0.58;
-  }
 
   .welcome-telemetry-hud {
     display: none;

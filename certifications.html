@@ -20,7 +20,7 @@
     rel="stylesheet">
 
   <!-- Portfolio Stylesheet -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2.9">
 
   <style>
     /* Dedicated Page Layout Styles */
@@ -142,6 +142,26 @@
       flex-wrap: wrap;
       gap: 1.5rem;
     }
+
+    @media (max-width: 680px) {
+      .cert-header-return-btn {
+        display: none;
+      }
+      .cert-hero-section {
+        padding-bottom: 1.75rem;
+        margin-bottom: 1.75rem;
+      }
+      .cert-return-banner {
+        padding: 1.5rem 1rem;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .cert-return-banner .btn {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 
@@ -167,7 +187,7 @@
 
       <!-- Action Buttons -->
       <div class="header-actions">
-        <a href="index.html" class="btn btn-primary btn-sm magnetic-target">
+        <a href="index.html" class="btn btn-primary btn-sm magnetic-target cert-header-return-btn">
           ← Return to Portfolio
         </a>
         <a href="assets/resume/resume.pdf" class="btn btn-secondary btn-sm magnetic-target"
